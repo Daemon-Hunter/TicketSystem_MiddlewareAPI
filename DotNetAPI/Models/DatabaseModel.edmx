@@ -1,0 +1,1289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="ADMIN_ID" />
+          </Key>
+          <Property Name="ADMIN_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ADMIN_EMAIL" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="ADMIN_PASSWORD" Type="varchar2" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ARTIST">
+          <Key>
+            <PropertyRef Name="ARTIST_ID" />
+          </Key>
+          <Property Name="ARTIST_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ARTIST_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="ARTIST_TAGS" Type="varchar2" MaxLength="60" />
+          <Property Name="SOCIAL_MEDIA_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ARTIST_DESCRIPTION" Type="varchar2" MaxLength="500" />
+          <Property Name="ARTIST_TYPE_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ARTIST_REVIEW">
+          <Key>
+            <PropertyRef Name="ARTIST_ID" />
+            <PropertyRef Name="CUSTOMER_ID" />
+          </Key>
+          <Property Name="ARTIST_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ARTIST_REVIEW_DATE_TIME" Type="date" Nullable="false" />
+          <Property Name="ARTIST_REVIEW_RATING" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="ARTIST_REVIEW_BODY" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="ARTIST_REVIEW_VERIFIED" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ARTIST_TYPE">
+          <Key>
+            <PropertyRef Name="ARTIST_TYPE_ID" />
+          </Key>
+          <Property Name="ARTIST_TYPE_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ARTIST_TYPE" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BOOKING">
+          <Key>
+            <PropertyRef Name="BOOKING_ID" />
+          </Key>
+          <Property Name="BOOKING_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="TICKET_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ORDER_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="BOOKING_QUANTITY" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="BOOKING_DATE_TIME" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CHILD_EVENT">
+          <Key>
+            <PropertyRef Name="CHILD_EVENT_ID" />
+          </Key>
+          <Property Name="CHILD_EVENT_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="VENUE_ID" Type="number" Precision="8" Scale="0" />
+          <Property Name="PARENT_EVENT_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="CHILD_EVENT_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="CHILD_EVENT_DESCRIPTION" Type="varchar2" MaxLength="100" />
+          <Property Name="START_DATE_TIME" Type="date" />
+          <Property Name="END_DATE_TIME" Type="date" />
+          <Property Name="CHILD_EVENT_CANCELED" Type="number" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONTRACTS">
+          <Key>
+            <PropertyRef Name="ARTIST_ID" />
+            <PropertyRef Name="CHILD_EVENT_ID" />
+          </Key>
+          <Property Name="ARTIST_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="CHILD_EVENT_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="COLUMN1" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="CUSTOMER_ID" />
+          </Key>
+          <Property Name="CUSTOMER_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="CUSTOMER_FIRST_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="CUSTOMER_LAST_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="CUSTOMER_EMAIL" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="CUSTOMER_ADDRESS" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="CUSTOMER_POSTCODE" Type="varchar2" MaxLength="7" Nullable="false" />
+          <Property Name="CUSTOMER_PASSWORD" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVENT_REVIEW">
+          <Key>
+            <PropertyRef Name="PARENT_EVENT_ID" />
+            <PropertyRef Name="CUSTOMER_ID" />
+          </Key>
+          <Property Name="PARENT_EVENT_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="EVENT_REVIEW_DATE_TIME" Type="date" Nullable="false" />
+          <Property Name="EVENT_REVIEW_RATING" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="EVENT_REVIEW_BODY" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="EVENT_REVIEW_VERIFIED" Type="number" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GUEST_BOOKING">
+          <Key>
+            <PropertyRef Name="GUEST_BOOKING_ID" />
+          </Key>
+          <Property Name="GUEST_BOOKING_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="TICKET_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="GUEST_EMAIL" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="GUEST_ADDRESS" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="GUEST_POSTCODE" Type="varchar2" MaxLength="7" Nullable="false" />
+          <Property Name="GUEST_BOOKING_QUANTITY" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="GUEST_BOOKING_DATE_TIME" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ORDERS">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PARENT_EVENT">
+          <Key>
+            <PropertyRef Name="PARENT_EVENT_ID" />
+          </Key>
+          <Property Name="PARENT_EVENT_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="SOCIAL_MEDIA_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="PARENT_EVENT_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PARENT_EVENT_DESCRIPTION" Type="varchar2" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SOCIAL_MEDIA">
+          <Key>
+            <PropertyRef Name="SOCIAL_MEDIA_ID" />
+          </Key>
+          <Property Name="SOCIAL_MEDIA_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="IMAGE" Type="blob" />
+          <Property Name="FACEBOOK" Type="varchar2" MaxLength="75" />
+          <Property Name="TWITTER" Type="varchar2" MaxLength="75" />
+          <Property Name="INSTAGRAM" Type="varchar2" MaxLength="75" />
+          <Property Name="SOUNDCLOUD" Type="varchar2" MaxLength="75" />
+          <Property Name="WEBSITE" Type="varchar2" MaxLength="75" />
+          <Property Name="SPOTIFY" Type="varchar2" MaxLength="75" />
+          <Property Name="IMAGE2" Type="blob" />
+          <Property Name="IMAGE3" Type="blob" />
+          <Property Name="IMAGE4" Type="blob" />
+          <Property Name="IMAGE5" Type="blob" />
+        </EntityType>
+        <EntityType Name="TICKET">
+          <Key>
+            <PropertyRef Name="TICKET_ID" />
+          </Key>
+          <Property Name="TICKET_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="TICKET_PRICE" Type="number" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="TICKET_DESCRIPTION" Type="varchar2" MaxLength="50" />
+          <Property Name="TICKET_AMOUNT_REMAINING" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="TICKET_TYPE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="CHILDEVENT_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VENUE">
+          <Key>
+            <PropertyRef Name="VENUE_ID" />
+          </Key>
+          <Property Name="VENUE_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="SOCIAL_MEDIA_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="VENUE_DESCRIPTION" Type="varchar2" MaxLength="100" />
+          <Property Name="VENUE_CAPACITY_SEATING" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="VENUE_CAPACITY_STANDING" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="VENUE_DISABLED_ACCESS" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="VENUE_FACILITES" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="VENUE_PARKING" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="VENUE_PHONE_NUMBER" Type="varchar2" MaxLength="11" />
+          <Property Name="VENUE_EMAIL" Type="varchar2" MaxLength="40" />
+          <Property Name="VENUE_ADDRESS" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="VENUE_POSTCODE" Type="varchar2" MaxLength="7" Nullable="false" />
+          <Property Name="VENUE_NAME" Type="varchar2" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VENUE_REVIEW">
+          <Key>
+            <PropertyRef Name="VENUE_ID" />
+            <PropertyRef Name="CUSTOMER_ID" />
+          </Key>
+          <Property Name="VENUE_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="VENUE_REVIEW_RATING" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="VENUE_REVIEW_BODY" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="VENUE_REVIEW_DATE_TIME" Type="date" Nullable="false" />
+          <Property Name="VENUE_REVIEW_VERIFIED" Type="number" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="ARTIST_FK1">
+          <End Role="SOCIAL_MEDIA" Type="Self.SOCIAL_MEDIA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ARTIST" Type="Self.ARTIST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOCIAL_MEDIA">
+              <PropertyRef Name="SOCIAL_MEDIA_ID" />
+            </Principal>
+            <Dependent Role="ARTIST">
+              <PropertyRef Name="SOCIAL_MEDIA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ARTIST_FK2">
+          <End Role="ARTIST_TYPE" Type="Self.ARTIST_TYPE" Multiplicity="1" />
+          <End Role="ARTIST" Type="Self.ARTIST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTIST_TYPE">
+              <PropertyRef Name="ARTIST_TYPE_ID" />
+            </Principal>
+            <Dependent Role="ARTIST">
+              <PropertyRef Name="ARTIST_TYPE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ARTIST_REVIEW_FK1">
+          <End Role="ARTIST" Type="Self.ARTIST" Multiplicity="1" />
+          <End Role="ARTIST_REVIEW" Type="Self.ARTIST_REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTIST">
+              <PropertyRef Name="ARTIST_ID" />
+            </Principal>
+            <Dependent Role="ARTIST_REVIEW">
+              <PropertyRef Name="ARTIST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ARTIST_REVIEW_FK2">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="ARTIST_REVIEW" Type="Self.ARTIST_REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Principal>
+            <Dependent Role="ARTIST_REVIEW">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BOOKING_FK1">
+          <End Role="TICKET" Type="Self.TICKET" Multiplicity="1" />
+          <End Role="BOOKING" Type="Self.BOOKING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TICKET">
+              <PropertyRef Name="TICKET_ID" />
+            </Principal>
+            <Dependent Role="BOOKING">
+              <PropertyRef Name="TICKET_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BOOKING_FK2">
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="1" />
+          <End Role="BOOKING" Type="Self.BOOKING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDERS">
+              <PropertyRef Name="ORDER_ID" />
+            </Principal>
+            <Dependent Role="BOOKING">
+              <PropertyRef Name="ORDER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CHILD_EVENT_FK2">
+          <End Role="VENUE" Type="Self.VENUE" Multiplicity="0..1" />
+          <End Role="CHILD_EVENT" Type="Self.CHILD_EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENUE">
+              <PropertyRef Name="VENUE_ID" />
+            </Principal>
+            <Dependent Role="CHILD_EVENT">
+              <PropertyRef Name="VENUE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CHILD_EVENT_FK3">
+          <End Role="PARENT_EVENT" Type="Self.PARENT_EVENT" Multiplicity="1" />
+          <End Role="CHILD_EVENT" Type="Self.CHILD_EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARENT_EVENT">
+              <PropertyRef Name="PARENT_EVENT_ID" />
+            </Principal>
+            <Dependent Role="CHILD_EVENT">
+              <PropertyRef Name="PARENT_EVENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONTRACTS_FK1">
+          <End Role="ARTIST" Type="Self.ARTIST" Multiplicity="1" />
+          <End Role="CONTRACTS" Type="Self.CONTRACTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTIST">
+              <PropertyRef Name="ARTIST_ID" />
+            </Principal>
+            <Dependent Role="CONTRACTS">
+              <PropertyRef Name="ARTIST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONTRACTS_FK2">
+          <End Role="CHILD_EVENT" Type="Self.CHILD_EVENT" Multiplicity="1" />
+          <End Role="CONTRACTS" Type="Self.CONTRACTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHILD_EVENT">
+              <PropertyRef Name="CHILD_EVENT_ID" />
+            </Principal>
+            <Dependent Role="CONTRACTS">
+              <PropertyRef Name="CHILD_EVENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EVENT_REVIEW_FK1">
+          <End Role="PARENT_EVENT" Type="Self.PARENT_EVENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EVENT_REVIEW" Type="Self.EVENT_REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARENT_EVENT">
+              <PropertyRef Name="PARENT_EVENT_ID" />
+            </Principal>
+            <Dependent Role="EVENT_REVIEW">
+              <PropertyRef Name="PARENT_EVENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EVENT_REVIEW_FK2">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="EVENT_REVIEW" Type="Self.EVENT_REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Principal>
+            <Dependent Role="EVENT_REVIEW">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GUEST_BOOKING_FK1">
+          <End Role="TICKET" Type="Self.TICKET" Multiplicity="1" />
+          <End Role="GUEST_BOOKING" Type="Self.GUEST_BOOKING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TICKET">
+              <PropertyRef Name="TICKET_ID" />
+            </Principal>
+            <Dependent Role="GUEST_BOOKING">
+              <PropertyRef Name="TICKET_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ORDERS_FK1">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PARENT_EVENT_FK1">
+          <End Role="SOCIAL_MEDIA" Type="Self.SOCIAL_MEDIA" Multiplicity="1" />
+          <End Role="PARENT_EVENT" Type="Self.PARENT_EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOCIAL_MEDIA">
+              <PropertyRef Name="SOCIAL_MEDIA_ID" />
+            </Principal>
+            <Dependent Role="PARENT_EVENT">
+              <PropertyRef Name="SOCIAL_MEDIA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SOCIAL_MEDIA_ID_REVIEW_FOREIGN">
+          <End Role="SOCIAL_MEDIA" Type="Self.SOCIAL_MEDIA" Multiplicity="1" />
+          <End Role="VENUE" Type="Self.VENUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOCIAL_MEDIA">
+              <PropertyRef Name="SOCIAL_MEDIA_ID" />
+            </Principal>
+            <Dependent Role="VENUE">
+              <PropertyRef Name="SOCIAL_MEDIA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TICKET_FK1">
+          <End Role="CHILD_EVENT" Type="Self.CHILD_EVENT" Multiplicity="1" />
+          <End Role="TICKET" Type="Self.TICKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHILD_EVENT">
+              <PropertyRef Name="CHILD_EVENT_ID" />
+            </Principal>
+            <Dependent Role="TICKET">
+              <PropertyRef Name="CHILDEVENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VENUE_REVIEW_FK1">
+          <End Role="VENUE" Type="Self.VENUE" Multiplicity="1" />
+          <End Role="VENUE_REVIEW" Type="Self.VENUE_REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENUE">
+              <PropertyRef Name="VENUE_ID" />
+            </Principal>
+            <Dependent Role="VENUE_REVIEW">
+              <PropertyRef Name="VENUE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VENUE_REVIEW_FK2">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="VENUE_REVIEW" Type="Self.VENUE_REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Principal>
+            <Dependent Role="VENUE_REVIEW">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="COMPAREPASSWORD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G" ReturnType="number">
+          <Parameter Name="CUSTOMERID" Type="number" Mode="In" />
+          <Parameter Name="CUSTOMERPASSWORD" Type="varchar2" Mode="In" />
+          <Parameter Name="DOESMATCH" Type="number" Mode="Out" />
+        </Function>
+        <EntityContainer Name="DBModelStoreContainer">
+          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="ARTIST" EntityType="Self.ARTIST" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="ARTIST_REVIEW" EntityType="Self.ARTIST_REVIEW" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="ARTIST_TYPE" EntityType="Self.ARTIST_TYPE" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="BOOKING" EntityType="Self.BOOKING" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="CHILD_EVENT" EntityType="Self.CHILD_EVENT" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="CONTRACTS" EntityType="Self.CONTRACTS" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="EVENT_REVIEW" EntityType="Self.EVENT_REVIEW" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="GUEST_BOOKING" EntityType="Self.GUEST_BOOKING" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="ORDERS" EntityType="Self.ORDERS" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="PARENT_EVENT" EntityType="Self.PARENT_EVENT" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="SOCIAL_MEDIA" EntityType="Self.SOCIAL_MEDIA" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="TICKET" EntityType="Self.TICKET" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="VENUE" EntityType="Self.VENUE" Schema="PRCS251G" store:Type="Tables" />
+          <EntitySet Name="VENUE_REVIEW" EntityType="Self.VENUE_REVIEW" Schema="PRCS251G" store:Type="Tables" />
+          <AssociationSet Name="ARTIST_FK1" Association="Self.ARTIST_FK1">
+            <End Role="SOCIAL_MEDIA" EntitySet="SOCIAL_MEDIA" />
+            <End Role="ARTIST" EntitySet="ARTIST" />
+          </AssociationSet>
+          <AssociationSet Name="ARTIST_FK2" Association="Self.ARTIST_FK2">
+            <End Role="ARTIST_TYPE" EntitySet="ARTIST_TYPE" />
+            <End Role="ARTIST" EntitySet="ARTIST" />
+          </AssociationSet>
+          <AssociationSet Name="ARTIST_REVIEW_FK1" Association="Self.ARTIST_REVIEW_FK1">
+            <End Role="ARTIST" EntitySet="ARTIST" />
+            <End Role="ARTIST_REVIEW" EntitySet="ARTIST_REVIEW" />
+          </AssociationSet>
+          <AssociationSet Name="ARTIST_REVIEW_FK2" Association="Self.ARTIST_REVIEW_FK2">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="ARTIST_REVIEW" EntitySet="ARTIST_REVIEW" />
+          </AssociationSet>
+          <AssociationSet Name="BOOKING_FK1" Association="Self.BOOKING_FK1">
+            <End Role="TICKET" EntitySet="TICKET" />
+            <End Role="BOOKING" EntitySet="BOOKING" />
+          </AssociationSet>
+          <AssociationSet Name="BOOKING_FK2" Association="Self.BOOKING_FK2">
+            <End Role="ORDERS" EntitySet="ORDERS" />
+            <End Role="BOOKING" EntitySet="BOOKING" />
+          </AssociationSet>
+          <AssociationSet Name="CHILD_EVENT_FK2" Association="Self.CHILD_EVENT_FK2">
+            <End Role="VENUE" EntitySet="VENUE" />
+            <End Role="CHILD_EVENT" EntitySet="CHILD_EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="CHILD_EVENT_FK3" Association="Self.CHILD_EVENT_FK3">
+            <End Role="PARENT_EVENT" EntitySet="PARENT_EVENT" />
+            <End Role="CHILD_EVENT" EntitySet="CHILD_EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="CONTRACTS_FK1" Association="Self.CONTRACTS_FK1">
+            <End Role="ARTIST" EntitySet="ARTIST" />
+            <End Role="CONTRACTS" EntitySet="CONTRACTS" />
+          </AssociationSet>
+          <AssociationSet Name="CONTRACTS_FK2" Association="Self.CONTRACTS_FK2">
+            <End Role="CHILD_EVENT" EntitySet="CHILD_EVENT" />
+            <End Role="CONTRACTS" EntitySet="CONTRACTS" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_REVIEW_FK1" Association="Self.EVENT_REVIEW_FK1">
+            <End Role="PARENT_EVENT" EntitySet="PARENT_EVENT" />
+            <End Role="EVENT_REVIEW" EntitySet="EVENT_REVIEW" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_REVIEW_FK2" Association="Self.EVENT_REVIEW_FK2">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="EVENT_REVIEW" EntitySet="EVENT_REVIEW" />
+          </AssociationSet>
+          <AssociationSet Name="GUEST_BOOKING_FK1" Association="Self.GUEST_BOOKING_FK1">
+            <End Role="TICKET" EntitySet="TICKET" />
+            <End Role="GUEST_BOOKING" EntitySet="GUEST_BOOKING" />
+          </AssociationSet>
+          <AssociationSet Name="ORDERS_FK1" Association="Self.ORDERS_FK1">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="PARENT_EVENT_FK1" Association="Self.PARENT_EVENT_FK1">
+            <End Role="SOCIAL_MEDIA" EntitySet="SOCIAL_MEDIA" />
+            <End Role="PARENT_EVENT" EntitySet="PARENT_EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="SOCIAL_MEDIA_ID_REVIEW_FOREIGN" Association="Self.SOCIAL_MEDIA_ID_REVIEW_FOREIGN">
+            <End Role="SOCIAL_MEDIA" EntitySet="SOCIAL_MEDIA" />
+            <End Role="VENUE" EntitySet="VENUE" />
+          </AssociationSet>
+          <AssociationSet Name="TICKET_FK1" Association="Self.TICKET_FK1">
+            <End Role="CHILD_EVENT" EntitySet="CHILD_EVENT" />
+            <End Role="TICKET" EntitySet="TICKET" />
+          </AssociationSet>
+          <AssociationSet Name="VENUE_REVIEW_FK1" Association="Self.VENUE_REVIEW_FK1">
+            <End Role="VENUE" EntitySet="VENUE" />
+            <End Role="VENUE_REVIEW" EntitySet="VENUE_REVIEW" />
+          </AssociationSet>
+          <AssociationSet Name="VENUE_REVIEW_FK2" Association="Self.VENUE_REVIEW_FK2">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="VENUE_REVIEW" EntitySet="VENUE_REVIEW" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="ADMIN_ID" />
+          </Key>
+          <Property Name="ADMIN_ID" Type="Int32" Nullable="false" />
+          <Property Name="ADMIN_EMAIL" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADMIN_PASSWORD" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ARTIST">
+          <Key>
+            <PropertyRef Name="ARTIST_ID" />
+          </Key>
+          <Property Name="ARTIST_ID" Type="Int32" Nullable="false" />
+          <Property Name="ARTIST_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ARTIST_TAGS" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="SOCIAL_MEDIA_ID" Type="Int32" Nullable="false" />
+          <Property Name="ARTIST_DESCRIPTION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ARTIST_TYPE_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SOCIAL_MEDIA" Relationship="Self.ARTIST_FK1" FromRole="ARTIST" ToRole="SOCIAL_MEDIA" />
+          <NavigationProperty Name="ARTIST_TYPE" Relationship="Self.ARTIST_FK2" FromRole="ARTIST" ToRole="ARTIST_TYPE" />
+          <NavigationProperty Name="ARTIST_REVIEW" Relationship="Self.ARTIST_REVIEW_FK1" FromRole="ARTIST" ToRole="ARTIST_REVIEW" />
+          <NavigationProperty Name="CONTRACTS" Relationship="Self.CONTRACTS_FK1" FromRole="ARTIST" ToRole="CONTRACTS" />
+        </EntityType>
+        <EntityType Name="ARTIST_REVIEW">
+          <Key>
+            <PropertyRef Name="ARTIST_ID" />
+            <PropertyRef Name="CUSTOMER_ID" />
+          </Key>
+          <Property Name="ARTIST_ID" Type="Int32" Nullable="false" />
+          <Property Name="ARTIST_REVIEW_DATE_TIME" Type="DateTime" Nullable="false" />
+          <Property Name="ARTIST_REVIEW_RATING" Type="Int16" Nullable="false" />
+          <Property Name="ARTIST_REVIEW_BODY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ARTIST_REVIEW_VERIFIED" Type="Boolean" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ARTIST" Relationship="Self.ARTIST_REVIEW_FK1" FromRole="ARTIST_REVIEW" ToRole="ARTIST" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.ARTIST_REVIEW_FK2" FromRole="ARTIST_REVIEW" ToRole="CUSTOMER" />
+        </EntityType>
+        <EntityType Name="ARTIST_TYPE">
+          <Key>
+            <PropertyRef Name="ARTIST_TYPE_ID" />
+          </Key>
+          <Property Name="ARTIST_TYPE_ID" Type="Int32" Nullable="false" />
+          <Property Name="ARTIST_TYPE1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ARTISTs" Relationship="Self.ARTIST_FK2" FromRole="ARTIST_TYPE" ToRole="ARTIST" />
+        </EntityType>
+        <EntityType Name="BOOKING">
+          <Key>
+            <PropertyRef Name="BOOKING_ID" />
+          </Key>
+          <Property Name="BOOKING_ID" Type="Int32" Nullable="false" />
+          <Property Name="TICKET_ID" Type="Int32" Nullable="false" />
+          <Property Name="ORDER_ID" Type="Int32" Nullable="false" />
+          <Property Name="BOOKING_QUANTITY" Type="Int16" Nullable="false" />
+          <Property Name="BOOKING_DATE_TIME" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="TICKET" Relationship="Self.BOOKING_FK1" FromRole="BOOKING" ToRole="TICKET" />
+          <NavigationProperty Name="ORDER" Relationship="Self.BOOKING_FK2" FromRole="BOOKING" ToRole="ORDERS" />
+        </EntityType>
+        <EntityType Name="CHILD_EVENT">
+          <Key>
+            <PropertyRef Name="CHILD_EVENT_ID" />
+          </Key>
+          <Property Name="CHILD_EVENT_ID" Type="Int32" Nullable="false" />
+          <Property Name="VENUE_ID" Type="Int32" />
+          <Property Name="PARENT_EVENT_ID" Type="Int32" Nullable="false" />
+          <Property Name="CHILD_EVENT_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CHILD_EVENT_DESCRIPTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="START_DATE_TIME" Type="DateTime" />
+          <Property Name="END_DATE_TIME" Type="DateTime" />
+          <Property Name="CHILD_EVENT_CANCELED" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="VENUE" Relationship="Self.CHILD_EVENT_FK2" FromRole="CHILD_EVENT" ToRole="VENUE" />
+          <NavigationProperty Name="PARENT_EVENT" Relationship="Self.CHILD_EVENT_FK3" FromRole="CHILD_EVENT" ToRole="PARENT_EVENT" />
+          <NavigationProperty Name="CONTRACTS" Relationship="Self.CONTRACTS_FK2" FromRole="CHILD_EVENT" ToRole="CONTRACTS" />
+          <NavigationProperty Name="TICKETs" Relationship="Self.TICKET_FK1" FromRole="CHILD_EVENT" ToRole="TICKET" />
+        </EntityType>
+        <EntityType Name="CONTRACT">
+          <Key>
+            <PropertyRef Name="ARTIST_ID" />
+            <PropertyRef Name="CHILD_EVENT_ID" />
+          </Key>
+          <Property Name="ARTIST_ID" Type="Int32" Nullable="false" />
+          <Property Name="CHILD_EVENT_ID" Type="Int32" Nullable="false" />
+          <Property Name="COLUMN1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ARTIST" Relationship="Self.CONTRACTS_FK1" FromRole="CONTRACTS" ToRole="ARTIST" />
+          <NavigationProperty Name="CHILD_EVENT" Relationship="Self.CONTRACTS_FK2" FromRole="CONTRACTS" ToRole="CHILD_EVENT" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="CUSTOMER_ID" />
+          </Key>
+          <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" />
+          <Property Name="CUSTOMER_FIRST_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CUSTOMER_LAST_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CUSTOMER_EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CUSTOMER_ADDRESS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CUSTOMER_POSTCODE" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CUSTOMER_PASSWORD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ARTIST_REVIEW" Relationship="Self.ARTIST_REVIEW_FK2" FromRole="CUSTOMER" ToRole="ARTIST_REVIEW" />
+          <NavigationProperty Name="EVENT_REVIEW" Relationship="Self.EVENT_REVIEW_FK2" FromRole="CUSTOMER" ToRole="EVENT_REVIEW" />
+          <NavigationProperty Name="ORDERS" Relationship="Self.ORDERS_FK1" FromRole="CUSTOMER" ToRole="ORDERS" />
+          <NavigationProperty Name="VENUE_REVIEW" Relationship="Self.VENUE_REVIEW_FK2" FromRole="CUSTOMER" ToRole="VENUE_REVIEW" />
+        </EntityType>
+        <EntityType Name="EVENT_REVIEW">
+          <Key>
+            <PropertyRef Name="PARENT_EVENT_ID" />
+            <PropertyRef Name="CUSTOMER_ID" />
+          </Key>
+          <Property Name="PARENT_EVENT_ID" Type="Int32" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" />
+          <Property Name="EVENT_REVIEW_DATE_TIME" Type="DateTime" Nullable="false" />
+          <Property Name="EVENT_REVIEW_RATING" Type="Int16" Nullable="false" />
+          <Property Name="EVENT_REVIEW_BODY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EVENT_REVIEW_VERIFIED" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.EVENT_REVIEW_FK2" FromRole="EVENT_REVIEW" ToRole="CUSTOMER" />
+          <NavigationProperty Name="PARENT_EVENT" Relationship="Self.EVENT_REVIEW_FK1" FromRole="EVENT_REVIEW" ToRole="PARENT_EVENT" />
+        </EntityType>
+        <EntityType Name="GUEST_BOOKING">
+          <Key>
+            <PropertyRef Name="GUEST_BOOKING_ID" />
+          </Key>
+          <Property Name="GUEST_BOOKING_ID" Type="Int32" Nullable="false" />
+          <Property Name="TICKET_ID" Type="Int32" Nullable="false" />
+          <Property Name="GUEST_EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GUEST_ADDRESS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GUEST_POSTCODE" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GUEST_BOOKING_QUANTITY" Type="Int32" Nullable="false" />
+          <Property Name="GUEST_BOOKING_DATE_TIME" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="TICKET" Relationship="Self.GUEST_BOOKING_FK1" FromRole="GUEST_BOOKING" ToRole="TICKET" />
+        </EntityType>
+        <EntityType Name="ORDER">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="Int32" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BOOKINGs" Relationship="Self.BOOKING_FK2" FromRole="ORDERS" ToRole="BOOKING" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.ORDERS_FK1" FromRole="ORDERS" ToRole="CUSTOMER" />
+        </EntityType>
+        <EntityType Name="PARENT_EVENT">
+          <Key>
+            <PropertyRef Name="PARENT_EVENT_ID" />
+          </Key>
+          <Property Name="PARENT_EVENT_ID" Type="Int32" Nullable="false" />
+          <Property Name="SOCIAL_MEDIA_ID" Type="Int32" Nullable="false" />
+          <Property Name="PARENT_EVENT_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PARENT_EVENT_DESCRIPTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CHILD_EVENT" Relationship="Self.CHILD_EVENT_FK3" FromRole="PARENT_EVENT" ToRole="CHILD_EVENT" />
+          <NavigationProperty Name="EVENT_REVIEW" Relationship="Self.EVENT_REVIEW_FK1" FromRole="PARENT_EVENT" ToRole="EVENT_REVIEW" />
+          <NavigationProperty Name="SOCIAL_MEDIA" Relationship="Self.PARENT_EVENT_FK1" FromRole="PARENT_EVENT" ToRole="SOCIAL_MEDIA" />
+        </EntityType>
+        <EntityType Name="SOCIAL_MEDIA">
+          <Key>
+            <PropertyRef Name="SOCIAL_MEDIA_ID" />
+          </Key>
+          <Property Name="SOCIAL_MEDIA_ID" Type="Int32" Nullable="false" />
+          <Property Name="IMAGE" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FACEBOOK" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="TWITTER" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="INSTAGRAM" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="SOUNDCLOUD" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="WEBSITE" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="SPOTIFY" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="IMAGE2" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IMAGE3" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IMAGE4" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IMAGE5" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="ARTISTs" Relationship="Self.ARTIST_FK1" FromRole="SOCIAL_MEDIA" ToRole="ARTIST" />
+          <NavigationProperty Name="PARENT_EVENT" Relationship="Self.PARENT_EVENT_FK1" FromRole="SOCIAL_MEDIA" ToRole="PARENT_EVENT" />
+          <NavigationProperty Name="VENUEs" Relationship="Self.SOCIAL_MEDIA_ID_REVIEW_FOREIGN" FromRole="SOCIAL_MEDIA" ToRole="VENUE" />
+        </EntityType>
+        <EntityType Name="TICKET">
+          <Key>
+            <PropertyRef Name="TICKET_ID" />
+          </Key>
+          <Property Name="TICKET_ID" Type="Int32" Nullable="false" />
+          <Property Name="TICKET_PRICE" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="TICKET_DESCRIPTION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TICKET_AMOUNT_REMAINING" Type="Int32" Nullable="false" />
+          <Property Name="TICKET_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CHILDEVENT_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BOOKINGs" Relationship="Self.BOOKING_FK1" FromRole="TICKET" ToRole="BOOKING" />
+          <NavigationProperty Name="CHILD_EVENT" Relationship="Self.TICKET_FK1" FromRole="TICKET" ToRole="CHILD_EVENT" />
+          <NavigationProperty Name="GUEST_BOOKING" Relationship="Self.GUEST_BOOKING_FK1" FromRole="TICKET" ToRole="GUEST_BOOKING" />
+        </EntityType>
+        <EntityType Name="VENUE">
+          <Key>
+            <PropertyRef Name="VENUE_ID" />
+          </Key>
+          <Property Name="VENUE_ID" Type="Int32" Nullable="false" />
+          <Property Name="SOCIAL_MEDIA_ID" Type="Int32" Nullable="false" />
+          <Property Name="VENUE_DESCRIPTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VENUE_CAPACITY_SEATING" Type="Int16" Nullable="false" />
+          <Property Name="VENUE_CAPACITY_STANDING" Type="Int16" Nullable="false" />
+          <Property Name="VENUE_DISABLED_ACCESS" Type="Boolean" Nullable="false" />
+          <Property Name="VENUE_FACILITES" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VENUE_PARKING" Type="Int32" Nullable="false" />
+          <Property Name="VENUE_PHONE_NUMBER" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="VENUE_EMAIL" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="VENUE_ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VENUE_POSTCODE" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VENUE_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CHILD_EVENT" Relationship="Self.CHILD_EVENT_FK2" FromRole="VENUE" ToRole="CHILD_EVENT" />
+          <NavigationProperty Name="SOCIAL_MEDIA" Relationship="Self.SOCIAL_MEDIA_ID_REVIEW_FOREIGN" FromRole="VENUE" ToRole="SOCIAL_MEDIA" />
+          <NavigationProperty Name="VENUE_REVIEW" Relationship="Self.VENUE_REVIEW_FK1" FromRole="VENUE" ToRole="VENUE_REVIEW" />
+        </EntityType>
+        <EntityType Name="VENUE_REVIEW">
+          <Key>
+            <PropertyRef Name="VENUE_ID" />
+            <PropertyRef Name="CUSTOMER_ID" />
+          </Key>
+          <Property Name="VENUE_ID" Type="Int32" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" />
+          <Property Name="VENUE_REVIEW_RATING" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="VENUE_REVIEW_BODY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VENUE_REVIEW_DATE_TIME" Type="DateTime" Nullable="false" />
+          <Property Name="VENUE_REVIEW_VERIFIED" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.VENUE_REVIEW_FK2" FromRole="VENUE_REVIEW" ToRole="CUSTOMER" />
+          <NavigationProperty Name="VENUE" Relationship="Self.VENUE_REVIEW_FK1" FromRole="VENUE_REVIEW" ToRole="VENUE" />
+        </EntityType>
+        <Association Name="ARTIST_FK1">
+          <End Role="SOCIAL_MEDIA" Type="Self.SOCIAL_MEDIA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ARTIST" Type="Self.ARTIST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOCIAL_MEDIA">
+              <PropertyRef Name="SOCIAL_MEDIA_ID" />
+            </Principal>
+            <Dependent Role="ARTIST">
+              <PropertyRef Name="SOCIAL_MEDIA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ARTIST_FK2">
+          <End Role="ARTIST_TYPE" Type="Self.ARTIST_TYPE" Multiplicity="1" />
+          <End Role="ARTIST" Type="Self.ARTIST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTIST_TYPE">
+              <PropertyRef Name="ARTIST_TYPE_ID" />
+            </Principal>
+            <Dependent Role="ARTIST">
+              <PropertyRef Name="ARTIST_TYPE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ARTIST_REVIEW_FK1">
+          <End Role="ARTIST" Type="Self.ARTIST" Multiplicity="1" />
+          <End Role="ARTIST_REVIEW" Type="Self.ARTIST_REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTIST">
+              <PropertyRef Name="ARTIST_ID" />
+            </Principal>
+            <Dependent Role="ARTIST_REVIEW">
+              <PropertyRef Name="ARTIST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONTRACTS_FK1">
+          <End Role="ARTIST" Type="Self.ARTIST" Multiplicity="1" />
+          <End Role="CONTRACTS" Type="Self.CONTRACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTIST">
+              <PropertyRef Name="ARTIST_ID" />
+            </Principal>
+            <Dependent Role="CONTRACTS">
+              <PropertyRef Name="ARTIST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ARTIST_REVIEW_FK2">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="ARTIST_REVIEW" Type="Self.ARTIST_REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Principal>
+            <Dependent Role="ARTIST_REVIEW">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BOOKING_FK1">
+          <End Role="TICKET" Type="Self.TICKET" Multiplicity="1" />
+          <End Role="BOOKING" Type="Self.BOOKING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TICKET">
+              <PropertyRef Name="TICKET_ID" />
+            </Principal>
+            <Dependent Role="BOOKING">
+              <PropertyRef Name="TICKET_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BOOKING_FK2">
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="1" />
+          <End Role="BOOKING" Type="Self.BOOKING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDERS">
+              <PropertyRef Name="ORDER_ID" />
+            </Principal>
+            <Dependent Role="BOOKING">
+              <PropertyRef Name="ORDER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CHILD_EVENT_FK2">
+          <End Role="VENUE" Type="Self.VENUE" Multiplicity="0..1" />
+          <End Role="CHILD_EVENT" Type="Self.CHILD_EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENUE">
+              <PropertyRef Name="VENUE_ID" />
+            </Principal>
+            <Dependent Role="CHILD_EVENT">
+              <PropertyRef Name="VENUE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CHILD_EVENT_FK3">
+          <End Role="PARENT_EVENT" Type="Self.PARENT_EVENT" Multiplicity="1" />
+          <End Role="CHILD_EVENT" Type="Self.CHILD_EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARENT_EVENT">
+              <PropertyRef Name="PARENT_EVENT_ID" />
+            </Principal>
+            <Dependent Role="CHILD_EVENT">
+              <PropertyRef Name="PARENT_EVENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONTRACTS_FK2">
+          <End Role="CHILD_EVENT" Type="Self.CHILD_EVENT" Multiplicity="1" />
+          <End Role="CONTRACTS" Type="Self.CONTRACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHILD_EVENT">
+              <PropertyRef Name="CHILD_EVENT_ID" />
+            </Principal>
+            <Dependent Role="CONTRACTS">
+              <PropertyRef Name="CHILD_EVENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TICKET_FK1">
+          <End Role="CHILD_EVENT" Type="Self.CHILD_EVENT" Multiplicity="1" />
+          <End Role="TICKET" Type="Self.TICKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHILD_EVENT">
+              <PropertyRef Name="CHILD_EVENT_ID" />
+            </Principal>
+            <Dependent Role="TICKET">
+              <PropertyRef Name="CHILDEVENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EVENT_REVIEW_FK2">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="EVENT_REVIEW" Type="Self.EVENT_REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Principal>
+            <Dependent Role="EVENT_REVIEW">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ORDERS_FK1">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VENUE_REVIEW_FK2">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="VENUE_REVIEW" Type="Self.VENUE_REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Principal>
+            <Dependent Role="VENUE_REVIEW">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EVENT_REVIEW_FK1">
+          <End Role="PARENT_EVENT" Type="Self.PARENT_EVENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EVENT_REVIEW" Type="Self.EVENT_REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARENT_EVENT">
+              <PropertyRef Name="PARENT_EVENT_ID" />
+            </Principal>
+            <Dependent Role="EVENT_REVIEW">
+              <PropertyRef Name="PARENT_EVENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GUEST_BOOKING_FK1">
+          <End Role="TICKET" Type="Self.TICKET" Multiplicity="1" />
+          <End Role="GUEST_BOOKING" Type="Self.GUEST_BOOKING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TICKET">
+              <PropertyRef Name="TICKET_ID" />
+            </Principal>
+            <Dependent Role="GUEST_BOOKING">
+              <PropertyRef Name="TICKET_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PARENT_EVENT_FK1">
+          <End Role="SOCIAL_MEDIA" Type="Self.SOCIAL_MEDIA" Multiplicity="1" />
+          <End Role="PARENT_EVENT" Type="Self.PARENT_EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOCIAL_MEDIA">
+              <PropertyRef Name="SOCIAL_MEDIA_ID" />
+            </Principal>
+            <Dependent Role="PARENT_EVENT">
+              <PropertyRef Name="SOCIAL_MEDIA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SOCIAL_MEDIA_ID_REVIEW_FOREIGN">
+          <End Role="SOCIAL_MEDIA" Type="Self.SOCIAL_MEDIA" Multiplicity="1" />
+          <End Role="VENUE" Type="Self.VENUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOCIAL_MEDIA">
+              <PropertyRef Name="SOCIAL_MEDIA_ID" />
+            </Principal>
+            <Dependent Role="VENUE">
+              <PropertyRef Name="SOCIAL_MEDIA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VENUE_REVIEW_FK1">
+          <End Role="VENUE" Type="Self.VENUE" Multiplicity="1" />
+          <End Role="VENUE_REVIEW" Type="Self.VENUE_REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENUE">
+              <PropertyRef Name="VENUE_ID" />
+            </Principal>
+            <Dependent Role="VENUE_REVIEW">
+              <PropertyRef Name="VENUE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBConn" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADMINs" EntityType="Self.ADMIN" />
+          <EntitySet Name="ARTISTs" EntityType="Self.ARTIST" />
+          <EntitySet Name="ARTIST_REVIEW" EntityType="Self.ARTIST_REVIEW" />
+          <EntitySet Name="ARTIST_TYPE" EntityType="Self.ARTIST_TYPE" />
+          <EntitySet Name="BOOKINGs" EntityType="Self.BOOKING" />
+          <EntitySet Name="CHILD_EVENT" EntityType="Self.CHILD_EVENT" />
+          <EntitySet Name="CONTRACTS" EntityType="Self.CONTRACT" />
+          <EntitySet Name="CUSTOMERs" EntityType="Self.CUSTOMER" />
+          <EntitySet Name="EVENT_REVIEW" EntityType="Self.EVENT_REVIEW" />
+          <EntitySet Name="GUEST_BOOKING" EntityType="Self.GUEST_BOOKING" />
+          <EntitySet Name="ORDERS" EntityType="Self.ORDER" />
+          <EntitySet Name="PARENT_EVENT" EntityType="Self.PARENT_EVENT" />
+          <EntitySet Name="SOCIAL_MEDIA" EntityType="Self.SOCIAL_MEDIA" />
+          <EntitySet Name="TICKETs" EntityType="Self.TICKET" />
+          <EntitySet Name="VENUEs" EntityType="Self.VENUE" />
+          <EntitySet Name="VENUE_REVIEW" EntityType="Self.VENUE_REVIEW" />
+          <AssociationSet Name="ARTIST_FK1" Association="Self.ARTIST_FK1">
+            <End Role="SOCIAL_MEDIA" EntitySet="SOCIAL_MEDIA" />
+            <End Role="ARTIST" EntitySet="ARTISTs" />
+          </AssociationSet>
+          <AssociationSet Name="ARTIST_FK2" Association="Self.ARTIST_FK2">
+            <End Role="ARTIST_TYPE" EntitySet="ARTIST_TYPE" />
+            <End Role="ARTIST" EntitySet="ARTISTs" />
+          </AssociationSet>
+          <AssociationSet Name="ARTIST_REVIEW_FK1" Association="Self.ARTIST_REVIEW_FK1">
+            <End Role="ARTIST" EntitySet="ARTISTs" />
+            <End Role="ARTIST_REVIEW" EntitySet="ARTIST_REVIEW" />
+          </AssociationSet>
+          <AssociationSet Name="CONTRACTS_FK1" Association="Self.CONTRACTS_FK1">
+            <End Role="ARTIST" EntitySet="ARTISTs" />
+            <End Role="CONTRACTS" EntitySet="CONTRACTS" />
+          </AssociationSet>
+          <AssociationSet Name="ARTIST_REVIEW_FK2" Association="Self.ARTIST_REVIEW_FK2">
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+            <End Role="ARTIST_REVIEW" EntitySet="ARTIST_REVIEW" />
+          </AssociationSet>
+          <AssociationSet Name="BOOKING_FK1" Association="Self.BOOKING_FK1">
+            <End Role="TICKET" EntitySet="TICKETs" />
+            <End Role="BOOKING" EntitySet="BOOKINGs" />
+          </AssociationSet>
+          <AssociationSet Name="BOOKING_FK2" Association="Self.BOOKING_FK2">
+            <End Role="ORDERS" EntitySet="ORDERS" />
+            <End Role="BOOKING" EntitySet="BOOKINGs" />
+          </AssociationSet>
+          <AssociationSet Name="CHILD_EVENT_FK2" Association="Self.CHILD_EVENT_FK2">
+            <End Role="VENUE" EntitySet="VENUEs" />
+            <End Role="CHILD_EVENT" EntitySet="CHILD_EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="CHILD_EVENT_FK3" Association="Self.CHILD_EVENT_FK3">
+            <End Role="PARENT_EVENT" EntitySet="PARENT_EVENT" />
+            <End Role="CHILD_EVENT" EntitySet="CHILD_EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="CONTRACTS_FK2" Association="Self.CONTRACTS_FK2">
+            <End Role="CHILD_EVENT" EntitySet="CHILD_EVENT" />
+            <End Role="CONTRACTS" EntitySet="CONTRACTS" />
+          </AssociationSet>
+          <AssociationSet Name="TICKET_FK1" Association="Self.TICKET_FK1">
+            <End Role="CHILD_EVENT" EntitySet="CHILD_EVENT" />
+            <End Role="TICKET" EntitySet="TICKETs" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_REVIEW_FK2" Association="Self.EVENT_REVIEW_FK2">
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+            <End Role="EVENT_REVIEW" EntitySet="EVENT_REVIEW" />
+          </AssociationSet>
+          <AssociationSet Name="ORDERS_FK1" Association="Self.ORDERS_FK1">
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="VENUE_REVIEW_FK2" Association="Self.VENUE_REVIEW_FK2">
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+            <End Role="VENUE_REVIEW" EntitySet="VENUE_REVIEW" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_REVIEW_FK1" Association="Self.EVENT_REVIEW_FK1">
+            <End Role="PARENT_EVENT" EntitySet="PARENT_EVENT" />
+            <End Role="EVENT_REVIEW" EntitySet="EVENT_REVIEW" />
+          </AssociationSet>
+          <AssociationSet Name="GUEST_BOOKING_FK1" Association="Self.GUEST_BOOKING_FK1">
+            <End Role="TICKET" EntitySet="TICKETs" />
+            <End Role="GUEST_BOOKING" EntitySet="GUEST_BOOKING" />
+          </AssociationSet>
+          <AssociationSet Name="PARENT_EVENT_FK1" Association="Self.PARENT_EVENT_FK1">
+            <End Role="SOCIAL_MEDIA" EntitySet="SOCIAL_MEDIA" />
+            <End Role="PARENT_EVENT" EntitySet="PARENT_EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="SOCIAL_MEDIA_ID_REVIEW_FOREIGN" Association="Self.SOCIAL_MEDIA_ID_REVIEW_FOREIGN">
+            <End Role="SOCIAL_MEDIA" EntitySet="SOCIAL_MEDIA" />
+            <End Role="VENUE" EntitySet="VENUEs" />
+          </AssociationSet>
+          <AssociationSet Name="VENUE_REVIEW_FK1" Association="Self.VENUE_REVIEW_FK1">
+            <End Role="VENUE" EntitySet="VENUEs" />
+            <End Role="VENUE_REVIEW" EntitySet="VENUE_REVIEW" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="DBConn">
+          <EntitySetMapping Name="ADMINs">
+            <EntityTypeMapping TypeName="DBModel.ADMIN">
+              <MappingFragment StoreEntitySet="ADMIN">
+                <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+                <ScalarProperty Name="ADMIN_EMAIL" ColumnName="ADMIN_EMAIL" />
+                <ScalarProperty Name="ADMIN_PASSWORD" ColumnName="ADMIN_PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ARTISTs">
+            <EntityTypeMapping TypeName="DBModel.ARTIST">
+              <MappingFragment StoreEntitySet="ARTIST">
+                <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
+                <ScalarProperty Name="ARTIST_NAME" ColumnName="ARTIST_NAME" />
+                <ScalarProperty Name="ARTIST_TAGS" ColumnName="ARTIST_TAGS" />
+                <ScalarProperty Name="SOCIAL_MEDIA_ID" ColumnName="SOCIAL_MEDIA_ID" />
+                <ScalarProperty Name="ARTIST_DESCRIPTION" ColumnName="ARTIST_DESCRIPTION" />
+                <ScalarProperty Name="ARTIST_TYPE_ID" ColumnName="ARTIST_TYPE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ARTIST_REVIEW">
+            <EntityTypeMapping TypeName="DBModel.ARTIST_REVIEW">
+              <MappingFragment StoreEntitySet="ARTIST_REVIEW">
+                <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
+                <ScalarProperty Name="ARTIST_REVIEW_DATE_TIME" ColumnName="ARTIST_REVIEW_DATE_TIME" />
+                <ScalarProperty Name="ARTIST_REVIEW_RATING" ColumnName="ARTIST_REVIEW_RATING" />
+                <ScalarProperty Name="ARTIST_REVIEW_BODY" ColumnName="ARTIST_REVIEW_BODY" />
+                <ScalarProperty Name="ARTIST_REVIEW_VERIFIED" ColumnName="ARTIST_REVIEW_VERIFIED" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ARTIST_TYPE">
+            <EntityTypeMapping TypeName="DBModel.ARTIST_TYPE">
+              <MappingFragment StoreEntitySet="ARTIST_TYPE">
+                <ScalarProperty Name="ARTIST_TYPE_ID" ColumnName="ARTIST_TYPE_ID" />
+                <ScalarProperty Name="ARTIST_TYPE1" ColumnName="ARTIST_TYPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BOOKINGs">
+            <EntityTypeMapping TypeName="DBModel.BOOKING">
+              <MappingFragment StoreEntitySet="BOOKING">
+                <ScalarProperty Name="BOOKING_ID" ColumnName="BOOKING_ID" />
+                <ScalarProperty Name="TICKET_ID" ColumnName="TICKET_ID" />
+                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+                <ScalarProperty Name="BOOKING_QUANTITY" ColumnName="BOOKING_QUANTITY" />
+                <ScalarProperty Name="BOOKING_DATE_TIME" ColumnName="BOOKING_DATE_TIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHILD_EVENT">
+            <EntityTypeMapping TypeName="DBModel.CHILD_EVENT">
+              <MappingFragment StoreEntitySet="CHILD_EVENT">
+                <ScalarProperty Name="CHILD_EVENT_ID" ColumnName="CHILD_EVENT_ID" />
+                <ScalarProperty Name="VENUE_ID" ColumnName="VENUE_ID" />
+                <ScalarProperty Name="PARENT_EVENT_ID" ColumnName="PARENT_EVENT_ID" />
+                <ScalarProperty Name="CHILD_EVENT_NAME" ColumnName="CHILD_EVENT_NAME" />
+                <ScalarProperty Name="CHILD_EVENT_DESCRIPTION" ColumnName="CHILD_EVENT_DESCRIPTION" />
+                <ScalarProperty Name="START_DATE_TIME" ColumnName="START_DATE_TIME" />
+                <ScalarProperty Name="END_DATE_TIME" ColumnName="END_DATE_TIME" />
+                <ScalarProperty Name="CHILD_EVENT_CANCELED" ColumnName="CHILD_EVENT_CANCELED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTRACTS">
+            <EntityTypeMapping TypeName="DBModel.CONTRACT">
+              <MappingFragment StoreEntitySet="CONTRACTS">
+                <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
+                <ScalarProperty Name="CHILD_EVENT_ID" ColumnName="CHILD_EVENT_ID" />
+                <ScalarProperty Name="COLUMN1" ColumnName="COLUMN1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUSTOMERs">
+            <EntityTypeMapping TypeName="DBModel.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMER">
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="CUSTOMER_FIRST_NAME" ColumnName="CUSTOMER_FIRST_NAME" />
+                <ScalarProperty Name="CUSTOMER_LAST_NAME" ColumnName="CUSTOMER_LAST_NAME" />
+                <ScalarProperty Name="CUSTOMER_EMAIL" ColumnName="CUSTOMER_EMAIL" />
+                <ScalarProperty Name="CUSTOMER_ADDRESS" ColumnName="CUSTOMER_ADDRESS" />
+                <ScalarProperty Name="CUSTOMER_POSTCODE" ColumnName="CUSTOMER_POSTCODE" />
+                <ScalarProperty Name="CUSTOMER_PASSWORD" ColumnName="CUSTOMER_PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENT_REVIEW">
+            <EntityTypeMapping TypeName="DBModel.EVENT_REVIEW">
+              <MappingFragment StoreEntitySet="EVENT_REVIEW">
+                <ScalarProperty Name="PARENT_EVENT_ID" ColumnName="PARENT_EVENT_ID" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="EVENT_REVIEW_DATE_TIME" ColumnName="EVENT_REVIEW_DATE_TIME" />
+                <ScalarProperty Name="EVENT_REVIEW_RATING" ColumnName="EVENT_REVIEW_RATING" />
+                <ScalarProperty Name="EVENT_REVIEW_BODY" ColumnName="EVENT_REVIEW_BODY" />
+                <ScalarProperty Name="EVENT_REVIEW_VERIFIED" ColumnName="EVENT_REVIEW_VERIFIED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GUEST_BOOKING">
+            <EntityTypeMapping TypeName="DBModel.GUEST_BOOKING">
+              <MappingFragment StoreEntitySet="GUEST_BOOKING">
+                <ScalarProperty Name="GUEST_BOOKING_ID" ColumnName="GUEST_BOOKING_ID" />
+                <ScalarProperty Name="TICKET_ID" ColumnName="TICKET_ID" />
+                <ScalarProperty Name="GUEST_EMAIL" ColumnName="GUEST_EMAIL" />
+                <ScalarProperty Name="GUEST_ADDRESS" ColumnName="GUEST_ADDRESS" />
+                <ScalarProperty Name="GUEST_POSTCODE" ColumnName="GUEST_POSTCODE" />
+                <ScalarProperty Name="GUEST_BOOKING_QUANTITY" ColumnName="GUEST_BOOKING_QUANTITY" />
+                <ScalarProperty Name="GUEST_BOOKING_DATE_TIME" ColumnName="GUEST_BOOKING_DATE_TIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDERS">
+            <EntityTypeMapping TypeName="DBModel.ORDER">
+              <MappingFragment StoreEntitySet="ORDERS">
+                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PARENT_EVENT">
+            <EntityTypeMapping TypeName="DBModel.PARENT_EVENT">
+              <MappingFragment StoreEntitySet="PARENT_EVENT">
+                <ScalarProperty Name="PARENT_EVENT_ID" ColumnName="PARENT_EVENT_ID" />
+                <ScalarProperty Name="SOCIAL_MEDIA_ID" ColumnName="SOCIAL_MEDIA_ID" />
+                <ScalarProperty Name="PARENT_EVENT_NAME" ColumnName="PARENT_EVENT_NAME" />
+                <ScalarProperty Name="PARENT_EVENT_DESCRIPTION" ColumnName="PARENT_EVENT_DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SOCIAL_MEDIA">
+            <EntityTypeMapping TypeName="DBModel.SOCIAL_MEDIA">
+              <MappingFragment StoreEntitySet="SOCIAL_MEDIA">
+                <ScalarProperty Name="SOCIAL_MEDIA_ID" ColumnName="SOCIAL_MEDIA_ID" />
+                <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
+                <ScalarProperty Name="FACEBOOK" ColumnName="FACEBOOK" />
+                <ScalarProperty Name="TWITTER" ColumnName="TWITTER" />
+                <ScalarProperty Name="INSTAGRAM" ColumnName="INSTAGRAM" />
+                <ScalarProperty Name="SOUNDCLOUD" ColumnName="SOUNDCLOUD" />
+                <ScalarProperty Name="WEBSITE" ColumnName="WEBSITE" />
+                <ScalarProperty Name="SPOTIFY" ColumnName="SPOTIFY" />
+                <ScalarProperty Name="IMAGE2" ColumnName="IMAGE2" />
+                <ScalarProperty Name="IMAGE3" ColumnName="IMAGE3" />
+                <ScalarProperty Name="IMAGE4" ColumnName="IMAGE4" />
+                <ScalarProperty Name="IMAGE5" ColumnName="IMAGE5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TICKETs">
+            <EntityTypeMapping TypeName="DBModel.TICKET">
+              <MappingFragment StoreEntitySet="TICKET">
+                <ScalarProperty Name="TICKET_ID" ColumnName="TICKET_ID" />
+                <ScalarProperty Name="TICKET_PRICE" ColumnName="TICKET_PRICE" />
+                <ScalarProperty Name="TICKET_DESCRIPTION" ColumnName="TICKET_DESCRIPTION" />
+                <ScalarProperty Name="TICKET_AMOUNT_REMAINING" ColumnName="TICKET_AMOUNT_REMAINING" />
+                <ScalarProperty Name="TICKET_TYPE" ColumnName="TICKET_TYPE" />
+                <ScalarProperty Name="CHILDEVENT_ID" ColumnName="CHILDEVENT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENUEs">
+            <EntityTypeMapping TypeName="DBModel.VENUE">
+              <MappingFragment StoreEntitySet="VENUE">
+                <ScalarProperty Name="VENUE_ID" ColumnName="VENUE_ID" />
+                <ScalarProperty Name="SOCIAL_MEDIA_ID" ColumnName="SOCIAL_MEDIA_ID" />
+                <ScalarProperty Name="VENUE_DESCRIPTION" ColumnName="VENUE_DESCRIPTION" />
+                <ScalarProperty Name="VENUE_CAPACITY_SEATING" ColumnName="VENUE_CAPACITY_SEATING" />
+                <ScalarProperty Name="VENUE_CAPACITY_STANDING" ColumnName="VENUE_CAPACITY_STANDING" />
+                <ScalarProperty Name="VENUE_DISABLED_ACCESS" ColumnName="VENUE_DISABLED_ACCESS" />
+                <ScalarProperty Name="VENUE_FACILITES" ColumnName="VENUE_FACILITES" />
+                <ScalarProperty Name="VENUE_PARKING" ColumnName="VENUE_PARKING" />
+                <ScalarProperty Name="VENUE_PHONE_NUMBER" ColumnName="VENUE_PHONE_NUMBER" />
+                <ScalarProperty Name="VENUE_EMAIL" ColumnName="VENUE_EMAIL" />
+                <ScalarProperty Name="VENUE_ADDRESS" ColumnName="VENUE_ADDRESS" />
+                <ScalarProperty Name="VENUE_POSTCODE" ColumnName="VENUE_POSTCODE" />
+                <ScalarProperty Name="VENUE_NAME" ColumnName="VENUE_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENUE_REVIEW">
+            <EntityTypeMapping TypeName="DBModel.VENUE_REVIEW">
+              <MappingFragment StoreEntitySet="VENUE_REVIEW">
+                <ScalarProperty Name="VENUE_ID" ColumnName="VENUE_ID" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="VENUE_REVIEW_RATING" ColumnName="VENUE_REVIEW_RATING" />
+                <ScalarProperty Name="VENUE_REVIEW_BODY" ColumnName="VENUE_REVIEW_BODY" />
+                <ScalarProperty Name="VENUE_REVIEW_DATE_TIME" ColumnName="VENUE_REVIEW_DATE_TIME" />
+                <ScalarProperty Name="VENUE_REVIEW_VERIFIED" ColumnName="VENUE_REVIEW_VERIFIED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
