@@ -30,7 +30,7 @@ namespace DotNetAPI.Models
         public Nullable<System.DateTime> END_DATE_TIME { get; set; }
         public bool CHILD_EVENT_CANCELED { get; set; }
     
-        public VENUE VENUE { get; set; }
+        public  VENUE VENUE { get; set; }
         public  PARENT_EVENT PARENT_EVENT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public  ICollection<CONTRACT> CONTRACTS { get; set; }

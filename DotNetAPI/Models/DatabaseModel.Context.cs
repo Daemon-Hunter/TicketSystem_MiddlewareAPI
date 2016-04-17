@@ -12,6 +12,8 @@ namespace DotNetAPI.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DBConn : DbContext
     {
@@ -41,5 +43,21 @@ namespace DotNetAPI.Models
         public virtual DbSet<TICKET> TICKETs { get; set; }
         public virtual DbSet<VENUE> VENUEs { get; set; }
         public virtual DbSet<VENUE_REVIEW> VENUE_REVIEW { get; set; }
+
+        public virtual int COMPAREPASSWORDS(Nullable<decimal> cUSTOMERID, string cUSTOMERPASSWORD)
+        {
+            var cUSTOMERIDParameter = cUSTOMERID.HasValue ?
+                new ObjectParameter("CUSTOMERID", cUSTOMERID) :
+                new ObjectParameter("CUSTOMERID", typeof(decimal));
+
+            var cUSTOMERPASSWORDParameter = cUSTOMERPASSWORD != null ?
+                new ObjectParameter("CUSTOMERPASSWORD", cUSTOMERPASSWORD) :
+                new ObjectParameter("CUSTOMERPASSWORD", typeof(string));
+            ObjectParameter n = new ObjectParameter("DOESMATCH", typeof(int));
+
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("COMPAREPASSWORDS", cUSTOMERIDParameter, cUSTOMERPASSWORDParameter, n);
+
+            return Convert.ToInt32(n.Value);
+        }
     }
 }

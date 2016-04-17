@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ADMIN">
           <Key>
             <PropertyRef Name="ADMIN_ID" />
@@ -417,7 +417,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="COMPAREPASSWORD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G" ReturnType="number">
+        <Function Name="COMPAREPASSWORD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
+          <Parameter Name="CUSTOMERID" Type="number" Mode="In" />
+          <Parameter Name="CUSTOMERPASSWORD" Type="varchar2" Mode="In" />
+          <Parameter Name="DOESMATCH" Type="number" Mode="Out" />
+        </Function>
+        <Function Name="COMPAREPASSWORDS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
           <Parameter Name="CUSTOMERID" Type="number" Mode="In" />
           <Parameter Name="CUSTOMERPASSWORD" Type="varchar2" Mode="In" />
           <Parameter Name="DOESMATCH" Type="number" Mode="Out" />
@@ -516,8 +521,7 @@
             <End Role="VENUE_REVIEW" EntitySet="VENUE_REVIEW" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1064,6 +1068,11 @@
             <End Role="VENUE" EntitySet="VENUEs" />
             <End Role="VENUE_REVIEW" EntitySet="VENUE_REVIEW" />
           </AssociationSet>
+          <FunctionImport Name="COMPAREPASSWORDS">
+            <Parameter Name="CUSTOMERID" Mode="In" Type="Decimal" />
+            <Parameter Name="CUSTOMERPASSWORD" Mode="In" Type="String" />
+            <Parameter Name="DOESMATCH" Mode="Out" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -1263,6 +1272,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="COMPAREPASSWORDS" FunctionName="DBModel.Store.COMPAREPASSWORDS" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

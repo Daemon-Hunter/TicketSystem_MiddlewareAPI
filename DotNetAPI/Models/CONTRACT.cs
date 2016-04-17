@@ -18,7 +18,7 @@ namespace DotNetAPI.Models
         public int CHILD_EVENT_ID { get; set; }
         public string COLUMN1 { get; set; }
     
-        public ARTIST ARTIST { get; set; }
+        public  ARTIST ARTIST { get; set; }
         public  CHILD_EVENT CHILD_EVENT { get; set; }
     }
 }

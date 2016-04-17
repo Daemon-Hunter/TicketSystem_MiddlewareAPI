@@ -32,8 +32,7 @@ namespace DotNetAPI.Models
         public string CUSTOMER_PASSWORD { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public 
-            ICollection<ARTIST_REVIEW> ARTIST_REVIEW { get; set; }
+        public  ICollection<ARTIST_REVIEW> ARTIST_REVIEW { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public  ICollection<EVENT_REVIEW> EVENT_REVIEW { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
