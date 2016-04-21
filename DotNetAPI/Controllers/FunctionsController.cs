@@ -169,9 +169,13 @@ namespace DotNetAPI.Controllers
             return db.CHILD_EVENT.Where(c => c.VENUE_ID == venueID).Select(d => d.CHILD_EVENT_ID).ToList();
         }
 
+        [HttpGet]
+        [Route("api/functions/searchParentEvent/{searchString}")]
+        public List<PARENT_EVENT> searchParentEvent(String searchString)
+        {
+            return db.PARENT_EVENT.Where(p => p.PARENT_EVENT_NAME.ToLower().Contains(searchString.ToLower())).ToList();
+        }
         //Get ChildEvents should return with parents??
-
-        //Get Events at Venue
         //Get Reviews of Artist, Venue, PEvent and Customer (amount)?
     }
 }
