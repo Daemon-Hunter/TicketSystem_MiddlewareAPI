@@ -11,6 +11,12 @@ namespace DotNetAPI.Controllers
     public class FunctionsController : ApiController
     {
         private DBConn db = new DBConn();
+        struct Reviews
+        {
+            public List<ARTIST_REVIEW> artistReviewList;
+            public List<EVENT_REVIEW> parentEventReviewList;
+            public List<VENUE_REVIEW> venueReviewList;
+        }
 
         [HttpGet]
         [Route("api/functions/comparepasswords/{id}/{password}")]
@@ -76,7 +82,7 @@ namespace DotNetAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/functions/getparenteventsamount/{amount}/{lowestID}")]
+        [Route("api/functions/getparent_eventsamount/{amount}/{lowestID}")]
         public List<PARENT_EVENT> getParentEventsAmount(int amount, int lowestID)
         {
             List<PARENT_EVENT> parentEventList = new List<PARENT_EVENT>();
@@ -102,5 +108,70 @@ namespace DotNetAPI.Controllers
 
             return parentEventList;
         }
+
+        //[HttpGet]
+        //[Route("api/functions/getcustomersreviews/{id}")]
+        //public Reviews getCustomersReviews(int id)
+        //{
+        //    Reviews reviews;
+        //    reviews.artistReviewList = db.ARTIST_REVIEW.Where(b => b.CUSTOMER_ID == id).ToList();
+        //    reviews.venueReviewList = db.VENUE_REVIEW.Where(b => b.CUSTOMER_ID == id).ToList();
+        //    reviews.parentEventReviewList = db.EVENT_REVIEW.Where(b => b.c == id).ToList();
+        //    return reviews;
+        //}
+
+        [HttpGet]
+        [Route("api/functions/getartistsreviews/{id}")]
+        public List<ARTIST_REVIEW> getArtistsReviews(int id)
+        {
+            return db.ARTIST_REVIEW.Where(b => b.ARTIST_ID == id).ToList();
+        }
+
+        [HttpGet]
+        [Route("api/functions/getvenuesreviews/{id}")]
+        public List<VENUE_REVIEW> getVenuesReviews(int id)
+        {
+            return db.VENUE_REVIEW.Where(b => b.VENUE_ID == id).ToList();
+        }
+
+        [HttpGet]
+        [Route("api/functions/getParent_Eventsreviews/{id}")]
+        public List<EVENT_REVIEW> getParentEventReviews(int id)
+        {
+            return db.EVENT_REVIEW.Where(b => b.PARENT_EVENT_ID == id).ToList();
+        }
+
+        [HttpGet]
+        [Route("api/functions/getChild_EventsViaParent/{id}")]
+        public List<CHILD_EVENT> getChildEventViaParent(int id)
+        {
+            return db.CHILD_EVENT.Where(c => c.PARENT_EVENT_ID == id).ToList();
+        }
+
+        [HttpGet]
+        [Route("api/functions/getChild_EventIDsViaContract/{artistID}")]
+        public List<int> getChildEventIDsViaContract(int artistID)
+        {
+            return db.CONTRACTS.Where(c => c.ARTIST_ID == artistID).Select(d => d.CHILD_EVENT_ID).ToList();
+        }
+
+        [HttpGet]
+        [Route("api/functions/getArtistIDsViaContract/{childEventID}")]
+        public List<int> getArtistIDsViaContract(int childEventID)
+        {
+            return db.CONTRACTS.Where(c => c.CHILD_EVENT_ID == childEventID).Select(d => d.ARTIST_ID).ToList();
+        }
+
+        [HttpGet]
+        [Route("api/functions/getVenueEventIDs/{venueID}")]
+        public List<int> getVenueEventIDs(int venueID)
+        {
+            return db.CHILD_EVENT.Where(c => c.VENUE_ID == venueID).Select(d => d.CHILD_EVENT_ID).ToList();
+        }
+
+        //Get ChildEvents should return with parents??
+
+        //Get Events at Venue
+        //Get Reviews of Artist, Venue, PEvent and Customer (amount)?
     }
 }
