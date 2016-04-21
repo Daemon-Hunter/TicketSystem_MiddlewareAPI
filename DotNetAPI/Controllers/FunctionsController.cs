@@ -170,10 +170,24 @@ namespace DotNetAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/functions/searchParentEvent/{searchString}")]
-        public List<PARENT_EVENT> searchParentEvent(String searchString)
+        [Route("api/functions/searchParent_Events/{searchString}")]
+        public List<PARENT_EVENT> searchParentEvents(String searchString)
         {
             return db.PARENT_EVENT.Where(p => p.PARENT_EVENT_NAME.ToLower().Contains(searchString.ToLower())).ToList();
+        }
+
+        [HttpGet]
+        [Route("api/functions/searchArtists/{searchString}")]
+        public List<ARTIST> searchArtists(String searchString)
+        {
+            return db.ARTISTs.Where(a => a.ARTIST_NAME.ToLower().Contains(searchString.ToLower())).ToList();
+        }
+
+        [HttpGet]
+        [Route("api/functions/searchVenues/{searchString}")]
+        public List<VENUE> searchVenues(String searchString)
+        {
+            return db.VENUEs.Where(a => a.VENUE_NAME.ToLower().Contains(searchString.ToLower())).ToList();
         }
         //Get ChildEvents should return with parents??
         //Get Reviews of Artist, Venue, PEvent and Customer (amount)?
