@@ -19,14 +19,14 @@ namespace DotNetAPI.Controllers
         // GET: api/VENUE_REVIEWs
         public IQueryable<VENUE_REVIEW> GetVENUE_REVIEW()
         {
-            return db.VENUE_REVIEW;
+            return db.VENUE_REVIEWs;
         }
 
         // GET: api/VENUE_REVIEWs/5
         [ResponseType(typeof(VENUE_REVIEW))]
         public IHttpActionResult GetVENUE_REVIEW(int id)
         {
-            VENUE_REVIEW vENUE_REVIEW = db.VENUE_REVIEW.Find(id);
+            VENUE_REVIEW vENUE_REVIEW = db.VENUE_REVIEWs.Find(id);
             if (vENUE_REVIEW == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace DotNetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.VENUE_REVIEW.Add(vENUE_REVIEW);
+            db.VENUE_REVIEWs.Add(vENUE_REVIEW);
 
             try
             {
@@ -104,13 +104,13 @@ namespace DotNetAPI.Controllers
         [ResponseType(typeof(VENUE_REVIEW))]
         public IHttpActionResult DeleteVENUE_REVIEW(int id)
         {
-            VENUE_REVIEW vENUE_REVIEW = db.VENUE_REVIEW.Find(id);
+            VENUE_REVIEW vENUE_REVIEW = db.VENUE_REVIEWs.Find(id);
             if (vENUE_REVIEW == null)
             {
                 return NotFound();
             }
 
-            db.VENUE_REVIEW.Remove(vENUE_REVIEW);
+            db.VENUE_REVIEWs.Remove(vENUE_REVIEW);
             db.SaveChanges();
 
             return Ok(vENUE_REVIEW);
@@ -127,7 +127,7 @@ namespace DotNetAPI.Controllers
 
         private bool VENUE_REVIEWExists(int vid, int cid)
         {
-            return db.VENUE_REVIEW.Count(e => e.VENUE_ID == vid && e.CUSTOMER_ID == cid) > 0;
+            return db.VENUE_REVIEWs.Count(e => e.VENUE_ID == vid && e.CUSTOMER_ID == cid) > 0;
         }
     }
 }

@@ -19,14 +19,14 @@ namespace DotNetAPI.Controllers
         // GET: api/SOCIAL_MEDIAs
         public IQueryable<SOCIAL_MEDIA> GetSOCIAL_MEDIA()
         {
-            return db.SOCIAL_MEDIA;
+            return db.SOCIAL_MEDIAs;
         }
 
         // GET: api/SOCIAL_MEDIAs/5
         [ResponseType(typeof(SOCIAL_MEDIA))]
         public IHttpActionResult GetSOCIAL_MEDIA(int id)
         {
-            SOCIAL_MEDIA sOCIAL_MEDIA = db.SOCIAL_MEDIA.Find(id);
+            SOCIAL_MEDIA sOCIAL_MEDIA = db.SOCIAL_MEDIAs.Find(id);
             if (sOCIAL_MEDIA == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace DotNetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.SOCIAL_MEDIA.Add(sOCIAL_MEDIA);
+            db.SOCIAL_MEDIAs.Add(sOCIAL_MEDIA);
 
             try
             {
@@ -104,13 +104,13 @@ namespace DotNetAPI.Controllers
         [ResponseType(typeof(SOCIAL_MEDIA))]
         public IHttpActionResult DeleteSOCIAL_MEDIA(int id)
         {
-            SOCIAL_MEDIA sOCIAL_MEDIA = db.SOCIAL_MEDIA.Find(id);
+            SOCIAL_MEDIA sOCIAL_MEDIA = db.SOCIAL_MEDIAs.Find(id);
             if (sOCIAL_MEDIA == null)
             {
                 return NotFound();
             }
 
-            db.SOCIAL_MEDIA.Remove(sOCIAL_MEDIA);
+            db.SOCIAL_MEDIAs.Remove(sOCIAL_MEDIA);
             db.SaveChanges();
 
             return Ok(sOCIAL_MEDIA);
@@ -127,7 +127,7 @@ namespace DotNetAPI.Controllers
 
         private bool SOCIAL_MEDIAExists(int id)
         {
-            return db.SOCIAL_MEDIA.Count(e => e.SOCIAL_MEDIA_ID == id) > 0;
+            return db.SOCIAL_MEDIAs.Count(e => e.SOCIAL_MEDIA_ID == id) > 0;
         }
     }
 }

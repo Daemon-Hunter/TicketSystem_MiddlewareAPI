@@ -19,14 +19,14 @@ namespace DotNetAPI.Controllers
         // GET: api/ARTIST_REVIEWS
         public IQueryable<ARTIST_REVIEW> GetARTIST_REVIEW()
         {
-            return db.ARTIST_REVIEW;
+            return db.ARTIST_REVIEWs;
         }
 
         // GET: api/ARTIST_REVIEWS/5
         [ResponseType(typeof(ARTIST_REVIEW))]
         public IHttpActionResult GetARTIST_REVIEW(int id)
         {
-            ARTIST_REVIEW aRTIST_REVIEW = db.ARTIST_REVIEW.Find(id);
+            ARTIST_REVIEW aRTIST_REVIEW = db.ARTIST_REVIEWs.Find(id);
             if (aRTIST_REVIEW == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace DotNetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.ARTIST_REVIEW.Add(aRTIST_REVIEW);
+            db.ARTIST_REVIEWs.Add(aRTIST_REVIEW);
 
             try
             {
@@ -104,13 +104,13 @@ namespace DotNetAPI.Controllers
         [ResponseType(typeof(ARTIST_REVIEW))]
         public IHttpActionResult DeleteARTIST_REVIEW(int id)
         {
-            ARTIST_REVIEW aRTIST_REVIEW = db.ARTIST_REVIEW.Find(id);
+            ARTIST_REVIEW aRTIST_REVIEW = db.ARTIST_REVIEWs.Find(id);
             if (aRTIST_REVIEW == null)
             {
                 return NotFound();
             }
 
-            db.ARTIST_REVIEW.Remove(aRTIST_REVIEW);
+            db.ARTIST_REVIEWs.Remove(aRTIST_REVIEW);
             db.SaveChanges();
 
             return Ok(aRTIST_REVIEW);
@@ -127,7 +127,7 @@ namespace DotNetAPI.Controllers
 
         private bool ARTIST_REVIEWExists(int aid, int cid)
         {
-            return db.ARTIST_REVIEW.Count(e => e.ARTIST_ID == aid && e.CUSTOMER_ID == cid) > 0;
+            return db.ARTIST_REVIEWs.Count(e => e.ARTIST_ID == aid && e.CUSTOMER_ID == cid) > 0;
         }
     }
 }

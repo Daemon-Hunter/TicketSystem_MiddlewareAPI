@@ -34,7 +34,7 @@ namespace DotNetAPI.Controllers
             List<ARTIST> artistList = new List<ARTIST>();
             ARTIST artist;
             int count = 0;
-            int lastID = db.ARTISTs.OrderByDescending(a => a.ARTIST_ID).Last().ARTIST_ID;
+            int lastID = db.ARTISTs.Max(a => a.ARTIST_ID);
             int diff = 0;
 
             if (lowestID != 0)
@@ -62,7 +62,7 @@ namespace DotNetAPI.Controllers
             List<VENUE> venueList = new List<VENUE>();
             VENUE venue;
             int count = 0;
-            int lastID = db.VENUEs.OrderByDescending(a => a.VENUE_ID).Last().VENUE_ID;
+            int lastID = db.VENUEs.Max(a => a.VENUE_ID);
             int diff = 0;
 
             if (lowestID != 0)
@@ -90,7 +90,7 @@ namespace DotNetAPI.Controllers
             List<PARENT_EVENT> parentEventList = new List<PARENT_EVENT>();
             PARENT_EVENT parentEvent;
             int count = 0;
-            int lastID = db.PARENT_EVENT.OrderByDescending(a => a.PARENT_EVENT_ID).Last().PARENT_EVENT_ID;
+            int lastID = db.PARENT_EVENTs.Max(a => a.PARENT_EVENT_ID);
             int diff = 0;
 
             if (lowestID != 0)
@@ -100,7 +100,7 @@ namespace DotNetAPI.Controllers
 
             for (int id = lastID - diff; count != amount && id >= 0; id--)
             {
-                parentEvent = db.PARENT_EVENT.Find(id);
+                parentEvent = db.PARENT_EVENTs.Find(id);
                 if (parentEvent != null)
                 {
                     parentEventList.Add(parentEvent);
@@ -126,14 +126,14 @@ namespace DotNetAPI.Controllers
         [Route("api/functions/getartistsreviews/{id}")]
         public List<ARTIST_REVIEW> getArtistsReviews(int id)
         {
-            return db.ARTIST_REVIEW.Where(b => b.ARTIST_ID == id).ToList();
+            return db.ARTIST_REVIEWs.Where(b => b.ARTIST_ID == id).ToList();
         }
 
         [HttpGet]
         [Route("api/functions/getvenuesreviews/{id}")]
         public List<VENUE_REVIEW> getVenuesReviews(int id)
         {
-            return db.VENUE_REVIEW.Where(b => b.VENUE_ID == id).ToList();
+            return db.VENUE_REVIEWs.Where(b => b.VENUE_ID == id).ToList();
         }
 
         [HttpGet]
@@ -147,7 +147,7 @@ namespace DotNetAPI.Controllers
         [Route("api/functions/getChild_EventsViaParent/{id}")]
         public List<CHILD_EVENT> getChildEventViaParent(int id)
         {
-            return db.CHILD_EVENT.Where(c => c.PARENT_EVENT_ID == id).ToList();
+            return db.CHILD_EVENTs.Where(c => c.PARENT_EVENT_ID == id).ToList();
         }
 
         [HttpGet]
@@ -166,16 +166,16 @@ namespace DotNetAPI.Controllers
 
         [HttpGet]
         [Route("api/functions/getVenueEventIDs/{venueID}")]
-        public List<int> getVenueEventIDs(int venueID)
+        public List<CHILD_EVENT> getVenueEventIDs(int venueID)
         {
-            return db.CHILD_EVENT.Where(c => c.VENUE_ID == venueID).Select(d => d.CHILD_EVENT_ID).ToList();
+            return db.CHILD_EVENTs.Where(c => c.VENUE_ID == venueID).ToList();
         }
 
         [HttpGet]
         [Route("api/functions/searchParent_Events/{searchString}")]
         public List<PARENT_EVENT> searchParentEvents(String searchString)
         {
-            return db.PARENT_EVENT.Where(p => p.PARENT_EVENT_NAME.ToLower().Contains(searchString.ToLower())).ToList();
+            return db.PARENT_EVENTs.Where(p => p.PARENT_EVENT_NAME.ToLower().Contains(searchString.ToLower())).ToList();
         }
 
         [HttpGet]

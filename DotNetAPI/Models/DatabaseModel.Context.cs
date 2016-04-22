@@ -29,20 +29,20 @@ namespace DotNetAPI.Models
     
         public virtual DbSet<ADMIN> ADMINs { get; set; }
         public virtual DbSet<ARTIST> ARTISTs { get; set; }
-        public virtual DbSet<ARTIST_REVIEW> ARTIST_REVIEW { get; set; }
-        public virtual DbSet<ARTIST_TYPE> ARTIST_TYPE { get; set; }
+        public virtual DbSet<ARTIST_REVIEW> ARTIST_REVIEWs { get; set; }
+        public virtual DbSet<ARTIST_TYPE> ARTIST_TYPEs { get; set; }
         public virtual DbSet<BOOKING> BOOKINGs { get; set; }
-        public virtual DbSet<CHILD_EVENT> CHILD_EVENT { get; set; }
+        public virtual DbSet<CHILD_EVENT> CHILD_EVENTs { get; set; }
         public virtual DbSet<CONTRACT> CONTRACTS { get; set; }
         public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }
         public virtual DbSet<EVENT_REVIEW> EVENT_REVIEW { get; set; }
         public virtual DbSet<GUEST_BOOKING> GUEST_BOOKING { get; set; }
         public virtual DbSet<ORDER> ORDERS { get; set; }
-        public virtual DbSet<PARENT_EVENT> PARENT_EVENT { get; set; }
-        public virtual DbSet<SOCIAL_MEDIA> SOCIAL_MEDIA { get; set; }
+        public virtual DbSet<PARENT_EVENT> PARENT_EVENTs { get; set; }
+        public virtual DbSet<SOCIAL_MEDIA> SOCIAL_MEDIAs { get; set; }
         public virtual DbSet<TICKET> TICKETs { get; set; }
         public virtual DbSet<VENUE> VENUEs { get; set; }
-        public virtual DbSet<VENUE_REVIEW> VENUE_REVIEW { get; set; }
+        public virtual DbSet<VENUE_REVIEW> VENUE_REVIEWs { get; set; }
 
         public virtual int COMPAREPASSWORDS(Nullable<decimal> cUSTOMERID, string cUSTOMERPASSWORD)
         {

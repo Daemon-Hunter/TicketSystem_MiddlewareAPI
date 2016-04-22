@@ -19,14 +19,14 @@ namespace DotNetAPI.Controllers
         // GET: api/ARTIST_TYPEs
         public IQueryable<ARTIST_TYPE> GetARTIST_TYPE()
         {
-            return db.ARTIST_TYPE;
+            return db.ARTIST_TYPEs;
         }
 
         // GET: api/ARTIST_TYPEs/5
         [ResponseType(typeof(ARTIST_TYPE))]
         public IHttpActionResult GetARTIST_TYPE(int id)
         {
-            ARTIST_TYPE aRTIST_TYPE = db.ARTIST_TYPE.Find(id);
+            ARTIST_TYPE aRTIST_TYPE = db.ARTIST_TYPEs.Find(id);
             if (aRTIST_TYPE == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace DotNetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.ARTIST_TYPE.Add(aRTIST_TYPE);
+            db.ARTIST_TYPEs.Add(aRTIST_TYPE);
 
             try
             {
@@ -104,13 +104,13 @@ namespace DotNetAPI.Controllers
         [ResponseType(typeof(ARTIST_TYPE))]
         public IHttpActionResult DeleteARTIST_TYPE(int id)
         {
-            ARTIST_TYPE aRTIST_TYPE = db.ARTIST_TYPE.Find(id);
+            ARTIST_TYPE aRTIST_TYPE = db.ARTIST_TYPEs.Find(id);
             if (aRTIST_TYPE == null)
             {
                 return NotFound();
             }
 
-            db.ARTIST_TYPE.Remove(aRTIST_TYPE);
+            db.ARTIST_TYPEs.Remove(aRTIST_TYPE);
             db.SaveChanges();
 
             return Ok(aRTIST_TYPE);
@@ -127,7 +127,7 @@ namespace DotNetAPI.Controllers
 
         private bool ARTIST_TYPEExists(int id)
         {
-            return db.ARTIST_TYPE.Count(e => e.ARTIST_TYPE_ID == id) > 0;
+            return db.ARTIST_TYPEs.Count(e => e.ARTIST_TYPE_ID == id) > 0;
         }
     }
 }

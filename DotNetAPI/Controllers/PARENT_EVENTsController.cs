@@ -19,14 +19,14 @@ namespace DotNetAPI.Controllers
         // GET: api/PARENT_EVENTs
         public IQueryable<PARENT_EVENT> GetPARENT_EVENT()
         {
-            return db.PARENT_EVENT;
+            return db.PARENT_EVENTs;
         }
 
         // GET: api/PARENT_EVENTs/5
         [ResponseType(typeof(PARENT_EVENT))]
         public IHttpActionResult GetPARENT_EVENT(int id)
         {
-            PARENT_EVENT pARENT_EVENT = db.PARENT_EVENT.Find(id);
+            PARENT_EVENT pARENT_EVENT = db.PARENT_EVENTs.Find(id);
             if (pARENT_EVENT == null)
             {
                 return NotFound();
@@ -81,7 +81,7 @@ namespace DotNetAPI.Controllers
 
             if (!PARENT_EVENTExists(pARENT_EVENT.SOCIAL_MEDIA_ID, pARENT_EVENT.PARENT_EVENT_NAME)) {
 
-                db.PARENT_EVENT.Add(pARENT_EVENT);
+                db.PARENT_EVENTs.Add(pARENT_EVENT);
 
                 try
                 {
@@ -108,13 +108,13 @@ namespace DotNetAPI.Controllers
         [ResponseType(typeof(PARENT_EVENT))]
         public IHttpActionResult DeletePARENT_EVENT(int id)
         {
-            PARENT_EVENT pARENT_EVENT = db.PARENT_EVENT.Find(id);
+            PARENT_EVENT pARENT_EVENT = db.PARENT_EVENTs.Find(id);
             if (pARENT_EVENT == null)
             {
                 return NotFound();
             }
 
-            db.PARENT_EVENT.Remove(pARENT_EVENT);
+            db.PARENT_EVENTs.Remove(pARENT_EVENT);
             db.SaveChanges();
 
             return Ok(pARENT_EVENT);
@@ -131,11 +131,11 @@ namespace DotNetAPI.Controllers
 
         private bool PARENT_EVENTExists(int id)
         {
-            return db.PARENT_EVENT.Count(e => e.PARENT_EVENT_ID == id) > 0;
+            return db.PARENT_EVENTs.Count(e => e.PARENT_EVENT_ID == id) > 0;
         }
         private bool PARENT_EVENTExists(int mediaID, string name)
         {
-            return db.PARENT_EVENT.Count(e => e.SOCIAL_MEDIA_ID == mediaID || e.PARENT_EVENT_NAME == name) > 0;
+            return db.PARENT_EVENTs.Count(e => e.SOCIAL_MEDIA_ID == mediaID || e.PARENT_EVENT_NAME == name) > 0;
         }
     }
 }

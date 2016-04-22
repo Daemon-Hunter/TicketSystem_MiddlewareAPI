@@ -19,14 +19,14 @@ namespace DotNetAPI.Controllers
         // GET: api/CHILD_EVENTS
         public IQueryable<CHILD_EVENT> GetCHILD_EVENT()
         {
-            return db.CHILD_EVENT;
+            return db.CHILD_EVENTs;
         }
 
         // GET: api/CHILD_EVENTS/5
         [ResponseType(typeof(CHILD_EVENT))]
         public IHttpActionResult GetCHILD_EVENT(int id)
         {
-            CHILD_EVENT cHILD_EVENT = db.CHILD_EVENT.Find(id);
+            CHILD_EVENT cHILD_EVENT = db.CHILD_EVENTs.Find(id);
             if (cHILD_EVENT == null)
             {
                 return NotFound();
@@ -82,7 +82,7 @@ namespace DotNetAPI.Controllers
             if (!CHILD_EVENTExists(cHILD_EVENT.PARENT_EVENT_ID, cHILD_EVENT.VENUE_ID, cHILD_EVENT.CHILD_EVENT_NAME))
             {
 
-                db.CHILD_EVENT.Add(cHILD_EVENT);
+                db.CHILD_EVENTs.Add(cHILD_EVENT);
 
                 try
                 {
@@ -109,13 +109,13 @@ namespace DotNetAPI.Controllers
         [ResponseType(typeof(CHILD_EVENT))]
         public IHttpActionResult DeleteCHILD_EVENT(int id)
         {
-            CHILD_EVENT cHILD_EVENT = db.CHILD_EVENT.Find(id);
+            CHILD_EVENT cHILD_EVENT = db.CHILD_EVENTs.Find(id);
             if (cHILD_EVENT == null)
             {
                 return NotFound();
             }
 
-            db.CHILD_EVENT.Remove(cHILD_EVENT);
+            db.CHILD_EVENTs.Remove(cHILD_EVENT);
             db.SaveChanges();
 
             return Ok(cHILD_EVENT);
@@ -132,12 +132,12 @@ namespace DotNetAPI.Controllers
 
         private bool CHILD_EVENTExists(int id)
         {
-            return db.CHILD_EVENT.Count(e => e.CHILD_EVENT_ID == id) > 0;
+            return db.CHILD_EVENTs.Count(e => e.CHILD_EVENT_ID == id) > 0;
         }
 
         private bool CHILD_EVENTExists(int pid, int? venueid, string name)
         {
-            return db.CHILD_EVENT.Count(e => e.PARENT_EVENT_ID == pid && e.VENUE_ID == venueid && e.CHILD_EVENT_NAME == name) > 0;
+            return db.CHILD_EVENTs.Count(e => e.PARENT_EVENT_ID == pid && e.VENUE_ID == venueid && e.CHILD_EVENT_NAME == name) > 0;
         }
     }
 }
