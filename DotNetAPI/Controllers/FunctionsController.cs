@@ -19,10 +19,12 @@ namespace DotNetAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/functions/comparepasswords/{id}/{password}")]
-        public int comparePassword(int id, string password)
+        [Route("api/functions/comparepasswords/{email}/{password}")]
+        public CUSTOMER comparePassword(string email, string password)
         {
-            return db.COMPAREPASSWORDS(id, password);
+            CUSTOMER cust = db.CUSTOMERs.Where(c => c.CUSTOMER_EMAIL == email && c.CUSTOMER_PASSWORD == password).FirstOrDefault();
+
+            return cust;
         }
 
         [HttpGet]
@@ -32,7 +34,7 @@ namespace DotNetAPI.Controllers
             List<ARTIST> artistList = new List<ARTIST>();
             ARTIST artist;
             int count = 0;
-            int lastID = db.ARTISTs.AsEnumerable().Last().ARTIST_ID;
+            int lastID = db.ARTISTs.OrderByDescending(a => a.ARTIST_ID).Last().ARTIST_ID;
             int diff = 0;
 
             if (lowestID != 0)
@@ -60,7 +62,7 @@ namespace DotNetAPI.Controllers
             List<VENUE> venueList = new List<VENUE>();
             VENUE venue;
             int count = 0;
-            int lastID = db.VENUEs.AsEnumerable().Last().VENUE_ID;
+            int lastID = db.VENUEs.OrderByDescending(a => a.VENUE_ID).Last().VENUE_ID;
             int diff = 0;
 
             if (lowestID != 0)
@@ -88,7 +90,7 @@ namespace DotNetAPI.Controllers
             List<PARENT_EVENT> parentEventList = new List<PARENT_EVENT>();
             PARENT_EVENT parentEvent;
             int count = 0;
-            int lastID = db.PARENT_EVENT.AsEnumerable().Last().PARENT_EVENT_ID;
+            int lastID = db.PARENT_EVENT.OrderByDescending(a => a.PARENT_EVENT_ID).Last().PARENT_EVENT_ID;
             int diff = 0;
 
             if (lowestID != 0)
@@ -189,7 +191,10 @@ namespace DotNetAPI.Controllers
         {
             return db.VENUEs.Where(a => a.VENUE_NAME.ToLower().Contains(searchString.ToLower())).ToList();
         }
+
+        //Get Customer orders
         //Get ChildEvents should return with parents??
         //Get Reviews of Artist, Venue, PEvent and Customer (amount)?
+        //Search to have max return value
     }
 }
