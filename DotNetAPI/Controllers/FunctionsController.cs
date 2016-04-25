@@ -123,50 +123,50 @@ namespace DotNetAPI.Controllers
         //}
 
         [HttpGet]
-        [Route("api/functions/getartistsreviews/{id}")]
-        public List<ARTIST_REVIEW> getArtistsReviews(int id)
+        [Route("api/functions/getReviewsOfArtist/{id}")]
+        public List<ARTIST_REVIEW> getReviewsOfArtist(int id)
         {
             return db.ARTIST_REVIEWs.Where(b => b.ARTIST_ID == id).ToList();
         }
 
         [HttpGet]
-        [Route("api/functions/getvenuesreviews/{id}")]
-        public List<VENUE_REVIEW> getVenuesReviews(int id)
+        [Route("api/functions/getReviewsOfVenue/{id}")]
+        public List<VENUE_REVIEW> getReviewsOfVenue(int id)
         {
             return db.VENUE_REVIEWs.Where(b => b.VENUE_ID == id).ToList();
         }
 
         [HttpGet]
-        [Route("api/functions/getParent_Eventsreviews/{id}")]
-        public List<EVENT_REVIEW> getParentEventReviews(int id)
+        [Route("api/functions/getReviewsOfParent_Event/{id}")]
+        public List<EVENT_REVIEW> getReviewsOfParent_Event(int id)
         {
             return db.EVENT_REVIEW.Where(b => b.PARENT_EVENT_ID == id).ToList();
         }
 
         [HttpGet]
-        [Route("api/functions/getChild_EventsViaParent/{id}")]
-        public List<CHILD_EVENT> getChildEventViaParent(int id)
+        [Route("api/functions/getChild_EventsOfParent_Event/{id}")]
+        public List<CHILD_EVENT> getChild_EventsOfParent_Event(int id)
         {
             return db.CHILD_EVENTs.Where(c => c.PARENT_EVENT_ID == id).ToList();
         }
 
         [HttpGet]
-        [Route("api/functions/getChild_EventIDsViaContract/{artistID}")]
-        public List<int> getChildEventIDsViaContract(int artistID)
+        [Route("api/functions/getChild_EventsOfContract/{artistID}")]
+        public List<CHILD_EVENT> getChild_EventsOfContract(int artistID)
         {
-            return db.CONTRACTS.Where(c => c.ARTIST_ID == artistID).Select(d => d.CHILD_EVENT_ID).ToList();
+            return db.CONTRACTS.Where(c => c.ARTIST_ID == artistID).Select(d => d.CHILD_EVENT).ToList();
         }
 
         [HttpGet]
-        [Route("api/functions/getArtistIDsViaContract/{childEventID}")]
-        public List<int> getArtistIDsViaContract(int childEventID)
+        [Route("api/functions/getArtistsOfContract/{childEventID}")]
+        public List<ARTIST> getArtistsViaContract(int childEventID)
         {
-            return db.CONTRACTS.Where(c => c.CHILD_EVENT_ID == childEventID).Select(d => d.ARTIST_ID).ToList();
+            return db.CONTRACTS.Where(c => c.CHILD_EVENT_ID == childEventID).Select(d => d.ARTIST).ToList();
         }
 
         [HttpGet]
-        [Route("api/functions/getVenueEventIDs/{venueID}")]
-        public List<CHILD_EVENT> getVenueEventIDs(int venueID)
+        [Route("api/functions/getEventsOfVenue/{venueID}")]
+        public List<CHILD_EVENT> getEventsOfVenue(int venueID)
         {
             return db.CHILD_EVENTs.Where(c => c.VENUE_ID == venueID).ToList();
         }
@@ -192,9 +192,21 @@ namespace DotNetAPI.Controllers
             return db.VENUEs.Where(a => a.VENUE_NAME.ToLower().Contains(searchString.ToLower())).ToList();
         }
 
+        [HttpGet]
+        [Route("api/functions/getBookingsOfOrder/{orderID}")]
+        public List<BOOKING> getBookingsOfOrder(int orderID)
+        {
+            return db.BOOKINGs.Where(b => b.ORDER_ID == orderID).ToList();
+        }
+
+        [HttpGet]
+        [Route("api/functions/getOrdersOfCustomer/{customerID}")]
+        public List<ORDER> getOrdersOfCustomer(int customerID)
+        {
+            return db.ORDERS.Where(b => b.CUSTOMER_ID == customerID).ToList();
+        }
+
         //Get Customer orders
-        //Get ChildEvents should return with parents??
-        //Get Reviews of Artist, Venue, PEvent and Customer (amount)?
         //Search to have max return value
     }
 }
