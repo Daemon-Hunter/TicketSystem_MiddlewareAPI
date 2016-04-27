@@ -23,7 +23,11 @@ namespace DotNetAPI.Controllers
         public CUSTOMER comparePassword(string email, string password)
         {
             CUSTOMER cust = db.CUSTOMERs.Where(c => c.CUSTOMER_EMAIL == email && c.CUSTOMER_PASSWORD == password).FirstOrDefault();
-
+            if (cust == null)
+            {
+            cust = new CUSTOMER();
+                cust.CUSTOMER_ID = -1;
+            }
             return cust;
         }
 
@@ -151,8 +155,8 @@ namespace DotNetAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/functions/getChild_EventsOfContract/{artistID}")]
-        public List<CHILD_EVENT> getChild_EventsOfContract(int artistID)
+        [Route("api/functions/getChild_EventsOfArtist/{artistID}")]
+        public List<CHILD_EVENT> getChild_EventsOfArtist(int artistID)
         {
             return db.CONTRACTS.Where(c => c.ARTIST_ID == artistID).Select(d => d.CHILD_EVENT).ToList();
         }
@@ -165,8 +169,8 @@ namespace DotNetAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/functions/getEventsOfVenue/{venueID}")]
-        public List<CHILD_EVENT> getEventsOfVenue(int venueID)
+        [Route("api/functions/getChild_EventsOfVenue/{venueID}")]
+        public List<CHILD_EVENT> getChild_EventsOfVenue(int venueID)
         {
             return db.CHILD_EVENTs.Where(c => c.VENUE_ID == venueID).ToList();
         }
