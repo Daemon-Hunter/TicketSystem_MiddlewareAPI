@@ -21,7 +21,7 @@ namespace DotNetAPI.Models
         public System.DateTime VENUE_REVIEW_DATE_TIME { get; set; }
         public bool VENUE_REVIEW_VERIFIED { get; set; }
     
-        public virtual CUSTOMER CUSTOMER { get; set; }
-        public virtual VENUE VENUE { get; set; }
+        public CUSTOMER CUSTOMER { get; set; }
+        public VENUE VENUE { get; set; }
     }
 }

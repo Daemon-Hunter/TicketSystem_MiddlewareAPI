@@ -24,6 +24,6 @@ namespace DotNetAPI.Models
         public string ARTIST_TYPE1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ARTIST> ARTISTs { get; set; }
+        public ICollection<ARTIST> ARTISTs { get; set; }
     }
 }

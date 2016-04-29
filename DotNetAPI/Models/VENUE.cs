@@ -37,9 +37,9 @@ namespace DotNetAPI.Models
         public string VENUE_CITY { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CHILD_EVENT> CHILD_EVENT { get; set; }
-        public virtual SOCIAL_MEDIA SOCIAL_MEDIA { get; set; }
+        public ICollection<CHILD_EVENT> CHILD_EVENT { get; set; }
+        public SOCIAL_MEDIA SOCIAL_MEDIA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VENUE_REVIEW> VENUE_REVIEW { get; set; }
+        public ICollection<VENUE_REVIEW> VENUE_REVIEW { get; set; }
     }
 }
