@@ -82,23 +82,8 @@ namespace DotNetAPI.Controllers
             if (!GUEST_BOOKINGExists(gUEST_BOOKING.TICKET_ID, gUEST_BOOKING.GUEST_EMAIL, gUEST_BOOKING.GUEST_ADDRESS, gUEST_BOOKING.GUEST_POSTCODE, gUEST_BOOKING.GUEST_BOOKING_QUANTITY, gUEST_BOOKING.GUEST_BOOKING_DATE_TIME))
             {
 
-                db.GUEST_BOOKINGs.Add(gUEST_BOOKING);
-
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateException)
-                {
-                    if (GUEST_BOOKINGExists(gUEST_BOOKING.GUEST_BOOKING_ID))
-                    {
-                        return Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                gUEST_BOOKING.GUEST_BOOKING_ID = db.ADD_GUEST_BOOKING(gUEST_BOOKING.GUEST_BOOKING_ID, gUEST_BOOKING.TICKET_ID, gUEST_BOOKING.GUEST_EMAIL,
+                    gUEST_BOOKING.GUEST_ADDRESS, gUEST_BOOKING.GUEST_POSTCODE, gUEST_BOOKING.GUEST_BOOKING_QUANTITY, gUEST_BOOKING.GUEST_BOOKING_DATE_TIME);
 
                 return CreatedAtRoute("DefaultApi", new { id = gUEST_BOOKING.GUEST_BOOKING_ID }, gUEST_BOOKING);
             }

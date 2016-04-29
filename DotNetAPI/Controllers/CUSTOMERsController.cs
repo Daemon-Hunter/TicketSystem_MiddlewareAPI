@@ -88,23 +88,8 @@ namespace DotNetAPI.Controllers
             if (!CUSTOMERExists(cUSTOMER.CUSTOMER_EMAIL))
             {
 
-                db.CUSTOMERs.Add(cUSTOMER);
-
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateException)
-                {
-                    if (CUSTOMERExists(cUSTOMER.CUSTOMER_ID))
-                    {
-                        return Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                db.ADD_CUSTOMER(cUSTOMER.CUSTOMER_ID, cUSTOMER.CUSTOMER_FIRST_NAME, cUSTOMER.CUSTOMER_LAST_NAME,
+                    cUSTOMER.CUSTOMER_EMAIL, cUSTOMER.CUSTOMER_ADDRESS, cUSTOMER.CUSTOMER_POSTCODE, cUSTOMER.CUSTOMER_PASSWORD);
 
                 return CreatedAtRoute("DefaultApi", new { id = cUSTOMER.CUSTOMER_ID }, cUSTOMER);
             }

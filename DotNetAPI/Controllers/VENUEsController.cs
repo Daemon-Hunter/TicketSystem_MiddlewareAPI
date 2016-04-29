@@ -79,25 +79,18 @@ namespace DotNetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.VENUEs.Add(vENUE);
+            if (VENUEExists(vENUE.SOCIAL_MEDIA_ID, vENUE.VENUE_NAME))
+            {
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (VENUEExists(vENUE.VENUE_ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                vENUE.VENUE_ID = db.ADD_VENUE(vENUE.VENUE_ID, vENUE.SOCIAL_MEDIA_ID, vENUE.VENUE_DESCRIPTION,
+                    vENUE.VENUE_CAPACITY_SEATING, vENUE.VENUE_CAPACITY_STANDING, vENUE.VENUE_DISABLED_ACCESS,
+                    vENUE.VENUE_FACILITES, vENUE.VENUE_PARKING, vENUE.VENUE_PHONE_NUMBER, vENUE.VENUE_EMAIL,
+                    vENUE.VENUE_ADDRESS, vENUE.VENUE_POSTCODE, vENUE.VENUE_NAME, vENUE.VENUE_CITY);
+
+                return CreatedAtRoute("DefaultApi", new { id = vENUE.VENUE_ID }, vENUE);
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = vENUE.VENUE_ID }, vENUE);
+            return Conflict();
         }
 
         // DELETE: api/VENUEs/5

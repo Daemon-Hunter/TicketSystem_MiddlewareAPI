@@ -21,7 +21,7 @@ namespace DotNetAPI.Models
         public string EVENT_REVIEW_BODY { get; set; }
         public bool EVENT_REVIEW_VERIFIED { get; set; }
     
-        public CUSTOMER CUSTOMER { get; set; }
-        public PARENT_EVENT PARENT_EVENT { get; set; }
+        public virtual CUSTOMER CUSTOMER { get; set; }
+        public virtual PARENT_EVENT PARENT_EVENT { get; set; }
     }
 }

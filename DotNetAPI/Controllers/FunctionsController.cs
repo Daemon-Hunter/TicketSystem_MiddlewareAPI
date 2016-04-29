@@ -11,12 +11,6 @@ namespace DotNetAPI.Controllers
     public class FunctionsController : ApiController
     {
         private DBConn db = new DBConn();
-        struct Reviews
-        {
-            public List<ARTIST_REVIEW> artistReviewList;
-            public List<EVENT_REVIEW> parentEventReviewList;
-            public List<VENUE_REVIEW> venueReviewList;
-        }
 
         [HttpGet]
         [Route("api/functions/comparepasswords/{email}/{password}")]
@@ -114,17 +108,6 @@ namespace DotNetAPI.Controllers
 
             return parentEventList;
         }
-
-        //[HttpGet]
-        //[Route("api/functions/getcustomersreviews/{id}")]
-        //public Reviews getCustomersReviews(int id)
-        //{
-        //    Reviews reviews;
-        //    reviews.artistReviewList = db.ARTIST_REVIEW.Where(b => b.CUSTOMER_ID == id).ToList();
-        //    reviews.venueReviewList = db.VENUE_REVIEW.Where(b => b.CUSTOMER_ID == id).ToList();
-        //    reviews.parentEventReviewList = db.EVENT_REVIEW.Where(b => b.c == id).ToList();
-        //    return reviews;
-        //}
 
         [HttpGet]
         [Route("api/functions/getReviewsOfArtist/{id}")]

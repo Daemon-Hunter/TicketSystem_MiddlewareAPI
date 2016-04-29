@@ -81,23 +81,8 @@ namespace DotNetAPI.Controllers
 
             if (!TICKETExists(tICKET.CHILDEVENT_ID, tICKET.TICKET_TYPE)) {
 
-                db.TICKETs.Add(tICKET);
-
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateException)
-                {
-                    if (TICKETExists(tICKET.TICKET_ID))
-                    {
-                        return Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                tICKET.TICKET_ID = db.ADD_TICKET(tICKET.TICKET_ID, tICKET.TICKET_PRICE, tICKET.TICKET_DESCRIPTION,
+                    tICKET.TICKET_AMOUNT_REMAINING, tICKET.TICKET_TYPE, tICKET.CHILDEVENT_ID);
 
                 return CreatedAtRoute("DefaultApi", new { id = tICKET.TICKET_ID }, tICKET);
             }

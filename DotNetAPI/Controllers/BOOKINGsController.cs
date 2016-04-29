@@ -79,24 +79,8 @@ namespace DotNetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.BOOKINGs.Add(bOOKING);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (BOOKINGExists(bOOKING.BOOKING_ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            db.ADD_BOOKING(bOOKING.BOOKING_ID, bOOKING.TICKET_ID, bOOKING.ORDER_ID, bOOKING.BOOKING_QUANTITY, bOOKING.BOOKING_DATE_TIME);
+            
             return CreatedAtRoute("DefaultApi", new { id = bOOKING.BOOKING_ID }, bOOKING);
         }
 

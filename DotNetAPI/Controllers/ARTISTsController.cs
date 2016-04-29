@@ -81,23 +81,8 @@ namespace DotNetAPI.Controllers
 
             if (!ARTISTExists(aRTIST.ARTIST_NAME, aRTIST.SOCIAL_MEDIA_ID, aRTIST.ARTIST_TYPE_ID)) {
 
-                db.ARTISTs.Add(aRTIST);
-
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateException)
-                {
-                    if (ARTISTExists(aRTIST.ARTIST_ID))
-                    {
-                        return Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                db.ADD_ARTIST(aRTIST.ARTIST_ID, aRTIST.ARTIST_NAME, aRTIST.ARTIST_TAGS, aRTIST.SOCIAL_MEDIA_ID,
+                    aRTIST.ARTIST_DESCRIPTION, aRTIST.ARTIST_TYPE_ID);
 
                 return CreatedAtRoute("DefaultApi", new { id = aRTIST.ARTIST_ID }, aRTIST);
             }

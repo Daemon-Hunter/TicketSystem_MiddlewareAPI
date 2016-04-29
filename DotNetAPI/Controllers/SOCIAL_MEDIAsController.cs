@@ -79,23 +79,10 @@ namespace DotNetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.SOCIAL_MEDIAs.Add(sOCIAL_MEDIA);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (SOCIAL_MEDIAExists(sOCIAL_MEDIA.SOCIAL_MEDIA_ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            sOCIAL_MEDIA.SOCIAL_MEDIA_ID = db.ADD_SOCIAL_MEDIA(sOCIAL_MEDIA.SOCIAL_MEDIA_ID, sOCIAL_MEDIA.IMAGE,
+                sOCIAL_MEDIA.IMAGE2, sOCIAL_MEDIA.IMAGE3, sOCIAL_MEDIA.IMAGE4, sOCIAL_MEDIA.IMAGE5,
+                sOCIAL_MEDIA.FACEBOOK, sOCIAL_MEDIA.TWITTER, sOCIAL_MEDIA.INSTAGRAM, sOCIAL_MEDIA.SOUNDCLOUD,
+                sOCIAL_MEDIA.WEBSITE, sOCIAL_MEDIA.SPOTIFY);
 
             return CreatedAtRoute("DefaultApi", new { id = sOCIAL_MEDIA.SOCIAL_MEDIA_ID }, sOCIAL_MEDIA);
         }

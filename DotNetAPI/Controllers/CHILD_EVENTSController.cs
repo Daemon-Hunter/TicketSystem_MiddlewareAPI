@@ -82,23 +82,9 @@ namespace DotNetAPI.Controllers
             if (!CHILD_EVENTExists(cHILD_EVENT.PARENT_EVENT_ID, cHILD_EVENT.VENUE_ID, cHILD_EVENT.CHILD_EVENT_NAME))
             {
 
-                db.CHILD_EVENTs.Add(cHILD_EVENT);
-
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateException)
-                {
-                    if (CHILD_EVENTExists(cHILD_EVENT.CHILD_EVENT_ID))
-                    {
-                        return Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                db.ADD_CHILD_EVENT(cHILD_EVENT.CHILD_EVENT_ID, cHILD_EVENT.VENUE_ID, cHILD_EVENT.PARENT_EVENT_ID,
+                    cHILD_EVENT.CHILD_EVENT_NAME, cHILD_EVENT.CHILD_EVENT_DESCRIPTION, cHILD_EVENT.START_DATE_TIME,
+                    cHILD_EVENT.END_DATE_TIME, cHILD_EVENT.CHILD_EVENT_CANCELED);
 
                 return CreatedAtRoute("DefaultApi", new { id = cHILD_EVENT.CHILD_EVENT_ID }, cHILD_EVENT);
             }

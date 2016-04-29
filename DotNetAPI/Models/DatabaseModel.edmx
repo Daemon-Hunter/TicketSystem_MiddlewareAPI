@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ADMIN">
           <Key>
             <PropertyRef Name="ADMIN_ID" />
@@ -418,13 +418,12 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="ADD_ADMIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
-          <Parameter Name="ADMIN_ID" Type="number" Mode="In" />
+          <Parameter Name="ADMIN_ID" Type="number" Mode="Out" />
           <Parameter Name="ADMIN_EMAIL" Type="varchar2" Mode="In" />
           <Parameter Name="ADMIN_PASSWORD" Type="varchar2" Mode="In" />
-          <Parameter Name="NEW_ID" Type="number" Mode="Out" />
         </Function>
         <Function Name="ADD_ARTIST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
-          <Parameter Name="ARTIST_ID" Type="number" Mode="InOut" />
+          <Parameter Name="ARTIST_ID" Type="number" Mode="Out" />
           <Parameter Name="ARTIST_NAME" Type="varchar2" Mode="In" />
           <Parameter Name="ARTIST_TAGS" Type="varchar2" Mode="In" />
           <Parameter Name="SOCIAL_MEDIA_ID" Type="number" Mode="In" />
@@ -432,14 +431,14 @@
           <Parameter Name="ARTIST_TYPE_ID" Type="number" Mode="In" />
         </Function>
         <Function Name="ADD_BOOKING" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
-          <Parameter Name="BOOKING_ID" Type="number" Mode="InOut" />
+          <Parameter Name="BOOKING_ID" Type="number" Mode="Out" />
           <Parameter Name="TICKET_ID" Type="number" Mode="In" />
           <Parameter Name="ORDER_ID" Type="number" Mode="In" />
           <Parameter Name="BOOKING_QUANTITY" Type="number" Mode="In" />
           <Parameter Name="BOOKING_DATE_TIME" Type="date" Mode="In" />
         </Function>
         <Function Name="ADD_CHILD_EVENT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
-          <Parameter Name="CHILD_EVENT_ID" Type="number" Mode="InOut" />
+          <Parameter Name="CHILD_EVENT_ID" Type="number" Mode="Out" />
           <Parameter Name="VENUE_ID" Type="number" Mode="In" />
           <Parameter Name="PARENT_EVENT_ID" Type="number" Mode="In" />
           <Parameter Name="CHILD_EVENT_NAME" Type="varchar2" Mode="In" />
@@ -449,7 +448,7 @@
           <Parameter Name="CHILD_EVENT_CANCELED" Type="number" Mode="In" />
         </Function>
         <Function Name="ADD_CUSTOMER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
-          <Parameter Name="CUSTOMER_ID" Type="number" Mode="InOut" />
+          <Parameter Name="CUSTOMER_ID" Type="number" Mode="Out" />
           <Parameter Name="CUSTOMER_FIRST_NAME" Type="varchar2" Mode="In" />
           <Parameter Name="CUSTOMER_LAST_NAME" Type="varchar2" Mode="In" />
           <Parameter Name="CUSTOMER_EMAIL" Type="varchar2" Mode="In" />
@@ -458,7 +457,7 @@
           <Parameter Name="CUSTOMER_PASSWORD" Type="varchar2" Mode="In" />
         </Function>
         <Function Name="ADD_GUEST_BOOKING" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
-          <Parameter Name="GUEST_BOOKING_ID" Type="number" Mode="InOut" />
+          <Parameter Name="GUEST_BOOKING_ID" Type="number" Mode="Out" />
           <Parameter Name="TICKET_ID" Type="number" Mode="In" />
           <Parameter Name="GUEST_EMAIL" Type="varchar2" Mode="In" />
           <Parameter Name="GUEST_ADDRESS" Type="varchar2" Mode="In" />
@@ -467,17 +466,17 @@
           <Parameter Name="GUEST_BOOKING_DATE_TIME" Type="date" Mode="In" />
         </Function>
         <Function Name="ADD_ORDERS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
-          <Parameter Name="ORDER_ID" Type="number" Mode="InOut" />
+          <Parameter Name="ORDER_ID" Type="number" Mode="Out" />
           <Parameter Name="CUSTOMER_ID" Type="number" Mode="In" />
         </Function>
         <Function Name="ADD_PARENT_EVENT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
-          <Parameter Name="PARENT_EVENT_ID" Type="number" Mode="InOut" />
+          <Parameter Name="PARENT_EVENT_ID" Type="number" Mode="Out" />
           <Parameter Name="SOCIAL_MEDIA_ID" Type="number" Mode="In" />
           <Parameter Name="PARENT_EVENT_NAME" Type="varchar2" Mode="In" />
           <Parameter Name="PARENT_EVENT_DESCRIPTION" Type="varchar2" Mode="In" />
         </Function>
         <Function Name="ADD_SOCIAL_MEDIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
-          <Parameter Name="SOCIAL_MEDIA_ID" Type="number" Mode="InOut" />
+          <Parameter Name="SOCIAL_MEDIA_ID" Type="number" Mode="Out" />
           <Parameter Name="IMAGE" Type="blob" Mode="In" />
           <Parameter Name="IMAGE2" Type="blob" Mode="In" />
           <Parameter Name="IMAGE3" Type="blob" Mode="In" />
@@ -491,7 +490,7 @@
           <Parameter Name="SPOTIFY" Type="varchar2" Mode="In" />
         </Function>
         <Function Name="ADD_TICKET" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
-          <Parameter Name="TICKET_ID" Type="number" Mode="InOut" />
+          <Parameter Name="TICKET_ID" Type="number" Mode="Out" />
           <Parameter Name="TICKET_PRICE" Type="number" Mode="In" />
           <Parameter Name="TICKET_DESCRIPTION" Type="varchar2" Mode="In" />
           <Parameter Name="TICKET_AMOUNT_REMAINING" Type="number" Mode="In" />
@@ -499,7 +498,7 @@
           <Parameter Name="CHILD_EVENT_ID" Type="number" Mode="In" />
         </Function>
         <Function Name="ADD_VENUE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
-          <Parameter Name="VENUE_ID" Type="number" Mode="InOut" />
+          <Parameter Name="VENUE_ID" Type="number" Mode="Out" />
           <Parameter Name="SOCIAL_MEDIA_ID" Type="number" Mode="In" />
           <Parameter Name="VENUE_DESCRIPTION" Type="varchar2" Mode="In" />
           <Parameter Name="VENUE_CAPACITY_SEATING" Type="number" Mode="In" />
@@ -608,8 +607,7 @@
             <End Role="VENUE_REVIEW" EntitySet="VENUE_REVIEW" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1122,13 +1120,12 @@
             <End Role="CHILD_EVENT" EntitySet="CHILD_EVENT" />
           </AssociationSet>
           <FunctionImport Name="ADD_ADMIN">
-            <Parameter Name="ADMIN_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="ADMIN_ID" Mode="Out" Type="Decimal" />
             <Parameter Name="ADMIN_EMAIL" Mode="In" Type="String" />
             <Parameter Name="ADMIN_PASSWORD" Mode="In" Type="String" />
-            <Parameter Name="NEW_ID" Mode="Out" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ADD_ARTIST">
-            <Parameter Name="ARTIST_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="ARTIST_ID" Mode="Out" Type="Decimal" />
             <Parameter Name="ARTIST_NAME" Mode="In" Type="String" />
             <Parameter Name="ARTIST_TAGS" Mode="In" Type="String" />
             <Parameter Name="SOCIAL_MEDIA_ID" Mode="In" Type="Decimal" />
@@ -1136,14 +1133,14 @@
             <Parameter Name="ARTIST_TYPE_ID" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ADD_BOOKING">
-            <Parameter Name="BOOKING_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="BOOKING_ID" Mode="Out" Type="Decimal" />
             <Parameter Name="TICKET_ID" Mode="In" Type="Decimal" />
             <Parameter Name="ORDER_ID" Mode="In" Type="Decimal" />
             <Parameter Name="BOOKING_QUANTITY" Mode="In" Type="Decimal" />
             <Parameter Name="BOOKING_DATE_TIME" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="ADD_CHILD_EVENT">
-            <Parameter Name="CHILD_EVENT_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="CHILD_EVENT_ID" Mode="Out" Type="Decimal" />
             <Parameter Name="VENUE_ID" Mode="In" Type="Decimal" />
             <Parameter Name="PARENT_EVENT_ID" Mode="In" Type="Decimal" />
             <Parameter Name="CHILD_EVENT_NAME" Mode="In" Type="String" />
@@ -1153,7 +1150,7 @@
             <Parameter Name="CHILD_EVENT_CANCELED" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ADD_CUSTOMER">
-            <Parameter Name="CUSTOMER_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="CUSTOMER_ID" Mode="Out" Type="Decimal" />
             <Parameter Name="CUSTOMER_FIRST_NAME" Mode="In" Type="String" />
             <Parameter Name="CUSTOMER_LAST_NAME" Mode="In" Type="String" />
             <Parameter Name="CUSTOMER_EMAIL" Mode="In" Type="String" />
@@ -1162,7 +1159,7 @@
             <Parameter Name="CUSTOMER_PASSWORD" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ADD_GUEST_BOOKING">
-            <Parameter Name="GUEST_BOOKING_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="GUEST_BOOKING_ID" Mode="Out" Type="Decimal" />
             <Parameter Name="TICKET_ID" Mode="In" Type="Decimal" />
             <Parameter Name="GUEST_EMAIL" Mode="In" Type="String" />
             <Parameter Name="GUEST_ADDRESS" Mode="In" Type="String" />
@@ -1171,17 +1168,17 @@
             <Parameter Name="GUEST_BOOKING_DATE_TIME" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="ADD_ORDERS">
-            <Parameter Name="ORDER_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="ORDER_ID" Mode="Out" Type="Decimal" />
             <Parameter Name="CUSTOMER_ID" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ADD_PARENT_EVENT">
-            <Parameter Name="PARENT_EVENT_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="PARENT_EVENT_ID" Mode="Out" Type="Decimal" />
             <Parameter Name="SOCIAL_MEDIA_ID" Mode="In" Type="Decimal" />
             <Parameter Name="PARENT_EVENT_NAME" Mode="In" Type="String" />
             <Parameter Name="PARENT_EVENT_DESCRIPTION" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ADD_SOCIAL_MEDIA">
-            <Parameter Name="SOCIAL_MEDIA_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="SOCIAL_MEDIA_ID" Mode="Out" Type="Decimal" />
             <Parameter Name="IMAGE" Mode="In" Type="Binary" />
             <Parameter Name="IMAGE2" Mode="In" Type="Binary" />
             <Parameter Name="IMAGE3" Mode="In" Type="Binary" />
@@ -1195,7 +1192,7 @@
             <Parameter Name="SPOTIFY" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ADD_TICKET">
-            <Parameter Name="TICKET_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="TICKET_ID" Mode="Out" Type="Decimal" />
             <Parameter Name="TICKET_PRICE" Mode="In" Type="Decimal" />
             <Parameter Name="TICKET_DESCRIPTION" Mode="In" Type="String" />
             <Parameter Name="TICKET_AMOUNT_REMAINING" Mode="In" Type="Decimal" />
@@ -1203,7 +1200,7 @@
             <Parameter Name="CHILD_EVENT_ID" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="ADD_VENUE">
-            <Parameter Name="VENUE_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="VENUE_ID" Mode="Out" Type="Decimal" />
             <Parameter Name="SOCIAL_MEDIA_ID" Mode="In" Type="Decimal" />
             <Parameter Name="VENUE_DESCRIPTION" Mode="In" Type="String" />
             <Parameter Name="VENUE_CAPACITY_SEATING" Mode="In" Type="Decimal" />

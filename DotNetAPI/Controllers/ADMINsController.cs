@@ -90,23 +90,7 @@ namespace DotNetAPI.Controllers
             if (!ADMINExists(aDMIN.ADMIN_EMAIL))
             {
 
-                db.ADMINs.Add(aDMIN);
-
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateException)
-                {
-                    if (ADMINExists(aDMIN.ADMIN_ID))
-                    {
-                        return Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                aDMIN.ADMIN_ID = db.ADD_ADMIN(aDMIN.ADMIN_ID, aDMIN.ADMIN_EMAIL, aDMIN.ADMIN_PASSWORD);
 
                 return CreatedAtRoute("DefaultApi", new { id = aDMIN.ADMIN_ID }, aDMIN);
             }

@@ -81,23 +81,8 @@ namespace DotNetAPI.Controllers
 
             if (!PARENT_EVENTExists(pARENT_EVENT.SOCIAL_MEDIA_ID, pARENT_EVENT.PARENT_EVENT_NAME)) {
 
-                db.PARENT_EVENTs.Add(pARENT_EVENT);
-
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateException)
-                {
-                    if (PARENT_EVENTExists(pARENT_EVENT.PARENT_EVENT_ID))
-                    {
-                        return Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                pARENT_EVENT.PARENT_EVENT_ID = db.ADD_PARENT_EVENT(pARENT_EVENT.PARENT_EVENT_ID, pARENT_EVENT.SOCIAL_MEDIA_ID,
+                    pARENT_EVENT.PARENT_EVENT_NAME, pARENT_EVENT.PARENT_EVENT_DESCRIPTION);
 
                 return CreatedAtRoute("DefaultApi", new { id = pARENT_EVENT.PARENT_EVENT_ID }, pARENT_EVENT);
             }

@@ -28,11 +28,11 @@ namespace DotNetAPI.Models
         public string ARTIST_DESCRIPTION { get; set; }
         public int ARTIST_TYPE_ID { get; set; }
     
-        public SOCIAL_MEDIA SOCIAL_MEDIA { get; set; }
-        public ARTIST_TYPE ARTIST_TYPE { get; set; }
+        public virtual SOCIAL_MEDIA SOCIAL_MEDIA { get; set; }
+        public virtual ARTIST_TYPE ARTIST_TYPE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public ICollection<ARTIST_REVIEW> ARTIST_REVIEW { get; set; }
+        public virtual ICollection<ARTIST_REVIEW> ARTIST_REVIEW { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public ICollection<CHILD_EVENT> CHILD_EVENT { get; set; }
+        public virtual ICollection<CHILD_EVENT> CHILD_EVENT { get; set; }
     }
 }

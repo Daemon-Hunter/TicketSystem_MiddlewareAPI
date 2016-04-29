@@ -43,25 +43,30 @@ namespace DotNetAPI.Models
         public virtual DbSet<VENUE> VENUEs { get; set; }
         public virtual DbSet<VENUE_REVIEW> VENUE_REVIEWs { get; set; }
     
-        public virtual int ADD_ADMIN(Nullable<decimal> aDMIN_ID, string aDMIN_EMAIL, string aDMIN_PASSWORD, ObjectParameter nEW_ID)
+        public virtual int ADD_ADMIN(int aDMIN_ID, string aDMIN_EMAIL, string aDMIN_PASSWORD)
         {
-            var aDMIN_IDParameter = aDMIN_ID.HasValue ?
+            var aDMIN_IDParameter = aDMIN_ID >= 0 ?
                 new ObjectParameter("ADMIN_ID", aDMIN_ID) :
-                new ObjectParameter("ADMIN_ID", typeof(decimal));
-    
+                new ObjectParameter("ADMIN_ID", typeof(int));
+
             var aDMIN_EMAILParameter = aDMIN_EMAIL != null ?
                 new ObjectParameter("ADMIN_EMAIL", aDMIN_EMAIL) :
                 new ObjectParameter("ADMIN_EMAIL", typeof(string));
-    
+
             var aDMIN_PASSWORDParameter = aDMIN_PASSWORD != null ?
                 new ObjectParameter("ADMIN_PASSWORD", aDMIN_PASSWORD) :
                 new ObjectParameter("ADMIN_PASSWORD", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_ADMIN", aDMIN_IDParameter, aDMIN_EMAILParameter, aDMIN_PASSWORDParameter, nEW_ID);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_ADMIN", aDMIN_IDParameter, aDMIN_EMAILParameter, aDMIN_PASSWORDParameter);
+            return Convert.ToInt32(aDMIN_IDParameter.Value);
         }
     
-        public virtual int ADD_ARTIST(ObjectParameter aRTIST_ID, string aRTIST_NAME, string aRTIST_TAGS, Nullable<decimal> sOCIAL_MEDIA_ID, string aRTIST_DESCRIPTION, Nullable<decimal> aRTIST_TYPE_ID)
+        public virtual int ADD_ARTIST(int aRTIST_ID, string aRTIST_NAME, string aRTIST_TAGS, Nullable<decimal> sOCIAL_MEDIA_ID, string aRTIST_DESCRIPTION, Nullable<decimal> aRTIST_TYPE_ID)
         {
+            var aRTIST_IDParameter = aRTIST_ID >= 0 ?
+                new ObjectParameter("aRTIST_ID", aRTIST_ID) :
+                new ObjectParameter("aRTIST_ID", typeof(int));
+
             var aRTIST_NAMEParameter = aRTIST_NAME != null ?
                 new ObjectParameter("ARTIST_NAME", aRTIST_NAME) :
                 new ObjectParameter("ARTIST_NAME", typeof(string));
@@ -82,11 +87,16 @@ namespace DotNetAPI.Models
                 new ObjectParameter("ARTIST_TYPE_ID", aRTIST_TYPE_ID) :
                 new ObjectParameter("ARTIST_TYPE_ID", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_ARTIST", aRTIST_ID, aRTIST_NAMEParameter, aRTIST_TAGSParameter, sOCIAL_MEDIA_IDParameter, aRTIST_DESCRIPTIONParameter, aRTIST_TYPE_IDParameter);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_ARTIST", aRTIST_IDParameter, aRTIST_NAMEParameter, aRTIST_TAGSParameter, sOCIAL_MEDIA_IDParameter, aRTIST_DESCRIPTIONParameter, aRTIST_TYPE_IDParameter);
+            return Convert.ToInt32(aRTIST_IDParameter.Value);
         }
     
-        public virtual int ADD_BOOKING(ObjectParameter bOOKING_ID, Nullable<decimal> tICKET_ID, Nullable<decimal> oRDER_ID, Nullable<decimal> bOOKING_QUANTITY, Nullable<System.DateTime> bOOKING_DATE_TIME)
+        public virtual int ADD_BOOKING(int bOOKING_ID, Nullable<decimal> tICKET_ID, Nullable<decimal> oRDER_ID, Nullable<decimal> bOOKING_QUANTITY, Nullable<System.DateTime> bOOKING_DATE_TIME)
         {
+            var bOOKING_IDParameter = bOOKING_ID >= 0 ?
+                new ObjectParameter("bOOKING_ID", bOOKING_ID) :
+                new ObjectParameter("bOOKING_ID", typeof(int));
+
             var tICKET_IDParameter = tICKET_ID.HasValue ?
                 new ObjectParameter("TICKET_ID", tICKET_ID) :
                 new ObjectParameter("TICKET_ID", typeof(decimal));
@@ -103,11 +113,16 @@ namespace DotNetAPI.Models
                 new ObjectParameter("BOOKING_DATE_TIME", bOOKING_DATE_TIME) :
                 new ObjectParameter("BOOKING_DATE_TIME", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_BOOKING", bOOKING_ID, tICKET_IDParameter, oRDER_IDParameter, bOOKING_QUANTITYParameter, bOOKING_DATE_TIMEParameter);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_BOOKING", bOOKING_IDParameter, tICKET_IDParameter, oRDER_IDParameter, bOOKING_QUANTITYParameter, bOOKING_DATE_TIMEParameter);
+            return Convert.ToInt32(bOOKING_IDParameter.Value);
         }
     
-        public virtual int ADD_CHILD_EVENT(ObjectParameter cHILD_EVENT_ID, Nullable<decimal> vENUE_ID, Nullable<decimal> pARENT_EVENT_ID, string cHILD_EVENT_NAME, string cHILD_EVENT_DESCRIPTION, Nullable<System.DateTime> sTART_DATE_TIME, Nullable<System.DateTime> eND_DATE_TIME, Nullable<decimal> cHILD_EVENT_CANCELED)
+        public virtual int ADD_CHILD_EVENT(int cHILD_EVENT_ID, Nullable<decimal> vENUE_ID, Nullable<decimal> pARENT_EVENT_ID, string cHILD_EVENT_NAME, string cHILD_EVENT_DESCRIPTION, Nullable<System.DateTime> sTART_DATE_TIME, Nullable<System.DateTime> eND_DATE_TIME, Nullable<bool> cHILD_EVENT_CANCELED)
         {
+            var cHILD_EVENT_IDParameter = cHILD_EVENT_ID >= 0 ?
+                new ObjectParameter("cHILD_EVENT_ID", cHILD_EVENT_ID) :
+                new ObjectParameter("cHILD_EVENT_ID", typeof(int));
+
             var vENUE_IDParameter = vENUE_ID.HasValue ?
                 new ObjectParameter("VENUE_ID", vENUE_ID) :
                 new ObjectParameter("VENUE_ID", typeof(decimal));
@@ -134,13 +149,18 @@ namespace DotNetAPI.Models
     
             var cHILD_EVENT_CANCELEDParameter = cHILD_EVENT_CANCELED.HasValue ?
                 new ObjectParameter("CHILD_EVENT_CANCELED", cHILD_EVENT_CANCELED) :
-                new ObjectParameter("CHILD_EVENT_CANCELED", typeof(decimal));
+                new ObjectParameter("CHILD_EVENT_CANCELED", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_CHILD_EVENT", cHILD_EVENT_ID, vENUE_IDParameter, pARENT_EVENT_IDParameter, cHILD_EVENT_NAMEParameter, cHILD_EVENT_DESCRIPTIONParameter, sTART_DATE_TIMEParameter, eND_DATE_TIMEParameter, cHILD_EVENT_CANCELEDParameter);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_CHILD_EVENT", cHILD_EVENT_IDParameter, vENUE_IDParameter, pARENT_EVENT_IDParameter, cHILD_EVENT_NAMEParameter, cHILD_EVENT_DESCRIPTIONParameter, sTART_DATE_TIMEParameter, eND_DATE_TIMEParameter, cHILD_EVENT_CANCELEDParameter);
+            return Convert.ToInt32(cHILD_EVENT_IDParameter.Value);
         }
     
-        public virtual int ADD_CUSTOMER(ObjectParameter cUSTOMER_ID, string cUSTOMER_FIRST_NAME, string cUSTOMER_LAST_NAME, string cUSTOMER_EMAIL, string cUSTOMER_ADDRESS, string cUSTOMER_POSTCODE, string cUSTOMER_PASSWORD)
+        public virtual int ADD_CUSTOMER(int cUSTOMER_ID, string cUSTOMER_FIRST_NAME, string cUSTOMER_LAST_NAME, string cUSTOMER_EMAIL, string cUSTOMER_ADDRESS, string cUSTOMER_POSTCODE, string cUSTOMER_PASSWORD)
         {
+            var cUSTOMER_IDParameter = cUSTOMER_ID >= 0 ?
+                new ObjectParameter("cUSTOMER_ID", cUSTOMER_ID) :
+                new ObjectParameter("cUSTOMER_ID", typeof(int));
+
             var cUSTOMER_FIRST_NAMEParameter = cUSTOMER_FIRST_NAME != null ?
                 new ObjectParameter("CUSTOMER_FIRST_NAME", cUSTOMER_FIRST_NAME) :
                 new ObjectParameter("CUSTOMER_FIRST_NAME", typeof(string));
@@ -165,11 +185,16 @@ namespace DotNetAPI.Models
                 new ObjectParameter("CUSTOMER_PASSWORD", cUSTOMER_PASSWORD) :
                 new ObjectParameter("CUSTOMER_PASSWORD", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_CUSTOMER", cUSTOMER_ID, cUSTOMER_FIRST_NAMEParameter, cUSTOMER_LAST_NAMEParameter, cUSTOMER_EMAILParameter, cUSTOMER_ADDRESSParameter, cUSTOMER_POSTCODEParameter, cUSTOMER_PASSWORDParameter);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_CUSTOMER", cUSTOMER_IDParameter, cUSTOMER_FIRST_NAMEParameter, cUSTOMER_LAST_NAMEParameter, cUSTOMER_EMAILParameter, cUSTOMER_ADDRESSParameter, cUSTOMER_POSTCODEParameter, cUSTOMER_PASSWORDParameter);
+            return Convert.ToInt32(cUSTOMER_IDParameter);
         }
     
-        public virtual int ADD_GUEST_BOOKING(ObjectParameter gUEST_BOOKING_ID, Nullable<decimal> tICKET_ID, string gUEST_EMAIL, string gUEST_ADDRESS, string gUEST_POSTCODE, Nullable<decimal> gUEST_BOOKING_QUANTITY, Nullable<System.DateTime> gUEST_BOOKING_DATE_TIME)
+        public virtual int ADD_GUEST_BOOKING(int gUEST_BOOKING_ID, Nullable<decimal> tICKET_ID, string gUEST_EMAIL, string gUEST_ADDRESS, string gUEST_POSTCODE, Nullable<decimal> gUEST_BOOKING_QUANTITY, Nullable<System.DateTime> gUEST_BOOKING_DATE_TIME)
         {
+            var gUEST_BOOKING_IDParameter = gUEST_BOOKING_ID >= 0 ?
+                new ObjectParameter("gUEST_BOOKING_ID", gUEST_BOOKING_ID) :
+                new ObjectParameter("gUEST_BOOKING_ID", typeof(int));
+
             var tICKET_IDParameter = tICKET_ID.HasValue ?
                 new ObjectParameter("TICKET_ID", tICKET_ID) :
                 new ObjectParameter("TICKET_ID", typeof(decimal));
@@ -194,20 +219,30 @@ namespace DotNetAPI.Models
                 new ObjectParameter("GUEST_BOOKING_DATE_TIME", gUEST_BOOKING_DATE_TIME) :
                 new ObjectParameter("GUEST_BOOKING_DATE_TIME", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_GUEST_BOOKING", gUEST_BOOKING_ID, tICKET_IDParameter, gUEST_EMAILParameter, gUEST_ADDRESSParameter, gUEST_POSTCODEParameter, gUEST_BOOKING_QUANTITYParameter, gUEST_BOOKING_DATE_TIMEParameter);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_GUEST_BOOKING", gUEST_BOOKING_IDParameter, tICKET_IDParameter, gUEST_EMAILParameter, gUEST_ADDRESSParameter, gUEST_POSTCODEParameter, gUEST_BOOKING_QUANTITYParameter, gUEST_BOOKING_DATE_TIMEParameter);
+            return Convert.ToInt32(gUEST_BOOKING_IDParameter.Value);
         }
     
-        public virtual int ADD_ORDERS(ObjectParameter oRDER_ID, Nullable<decimal> cUSTOMER_ID)
+        public virtual int ADD_ORDERS(int oRDER_ID, Nullable<decimal> cUSTOMER_ID)
         {
+            var oRDER_IDParameter = oRDER_ID >= 0 ?
+                new ObjectParameter("oRDER_ID", oRDER_ID) :
+                new ObjectParameter("oRDER_ID", typeof(int));
+
             var cUSTOMER_IDParameter = cUSTOMER_ID.HasValue ?
                 new ObjectParameter("CUSTOMER_ID", cUSTOMER_ID) :
                 new ObjectParameter("CUSTOMER_ID", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_ORDERS", oRDER_ID, cUSTOMER_IDParameter);
+             ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_ORDERS", oRDER_IDParameter, cUSTOMER_IDParameter);
+            return Convert.ToInt32(oRDER_IDParameter);
         }
     
-        public virtual int ADD_PARENT_EVENT(ObjectParameter pARENT_EVENT_ID, Nullable<decimal> sOCIAL_MEDIA_ID, string pARENT_EVENT_NAME, string pARENT_EVENT_DESCRIPTION)
+        public virtual int ADD_PARENT_EVENT(int pARENT_EVENT_ID, Nullable<decimal> sOCIAL_MEDIA_ID, string pARENT_EVENT_NAME, string pARENT_EVENT_DESCRIPTION)
         {
+            var pARENT_EVENT_IDParameter = pARENT_EVENT_ID >= 0 ?
+                new ObjectParameter("pARENT_EVENT_ID", pARENT_EVENT_ID) :
+                new ObjectParameter("pARENT_EVENT_ID", typeof(int));
+
             var sOCIAL_MEDIA_IDParameter = sOCIAL_MEDIA_ID.HasValue ?
                 new ObjectParameter("SOCIAL_MEDIA_ID", sOCIAL_MEDIA_ID) :
                 new ObjectParameter("SOCIAL_MEDIA_ID", typeof(decimal));
@@ -220,11 +255,16 @@ namespace DotNetAPI.Models
                 new ObjectParameter("PARENT_EVENT_DESCRIPTION", pARENT_EVENT_DESCRIPTION) :
                 new ObjectParameter("PARENT_EVENT_DESCRIPTION", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_PARENT_EVENT", pARENT_EVENT_ID, sOCIAL_MEDIA_IDParameter, pARENT_EVENT_NAMEParameter, pARENT_EVENT_DESCRIPTIONParameter);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_PARENT_EVENT", pARENT_EVENT_IDParameter, sOCIAL_MEDIA_IDParameter, pARENT_EVENT_NAMEParameter, pARENT_EVENT_DESCRIPTIONParameter);
+            return Convert.ToInt32(pARENT_EVENT_IDParameter);
         }
     
-        public virtual int ADD_SOCIAL_MEDIA(ObjectParameter sOCIAL_MEDIA_ID, byte[] iMAGE, byte[] iMAGE2, byte[] iMAGE3, byte[] iMAGE4, byte[] iMAGE5, string fACEBOOK, string tWITTER, string iNSTAGRAM, string sOUNDCLOUD, string wEBSITE, string sPOTIFY)
+        public virtual int ADD_SOCIAL_MEDIA(int sOCIAL_MEDIA_ID, byte[] iMAGE, byte[] iMAGE2, byte[] iMAGE3, byte[] iMAGE4, byte[] iMAGE5, string fACEBOOK, string tWITTER, string iNSTAGRAM, string sOUNDCLOUD, string wEBSITE, string sPOTIFY)
         {
+            var sOCIAL_MEDIA_IDParameter = sOCIAL_MEDIA_ID >= 0 ?
+                new ObjectParameter("sOCIAL_MEDIA_ID", sOCIAL_MEDIA_ID) :
+                new ObjectParameter("sOCIAL_MEDIA_ID", typeof(int));
+
             var iMAGEParameter = iMAGE != null ?
                 new ObjectParameter("IMAGE", iMAGE) :
                 new ObjectParameter("IMAGE", typeof(byte[]));
@@ -269,11 +309,16 @@ namespace DotNetAPI.Models
                 new ObjectParameter("SPOTIFY", sPOTIFY) :
                 new ObjectParameter("SPOTIFY", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_SOCIAL_MEDIA", sOCIAL_MEDIA_ID, iMAGEParameter, iMAGE2Parameter, iMAGE3Parameter, iMAGE4Parameter, iMAGE5Parameter, fACEBOOKParameter, tWITTERParameter, iNSTAGRAMParameter, sOUNDCLOUDParameter, wEBSITEParameter, sPOTIFYParameter);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_SOCIAL_MEDIA", sOCIAL_MEDIA_IDParameter, iMAGEParameter, iMAGE2Parameter, iMAGE3Parameter, iMAGE4Parameter, iMAGE5Parameter, fACEBOOKParameter, tWITTERParameter, iNSTAGRAMParameter, sOUNDCLOUDParameter, wEBSITEParameter, sPOTIFYParameter);
+            return Convert.ToInt32(sOCIAL_MEDIA_IDParameter.Value);
         }
     
-        public virtual int ADD_TICKET(ObjectParameter tICKET_ID, Nullable<decimal> tICKET_PRICE, string tICKET_DESCRIPTION, Nullable<decimal> tICKET_AMOUNT_REMAINING, string tICKET_TYPE, Nullable<decimal> cHILD_EVENT_ID)
+        public virtual int ADD_TICKET(int tICKET_ID, Nullable<decimal> tICKET_PRICE, string tICKET_DESCRIPTION, Nullable<decimal> tICKET_AMOUNT_REMAINING, string tICKET_TYPE, Nullable<decimal> cHILD_EVENT_ID)
         {
+            var tICKET_IDParameter = tICKET_ID >= 0 ?
+                new ObjectParameter("tICKET_ID", tICKET_ID) :
+                new ObjectParameter("tICKET_ID", typeof(int));
+
             var tICKET_PRICEParameter = tICKET_PRICE.HasValue ?
                 new ObjectParameter("TICKET_PRICE", tICKET_PRICE) :
                 new ObjectParameter("TICKET_PRICE", typeof(decimal));
@@ -294,11 +339,16 @@ namespace DotNetAPI.Models
                 new ObjectParameter("CHILD_EVENT_ID", cHILD_EVENT_ID) :
                 new ObjectParameter("CHILD_EVENT_ID", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_TICKET", tICKET_ID, tICKET_PRICEParameter, tICKET_DESCRIPTIONParameter, tICKET_AMOUNT_REMAININGParameter, tICKET_TYPEParameter, cHILD_EVENT_IDParameter);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_TICKET", tICKET_IDParameter, tICKET_PRICEParameter, tICKET_DESCRIPTIONParameter, tICKET_AMOUNT_REMAININGParameter, tICKET_TYPEParameter, cHILD_EVENT_IDParameter);
+            return Convert.ToInt32(tICKET_IDParameter);
         }
     
-        public virtual int ADD_VENUE(ObjectParameter vENUE_ID, Nullable<decimal> sOCIAL_MEDIA_ID, string vENUE_DESCRIPTION, Nullable<decimal> vENUE_CAPACITY_SEATING, Nullable<decimal> vENUE_CAPACITY_STANDING, Nullable<decimal> vENUE_DISABLED_ACCESS, string vENUE_FACILITES, Nullable<decimal> vENUE_PARKING, string vENUE_PHONE_NUMBER, string vENUE_EMAIL, string vENUE_ADDRESS, string vENUE_POSTCODE, string vENUE_NAME, string vENUE_CITY)
+        public virtual int ADD_VENUE(int vENUE_ID, Nullable<decimal> sOCIAL_MEDIA_ID, string vENUE_DESCRIPTION, Nullable<decimal> vENUE_CAPACITY_SEATING, Nullable<decimal> vENUE_CAPACITY_STANDING, Nullable<bool> vENUE_DISABLED_ACCESS, string vENUE_FACILITES, Nullable<decimal> vENUE_PARKING, string vENUE_PHONE_NUMBER, string vENUE_EMAIL, string vENUE_ADDRESS, string vENUE_POSTCODE, string vENUE_NAME, string vENUE_CITY)
         {
+            var vENUE_IDParameter = vENUE_ID >= 0 ?
+                new ObjectParameter("vENUE_ID", vENUE_ID) :
+                new ObjectParameter("vENUE_ID", typeof(int));
+
             var sOCIAL_MEDIA_IDParameter = sOCIAL_MEDIA_ID.HasValue ?
                 new ObjectParameter("SOCIAL_MEDIA_ID", sOCIAL_MEDIA_ID) :
                 new ObjectParameter("SOCIAL_MEDIA_ID", typeof(decimal));
@@ -317,7 +367,7 @@ namespace DotNetAPI.Models
     
             var vENUE_DISABLED_ACCESSParameter = vENUE_DISABLED_ACCESS.HasValue ?
                 new ObjectParameter("VENUE_DISABLED_ACCESS", vENUE_DISABLED_ACCESS) :
-                new ObjectParameter("VENUE_DISABLED_ACCESS", typeof(decimal));
+                new ObjectParameter("VENUE_DISABLED_ACCESS", typeof(bool));
     
             var vENUE_FACILITESParameter = vENUE_FACILITES != null ?
                 new ObjectParameter("VENUE_FACILITES", vENUE_FACILITES) :
@@ -351,7 +401,8 @@ namespace DotNetAPI.Models
                 new ObjectParameter("VENUE_CITY", vENUE_CITY) :
                 new ObjectParameter("VENUE_CITY", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_VENUE", vENUE_ID, sOCIAL_MEDIA_IDParameter, vENUE_DESCRIPTIONParameter, vENUE_CAPACITY_SEATINGParameter, vENUE_CAPACITY_STANDINGParameter, vENUE_DISABLED_ACCESSParameter, vENUE_FACILITESParameter, vENUE_PARKINGParameter, vENUE_PHONE_NUMBERParameter, vENUE_EMAILParameter, vENUE_ADDRESSParameter, vENUE_POSTCODEParameter, vENUE_NAMEParameter, vENUE_CITYParameter);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_VENUE", vENUE_IDParameter, sOCIAL_MEDIA_IDParameter, vENUE_DESCRIPTIONParameter, vENUE_CAPACITY_SEATINGParameter, vENUE_CAPACITY_STANDINGParameter, vENUE_DISABLED_ACCESSParameter, vENUE_FACILITESParameter, vENUE_PARKINGParameter, vENUE_PHONE_NUMBERParameter, vENUE_EMAILParameter, vENUE_ADDRESSParameter, vENUE_POSTCODEParameter, vENUE_NAMEParameter, vENUE_CITYParameter);
+            return Convert.ToInt32(vENUE_IDParameter.Value);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace DotNetAPI.Models
         public short BOOKING_QUANTITY { get; set; }
         public System.DateTime BOOKING_DATE_TIME { get; set; }
     
-        public TICKET TICKET { get; set; }
-        public ORDER ORDER { get; set; }
+        public virtual TICKET TICKET { get; set; }
+        public virtual ORDER ORDER { get; set; }
     }
 }

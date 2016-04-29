@@ -79,23 +79,7 @@ namespace DotNetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.ORDERS.Add(oRDER);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (ORDERExists(oRDER.ORDER_ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            oRDER.ORDER_ID = db.ADD_ORDERS(oRDER.ORDER_ID, oRDER.CUSTOMER_ID);
 
             return CreatedAtRoute("DefaultApi", new { id = oRDER.ORDER_ID }, oRDER);
         }
