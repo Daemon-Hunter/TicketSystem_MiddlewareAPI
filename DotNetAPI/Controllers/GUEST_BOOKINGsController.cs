@@ -19,14 +19,14 @@ namespace DotNetAPI.Controllers
         // GET: api/GUEST_BOOKINGs
         public IQueryable<GUEST_BOOKING> GetGUEST_BOOKING()
         {
-            return db.GUEST_BOOKING;
+            return db.GUEST_BOOKINGs;
         }
 
         // GET: api/GUEST_BOOKINGs/5
         [ResponseType(typeof(GUEST_BOOKING))]
         public IHttpActionResult GetGUEST_BOOKING(int id)
         {
-            GUEST_BOOKING gUEST_BOOKING = db.GUEST_BOOKING.Find(id);
+            GUEST_BOOKING gUEST_BOOKING = db.GUEST_BOOKINGs.Find(id);
             if (gUEST_BOOKING == null)
             {
                 return NotFound();
@@ -82,7 +82,7 @@ namespace DotNetAPI.Controllers
             if (!GUEST_BOOKINGExists(gUEST_BOOKING.TICKET_ID, gUEST_BOOKING.GUEST_EMAIL, gUEST_BOOKING.GUEST_ADDRESS, gUEST_BOOKING.GUEST_POSTCODE, gUEST_BOOKING.GUEST_BOOKING_QUANTITY, gUEST_BOOKING.GUEST_BOOKING_DATE_TIME))
             {
 
-                db.GUEST_BOOKING.Add(gUEST_BOOKING);
+                db.GUEST_BOOKINGs.Add(gUEST_BOOKING);
 
                 try
                 {
@@ -109,13 +109,13 @@ namespace DotNetAPI.Controllers
         [ResponseType(typeof(GUEST_BOOKING))]
         public IHttpActionResult DeleteGUEST_BOOKING(int id)
         {
-            GUEST_BOOKING gUEST_BOOKING = db.GUEST_BOOKING.Find(id);
+            GUEST_BOOKING gUEST_BOOKING = db.GUEST_BOOKINGs.Find(id);
             if (gUEST_BOOKING == null)
             {
                 return NotFound();
             }
 
-            db.GUEST_BOOKING.Remove(gUEST_BOOKING);
+            db.GUEST_BOOKINGs.Remove(gUEST_BOOKING);
             db.SaveChanges();
 
             return Ok(gUEST_BOOKING);
@@ -132,11 +132,11 @@ namespace DotNetAPI.Controllers
 
         private bool GUEST_BOOKINGExists(int id)
         {
-            return db.GUEST_BOOKING.Count(e => e.GUEST_BOOKING_ID == id) > 0;
+            return db.GUEST_BOOKINGs.Count(e => e.GUEST_BOOKING_ID == id) > 0;
         }
         private bool GUEST_BOOKINGExists(int ticketid, string email, string address, string postcode, int bookingq, DateTime dateTime)
         {
-            return db.GUEST_BOOKING.Count(e => e.TICKET_ID == ticketid && e.GUEST_EMAIL == email && e.GUEST_ADDRESS == address && e.GUEST_POSTCODE == postcode && e.GUEST_BOOKING_QUANTITY == bookingq && e.GUEST_BOOKING_DATE_TIME == dateTime) > 0;
+            return db.GUEST_BOOKINGs.Count(e => e.TICKET_ID == ticketid && e.GUEST_EMAIL == email && e.GUEST_ADDRESS == address && e.GUEST_POSTCODE == postcode && e.GUEST_BOOKING_QUANTITY == bookingq && e.GUEST_BOOKING_DATE_TIME == dateTime) > 0;
         }
     }
 }

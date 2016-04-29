@@ -19,14 +19,14 @@ namespace DotNetAPI.Controllers
         // GET: api/EVENT_REVIEWs
         public IQueryable<EVENT_REVIEW> GetEVENT_REVIEW()
         {
-            return db.EVENT_REVIEW;
+            return db.EVENT_REVIEWs;
         }
 
         // GET: api/EVENT_REVIEWs/5
         [ResponseType(typeof(EVENT_REVIEW))]
         public IHttpActionResult GetEVENT_REVIEW(int id)
         {
-            EVENT_REVIEW eVENT_REVIEW = db.EVENT_REVIEW.Find(id);
+            EVENT_REVIEW eVENT_REVIEW = db.EVENT_REVIEWs.Find(id);
             if (eVENT_REVIEW == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace DotNetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.EVENT_REVIEW.Add(eVENT_REVIEW);
+            db.EVENT_REVIEWs.Add(eVENT_REVIEW);
 
             try
             {
@@ -104,13 +104,13 @@ namespace DotNetAPI.Controllers
         [ResponseType(typeof(EVENT_REVIEW))]
         public IHttpActionResult DeleteEVENT_REVIEW(int id)
         {
-            EVENT_REVIEW eVENT_REVIEW = db.EVENT_REVIEW.Find(id);
+            EVENT_REVIEW eVENT_REVIEW = db.EVENT_REVIEWs.Find(id);
             if (eVENT_REVIEW == null)
             {
                 return NotFound();
             }
 
-            db.EVENT_REVIEW.Remove(eVENT_REVIEW);
+            db.EVENT_REVIEWs.Remove(eVENT_REVIEW);
             db.SaveChanges();
 
             return Ok(eVENT_REVIEW);
@@ -127,7 +127,7 @@ namespace DotNetAPI.Controllers
 
         private bool EVENT_REVIEWExists(int erid, int cid)
         {
-            return db.EVENT_REVIEW.Count(e => e.PARENT_EVENT_ID == erid && e.CUSTOMER_ID == cid) > 0;
+            return db.EVENT_REVIEWs.Count(e => e.PARENT_EVENT_ID == erid && e.CUSTOMER_ID == cid) > 0;
         }
     }
 }

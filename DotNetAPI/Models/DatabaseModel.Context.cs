@@ -33,31 +33,325 @@ namespace DotNetAPI.Models
         public virtual DbSet<ARTIST_TYPE> ARTIST_TYPEs { get; set; }
         public virtual DbSet<BOOKING> BOOKINGs { get; set; }
         public virtual DbSet<CHILD_EVENT> CHILD_EVENTs { get; set; }
-        public virtual DbSet<CONTRACT> CONTRACTS { get; set; }
         public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }
-        public virtual DbSet<EVENT_REVIEW> EVENT_REVIEW { get; set; }
-        public virtual DbSet<GUEST_BOOKING> GUEST_BOOKING { get; set; }
+        public virtual DbSet<EVENT_REVIEW> EVENT_REVIEWs { get; set; }
+        public virtual DbSet<GUEST_BOOKING> GUEST_BOOKINGs { get; set; }
         public virtual DbSet<ORDER> ORDERS { get; set; }
         public virtual DbSet<PARENT_EVENT> PARENT_EVENTs { get; set; }
         public virtual DbSet<SOCIAL_MEDIA> SOCIAL_MEDIAs { get; set; }
         public virtual DbSet<TICKET> TICKETs { get; set; }
         public virtual DbSet<VENUE> VENUEs { get; set; }
         public virtual DbSet<VENUE_REVIEW> VENUE_REVIEWs { get; set; }
-
-        public virtual int COMPAREPASSWORDS(Nullable<decimal> cUSTOMERID, string cUSTOMERPASSWORD)
+    
+        public virtual int ADD_ADMIN(Nullable<decimal> aDMIN_ID, string aDMIN_EMAIL, string aDMIN_PASSWORD, ObjectParameter nEW_ID)
         {
-            var cUSTOMERIDParameter = cUSTOMERID.HasValue ?
-                new ObjectParameter("CUSTOMERID", cUSTOMERID) :
-                new ObjectParameter("CUSTOMERID", typeof(decimal));
-
-            var cUSTOMERPASSWORDParameter = cUSTOMERPASSWORD != null ?
-                new ObjectParameter("CUSTOMERPASSWORD", cUSTOMERPASSWORD) :
-                new ObjectParameter("CUSTOMERPASSWORD", typeof(string));
-            ObjectParameter n = new ObjectParameter("DOESMATCH", typeof(int));
-
-            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("COMPAREPASSWORDS", cUSTOMERIDParameter, cUSTOMERPASSWORDParameter, n);
-
-            return Convert.ToInt32(n.Value);
+            var aDMIN_IDParameter = aDMIN_ID.HasValue ?
+                new ObjectParameter("ADMIN_ID", aDMIN_ID) :
+                new ObjectParameter("ADMIN_ID", typeof(decimal));
+    
+            var aDMIN_EMAILParameter = aDMIN_EMAIL != null ?
+                new ObjectParameter("ADMIN_EMAIL", aDMIN_EMAIL) :
+                new ObjectParameter("ADMIN_EMAIL", typeof(string));
+    
+            var aDMIN_PASSWORDParameter = aDMIN_PASSWORD != null ?
+                new ObjectParameter("ADMIN_PASSWORD", aDMIN_PASSWORD) :
+                new ObjectParameter("ADMIN_PASSWORD", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_ADMIN", aDMIN_IDParameter, aDMIN_EMAILParameter, aDMIN_PASSWORDParameter, nEW_ID);
+        }
+    
+        public virtual int ADD_ARTIST(ObjectParameter aRTIST_ID, string aRTIST_NAME, string aRTIST_TAGS, Nullable<decimal> sOCIAL_MEDIA_ID, string aRTIST_DESCRIPTION, Nullable<decimal> aRTIST_TYPE_ID)
+        {
+            var aRTIST_NAMEParameter = aRTIST_NAME != null ?
+                new ObjectParameter("ARTIST_NAME", aRTIST_NAME) :
+                new ObjectParameter("ARTIST_NAME", typeof(string));
+    
+            var aRTIST_TAGSParameter = aRTIST_TAGS != null ?
+                new ObjectParameter("ARTIST_TAGS", aRTIST_TAGS) :
+                new ObjectParameter("ARTIST_TAGS", typeof(string));
+    
+            var sOCIAL_MEDIA_IDParameter = sOCIAL_MEDIA_ID.HasValue ?
+                new ObjectParameter("SOCIAL_MEDIA_ID", sOCIAL_MEDIA_ID) :
+                new ObjectParameter("SOCIAL_MEDIA_ID", typeof(decimal));
+    
+            var aRTIST_DESCRIPTIONParameter = aRTIST_DESCRIPTION != null ?
+                new ObjectParameter("ARTIST_DESCRIPTION", aRTIST_DESCRIPTION) :
+                new ObjectParameter("ARTIST_DESCRIPTION", typeof(string));
+    
+            var aRTIST_TYPE_IDParameter = aRTIST_TYPE_ID.HasValue ?
+                new ObjectParameter("ARTIST_TYPE_ID", aRTIST_TYPE_ID) :
+                new ObjectParameter("ARTIST_TYPE_ID", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_ARTIST", aRTIST_ID, aRTIST_NAMEParameter, aRTIST_TAGSParameter, sOCIAL_MEDIA_IDParameter, aRTIST_DESCRIPTIONParameter, aRTIST_TYPE_IDParameter);
+        }
+    
+        public virtual int ADD_BOOKING(ObjectParameter bOOKING_ID, Nullable<decimal> tICKET_ID, Nullable<decimal> oRDER_ID, Nullable<decimal> bOOKING_QUANTITY, Nullable<System.DateTime> bOOKING_DATE_TIME)
+        {
+            var tICKET_IDParameter = tICKET_ID.HasValue ?
+                new ObjectParameter("TICKET_ID", tICKET_ID) :
+                new ObjectParameter("TICKET_ID", typeof(decimal));
+    
+            var oRDER_IDParameter = oRDER_ID.HasValue ?
+                new ObjectParameter("ORDER_ID", oRDER_ID) :
+                new ObjectParameter("ORDER_ID", typeof(decimal));
+    
+            var bOOKING_QUANTITYParameter = bOOKING_QUANTITY.HasValue ?
+                new ObjectParameter("BOOKING_QUANTITY", bOOKING_QUANTITY) :
+                new ObjectParameter("BOOKING_QUANTITY", typeof(decimal));
+    
+            var bOOKING_DATE_TIMEParameter = bOOKING_DATE_TIME.HasValue ?
+                new ObjectParameter("BOOKING_DATE_TIME", bOOKING_DATE_TIME) :
+                new ObjectParameter("BOOKING_DATE_TIME", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_BOOKING", bOOKING_ID, tICKET_IDParameter, oRDER_IDParameter, bOOKING_QUANTITYParameter, bOOKING_DATE_TIMEParameter);
+        }
+    
+        public virtual int ADD_CHILD_EVENT(ObjectParameter cHILD_EVENT_ID, Nullable<decimal> vENUE_ID, Nullable<decimal> pARENT_EVENT_ID, string cHILD_EVENT_NAME, string cHILD_EVENT_DESCRIPTION, Nullable<System.DateTime> sTART_DATE_TIME, Nullable<System.DateTime> eND_DATE_TIME, Nullable<decimal> cHILD_EVENT_CANCELED)
+        {
+            var vENUE_IDParameter = vENUE_ID.HasValue ?
+                new ObjectParameter("VENUE_ID", vENUE_ID) :
+                new ObjectParameter("VENUE_ID", typeof(decimal));
+    
+            var pARENT_EVENT_IDParameter = pARENT_EVENT_ID.HasValue ?
+                new ObjectParameter("PARENT_EVENT_ID", pARENT_EVENT_ID) :
+                new ObjectParameter("PARENT_EVENT_ID", typeof(decimal));
+    
+            var cHILD_EVENT_NAMEParameter = cHILD_EVENT_NAME != null ?
+                new ObjectParameter("CHILD_EVENT_NAME", cHILD_EVENT_NAME) :
+                new ObjectParameter("CHILD_EVENT_NAME", typeof(string));
+    
+            var cHILD_EVENT_DESCRIPTIONParameter = cHILD_EVENT_DESCRIPTION != null ?
+                new ObjectParameter("CHILD_EVENT_DESCRIPTION", cHILD_EVENT_DESCRIPTION) :
+                new ObjectParameter("CHILD_EVENT_DESCRIPTION", typeof(string));
+    
+            var sTART_DATE_TIMEParameter = sTART_DATE_TIME.HasValue ?
+                new ObjectParameter("START_DATE_TIME", sTART_DATE_TIME) :
+                new ObjectParameter("START_DATE_TIME", typeof(System.DateTime));
+    
+            var eND_DATE_TIMEParameter = eND_DATE_TIME.HasValue ?
+                new ObjectParameter("END_DATE_TIME", eND_DATE_TIME) :
+                new ObjectParameter("END_DATE_TIME", typeof(System.DateTime));
+    
+            var cHILD_EVENT_CANCELEDParameter = cHILD_EVENT_CANCELED.HasValue ?
+                new ObjectParameter("CHILD_EVENT_CANCELED", cHILD_EVENT_CANCELED) :
+                new ObjectParameter("CHILD_EVENT_CANCELED", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_CHILD_EVENT", cHILD_EVENT_ID, vENUE_IDParameter, pARENT_EVENT_IDParameter, cHILD_EVENT_NAMEParameter, cHILD_EVENT_DESCRIPTIONParameter, sTART_DATE_TIMEParameter, eND_DATE_TIMEParameter, cHILD_EVENT_CANCELEDParameter);
+        }
+    
+        public virtual int ADD_CUSTOMER(ObjectParameter cUSTOMER_ID, string cUSTOMER_FIRST_NAME, string cUSTOMER_LAST_NAME, string cUSTOMER_EMAIL, string cUSTOMER_ADDRESS, string cUSTOMER_POSTCODE, string cUSTOMER_PASSWORD)
+        {
+            var cUSTOMER_FIRST_NAMEParameter = cUSTOMER_FIRST_NAME != null ?
+                new ObjectParameter("CUSTOMER_FIRST_NAME", cUSTOMER_FIRST_NAME) :
+                new ObjectParameter("CUSTOMER_FIRST_NAME", typeof(string));
+    
+            var cUSTOMER_LAST_NAMEParameter = cUSTOMER_LAST_NAME != null ?
+                new ObjectParameter("CUSTOMER_LAST_NAME", cUSTOMER_LAST_NAME) :
+                new ObjectParameter("CUSTOMER_LAST_NAME", typeof(string));
+    
+            var cUSTOMER_EMAILParameter = cUSTOMER_EMAIL != null ?
+                new ObjectParameter("CUSTOMER_EMAIL", cUSTOMER_EMAIL) :
+                new ObjectParameter("CUSTOMER_EMAIL", typeof(string));
+    
+            var cUSTOMER_ADDRESSParameter = cUSTOMER_ADDRESS != null ?
+                new ObjectParameter("CUSTOMER_ADDRESS", cUSTOMER_ADDRESS) :
+                new ObjectParameter("CUSTOMER_ADDRESS", typeof(string));
+    
+            var cUSTOMER_POSTCODEParameter = cUSTOMER_POSTCODE != null ?
+                new ObjectParameter("CUSTOMER_POSTCODE", cUSTOMER_POSTCODE) :
+                new ObjectParameter("CUSTOMER_POSTCODE", typeof(string));
+    
+            var cUSTOMER_PASSWORDParameter = cUSTOMER_PASSWORD != null ?
+                new ObjectParameter("CUSTOMER_PASSWORD", cUSTOMER_PASSWORD) :
+                new ObjectParameter("CUSTOMER_PASSWORD", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_CUSTOMER", cUSTOMER_ID, cUSTOMER_FIRST_NAMEParameter, cUSTOMER_LAST_NAMEParameter, cUSTOMER_EMAILParameter, cUSTOMER_ADDRESSParameter, cUSTOMER_POSTCODEParameter, cUSTOMER_PASSWORDParameter);
+        }
+    
+        public virtual int ADD_GUEST_BOOKING(ObjectParameter gUEST_BOOKING_ID, Nullable<decimal> tICKET_ID, string gUEST_EMAIL, string gUEST_ADDRESS, string gUEST_POSTCODE, Nullable<decimal> gUEST_BOOKING_QUANTITY, Nullable<System.DateTime> gUEST_BOOKING_DATE_TIME)
+        {
+            var tICKET_IDParameter = tICKET_ID.HasValue ?
+                new ObjectParameter("TICKET_ID", tICKET_ID) :
+                new ObjectParameter("TICKET_ID", typeof(decimal));
+    
+            var gUEST_EMAILParameter = gUEST_EMAIL != null ?
+                new ObjectParameter("GUEST_EMAIL", gUEST_EMAIL) :
+                new ObjectParameter("GUEST_EMAIL", typeof(string));
+    
+            var gUEST_ADDRESSParameter = gUEST_ADDRESS != null ?
+                new ObjectParameter("GUEST_ADDRESS", gUEST_ADDRESS) :
+                new ObjectParameter("GUEST_ADDRESS", typeof(string));
+    
+            var gUEST_POSTCODEParameter = gUEST_POSTCODE != null ?
+                new ObjectParameter("GUEST_POSTCODE", gUEST_POSTCODE) :
+                new ObjectParameter("GUEST_POSTCODE", typeof(string));
+    
+            var gUEST_BOOKING_QUANTITYParameter = gUEST_BOOKING_QUANTITY.HasValue ?
+                new ObjectParameter("GUEST_BOOKING_QUANTITY", gUEST_BOOKING_QUANTITY) :
+                new ObjectParameter("GUEST_BOOKING_QUANTITY", typeof(decimal));
+    
+            var gUEST_BOOKING_DATE_TIMEParameter = gUEST_BOOKING_DATE_TIME.HasValue ?
+                new ObjectParameter("GUEST_BOOKING_DATE_TIME", gUEST_BOOKING_DATE_TIME) :
+                new ObjectParameter("GUEST_BOOKING_DATE_TIME", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_GUEST_BOOKING", gUEST_BOOKING_ID, tICKET_IDParameter, gUEST_EMAILParameter, gUEST_ADDRESSParameter, gUEST_POSTCODEParameter, gUEST_BOOKING_QUANTITYParameter, gUEST_BOOKING_DATE_TIMEParameter);
+        }
+    
+        public virtual int ADD_ORDERS(ObjectParameter oRDER_ID, Nullable<decimal> cUSTOMER_ID)
+        {
+            var cUSTOMER_IDParameter = cUSTOMER_ID.HasValue ?
+                new ObjectParameter("CUSTOMER_ID", cUSTOMER_ID) :
+                new ObjectParameter("CUSTOMER_ID", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_ORDERS", oRDER_ID, cUSTOMER_IDParameter);
+        }
+    
+        public virtual int ADD_PARENT_EVENT(ObjectParameter pARENT_EVENT_ID, Nullable<decimal> sOCIAL_MEDIA_ID, string pARENT_EVENT_NAME, string pARENT_EVENT_DESCRIPTION)
+        {
+            var sOCIAL_MEDIA_IDParameter = sOCIAL_MEDIA_ID.HasValue ?
+                new ObjectParameter("SOCIAL_MEDIA_ID", sOCIAL_MEDIA_ID) :
+                new ObjectParameter("SOCIAL_MEDIA_ID", typeof(decimal));
+    
+            var pARENT_EVENT_NAMEParameter = pARENT_EVENT_NAME != null ?
+                new ObjectParameter("PARENT_EVENT_NAME", pARENT_EVENT_NAME) :
+                new ObjectParameter("PARENT_EVENT_NAME", typeof(string));
+    
+            var pARENT_EVENT_DESCRIPTIONParameter = pARENT_EVENT_DESCRIPTION != null ?
+                new ObjectParameter("PARENT_EVENT_DESCRIPTION", pARENT_EVENT_DESCRIPTION) :
+                new ObjectParameter("PARENT_EVENT_DESCRIPTION", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_PARENT_EVENT", pARENT_EVENT_ID, sOCIAL_MEDIA_IDParameter, pARENT_EVENT_NAMEParameter, pARENT_EVENT_DESCRIPTIONParameter);
+        }
+    
+        public virtual int ADD_SOCIAL_MEDIA(ObjectParameter sOCIAL_MEDIA_ID, byte[] iMAGE, byte[] iMAGE2, byte[] iMAGE3, byte[] iMAGE4, byte[] iMAGE5, string fACEBOOK, string tWITTER, string iNSTAGRAM, string sOUNDCLOUD, string wEBSITE, string sPOTIFY)
+        {
+            var iMAGEParameter = iMAGE != null ?
+                new ObjectParameter("IMAGE", iMAGE) :
+                new ObjectParameter("IMAGE", typeof(byte[]));
+    
+            var iMAGE2Parameter = iMAGE2 != null ?
+                new ObjectParameter("IMAGE2", iMAGE2) :
+                new ObjectParameter("IMAGE2", typeof(byte[]));
+    
+            var iMAGE3Parameter = iMAGE3 != null ?
+                new ObjectParameter("IMAGE3", iMAGE3) :
+                new ObjectParameter("IMAGE3", typeof(byte[]));
+    
+            var iMAGE4Parameter = iMAGE4 != null ?
+                new ObjectParameter("IMAGE4", iMAGE4) :
+                new ObjectParameter("IMAGE4", typeof(byte[]));
+    
+            var iMAGE5Parameter = iMAGE5 != null ?
+                new ObjectParameter("IMAGE5", iMAGE5) :
+                new ObjectParameter("IMAGE5", typeof(byte[]));
+    
+            var fACEBOOKParameter = fACEBOOK != null ?
+                new ObjectParameter("FACEBOOK", fACEBOOK) :
+                new ObjectParameter("FACEBOOK", typeof(string));
+    
+            var tWITTERParameter = tWITTER != null ?
+                new ObjectParameter("TWITTER", tWITTER) :
+                new ObjectParameter("TWITTER", typeof(string));
+    
+            var iNSTAGRAMParameter = iNSTAGRAM != null ?
+                new ObjectParameter("INSTAGRAM", iNSTAGRAM) :
+                new ObjectParameter("INSTAGRAM", typeof(string));
+    
+            var sOUNDCLOUDParameter = sOUNDCLOUD != null ?
+                new ObjectParameter("SOUNDCLOUD", sOUNDCLOUD) :
+                new ObjectParameter("SOUNDCLOUD", typeof(string));
+    
+            var wEBSITEParameter = wEBSITE != null ?
+                new ObjectParameter("WEBSITE", wEBSITE) :
+                new ObjectParameter("WEBSITE", typeof(string));
+    
+            var sPOTIFYParameter = sPOTIFY != null ?
+                new ObjectParameter("SPOTIFY", sPOTIFY) :
+                new ObjectParameter("SPOTIFY", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_SOCIAL_MEDIA", sOCIAL_MEDIA_ID, iMAGEParameter, iMAGE2Parameter, iMAGE3Parameter, iMAGE4Parameter, iMAGE5Parameter, fACEBOOKParameter, tWITTERParameter, iNSTAGRAMParameter, sOUNDCLOUDParameter, wEBSITEParameter, sPOTIFYParameter);
+        }
+    
+        public virtual int ADD_TICKET(ObjectParameter tICKET_ID, Nullable<decimal> tICKET_PRICE, string tICKET_DESCRIPTION, Nullable<decimal> tICKET_AMOUNT_REMAINING, string tICKET_TYPE, Nullable<decimal> cHILD_EVENT_ID)
+        {
+            var tICKET_PRICEParameter = tICKET_PRICE.HasValue ?
+                new ObjectParameter("TICKET_PRICE", tICKET_PRICE) :
+                new ObjectParameter("TICKET_PRICE", typeof(decimal));
+    
+            var tICKET_DESCRIPTIONParameter = tICKET_DESCRIPTION != null ?
+                new ObjectParameter("TICKET_DESCRIPTION", tICKET_DESCRIPTION) :
+                new ObjectParameter("TICKET_DESCRIPTION", typeof(string));
+    
+            var tICKET_AMOUNT_REMAININGParameter = tICKET_AMOUNT_REMAINING.HasValue ?
+                new ObjectParameter("TICKET_AMOUNT_REMAINING", tICKET_AMOUNT_REMAINING) :
+                new ObjectParameter("TICKET_AMOUNT_REMAINING", typeof(decimal));
+    
+            var tICKET_TYPEParameter = tICKET_TYPE != null ?
+                new ObjectParameter("TICKET_TYPE", tICKET_TYPE) :
+                new ObjectParameter("TICKET_TYPE", typeof(string));
+    
+            var cHILD_EVENT_IDParameter = cHILD_EVENT_ID.HasValue ?
+                new ObjectParameter("CHILD_EVENT_ID", cHILD_EVENT_ID) :
+                new ObjectParameter("CHILD_EVENT_ID", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_TICKET", tICKET_ID, tICKET_PRICEParameter, tICKET_DESCRIPTIONParameter, tICKET_AMOUNT_REMAININGParameter, tICKET_TYPEParameter, cHILD_EVENT_IDParameter);
+        }
+    
+        public virtual int ADD_VENUE(ObjectParameter vENUE_ID, Nullable<decimal> sOCIAL_MEDIA_ID, string vENUE_DESCRIPTION, Nullable<decimal> vENUE_CAPACITY_SEATING, Nullable<decimal> vENUE_CAPACITY_STANDING, Nullable<decimal> vENUE_DISABLED_ACCESS, string vENUE_FACILITES, Nullable<decimal> vENUE_PARKING, string vENUE_PHONE_NUMBER, string vENUE_EMAIL, string vENUE_ADDRESS, string vENUE_POSTCODE, string vENUE_NAME, string vENUE_CITY)
+        {
+            var sOCIAL_MEDIA_IDParameter = sOCIAL_MEDIA_ID.HasValue ?
+                new ObjectParameter("SOCIAL_MEDIA_ID", sOCIAL_MEDIA_ID) :
+                new ObjectParameter("SOCIAL_MEDIA_ID", typeof(decimal));
+    
+            var vENUE_DESCRIPTIONParameter = vENUE_DESCRIPTION != null ?
+                new ObjectParameter("VENUE_DESCRIPTION", vENUE_DESCRIPTION) :
+                new ObjectParameter("VENUE_DESCRIPTION", typeof(string));
+    
+            var vENUE_CAPACITY_SEATINGParameter = vENUE_CAPACITY_SEATING.HasValue ?
+                new ObjectParameter("VENUE_CAPACITY_SEATING", vENUE_CAPACITY_SEATING) :
+                new ObjectParameter("VENUE_CAPACITY_SEATING", typeof(decimal));
+    
+            var vENUE_CAPACITY_STANDINGParameter = vENUE_CAPACITY_STANDING.HasValue ?
+                new ObjectParameter("VENUE_CAPACITY_STANDING", vENUE_CAPACITY_STANDING) :
+                new ObjectParameter("VENUE_CAPACITY_STANDING", typeof(decimal));
+    
+            var vENUE_DISABLED_ACCESSParameter = vENUE_DISABLED_ACCESS.HasValue ?
+                new ObjectParameter("VENUE_DISABLED_ACCESS", vENUE_DISABLED_ACCESS) :
+                new ObjectParameter("VENUE_DISABLED_ACCESS", typeof(decimal));
+    
+            var vENUE_FACILITESParameter = vENUE_FACILITES != null ?
+                new ObjectParameter("VENUE_FACILITES", vENUE_FACILITES) :
+                new ObjectParameter("VENUE_FACILITES", typeof(string));
+    
+            var vENUE_PARKINGParameter = vENUE_PARKING.HasValue ?
+                new ObjectParameter("VENUE_PARKING", vENUE_PARKING) :
+                new ObjectParameter("VENUE_PARKING", typeof(decimal));
+    
+            var vENUE_PHONE_NUMBERParameter = vENUE_PHONE_NUMBER != null ?
+                new ObjectParameter("VENUE_PHONE_NUMBER", vENUE_PHONE_NUMBER) :
+                new ObjectParameter("VENUE_PHONE_NUMBER", typeof(string));
+    
+            var vENUE_EMAILParameter = vENUE_EMAIL != null ?
+                new ObjectParameter("VENUE_EMAIL", vENUE_EMAIL) :
+                new ObjectParameter("VENUE_EMAIL", typeof(string));
+    
+            var vENUE_ADDRESSParameter = vENUE_ADDRESS != null ?
+                new ObjectParameter("VENUE_ADDRESS", vENUE_ADDRESS) :
+                new ObjectParameter("VENUE_ADDRESS", typeof(string));
+    
+            var vENUE_POSTCODEParameter = vENUE_POSTCODE != null ?
+                new ObjectParameter("VENUE_POSTCODE", vENUE_POSTCODE) :
+                new ObjectParameter("VENUE_POSTCODE", typeof(string));
+    
+            var vENUE_NAMEParameter = vENUE_NAME != null ?
+                new ObjectParameter("VENUE_NAME", vENUE_NAME) :
+                new ObjectParameter("VENUE_NAME", typeof(string));
+    
+            var vENUE_CITYParameter = vENUE_CITY != null ?
+                new ObjectParameter("VENUE_CITY", vENUE_CITY) :
+                new ObjectParameter("VENUE_CITY", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADD_VENUE", vENUE_ID, sOCIAL_MEDIA_IDParameter, vENUE_DESCRIPTIONParameter, vENUE_CAPACITY_SEATINGParameter, vENUE_CAPACITY_STANDINGParameter, vENUE_DISABLED_ACCESSParameter, vENUE_FACILITESParameter, vENUE_PARKINGParameter, vENUE_PHONE_NUMBERParameter, vENUE_EMAILParameter, vENUE_ADDRESSParameter, vENUE_POSTCODEParameter, vENUE_NAMEParameter, vENUE_CITYParameter);
         }
     }
 }

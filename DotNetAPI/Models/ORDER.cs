@@ -24,7 +24,7 @@ namespace DotNetAPI.Models
         public int CUSTOMER_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public  ICollection<BOOKING> BOOKINGs { get; set; }
-        public  CUSTOMER CUSTOMER { get; set; }
+        public ICollection<BOOKING> BOOKINGs { get; set; }
+        public CUSTOMER CUSTOMER { get; set; }
     }
 }

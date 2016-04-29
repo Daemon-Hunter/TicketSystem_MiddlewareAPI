@@ -17,8 +17,8 @@ namespace DotNetAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CHILD_EVENT()
         {
-            this.CONTRACTS = new HashSet<CONTRACT>();
             this.TICKETs = new HashSet<TICKET>();
+            this.ARTISTs = new HashSet<ARTIST>();
         }
     
         public int CHILD_EVENT_ID { get; set; }
@@ -30,11 +30,11 @@ namespace DotNetAPI.Models
         public Nullable<System.DateTime> END_DATE_TIME { get; set; }
         public bool CHILD_EVENT_CANCELED { get; set; }
     
-        public  VENUE VENUE { get; set; }
-        public  PARENT_EVENT PARENT_EVENT { get; set; }
+        public VENUE VENUE { get; set; }
+        public PARENT_EVENT PARENT_EVENT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public  ICollection<CONTRACT> CONTRACTS { get; set; }
+        public ICollection<TICKET> TICKETs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public  ICollection<TICKET> TICKETs { get; set; }
+        public ICollection<ARTIST> ARTISTs { get; set; }
     }
 }

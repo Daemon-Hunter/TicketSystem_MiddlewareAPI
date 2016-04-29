@@ -21,7 +21,7 @@ namespace DotNetAPI.Models
         public bool ARTIST_REVIEW_VERIFIED { get; set; }
         public int CUSTOMER_ID { get; set; }
     
-        public  ARTIST ARTIST { get; set; }
-        public  CUSTOMER CUSTOMER { get; set; }
+        public ARTIST ARTIST { get; set; }
+        public CUSTOMER CUSTOMER { get; set; }
     }
 }

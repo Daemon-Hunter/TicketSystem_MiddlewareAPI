@@ -22,6 +22,6 @@ namespace DotNetAPI.Models
         public int GUEST_BOOKING_QUANTITY { get; set; }
         public System.DateTime GUEST_BOOKING_DATE_TIME { get; set; }
     
-        public  TICKET TICKET { get; set; }
+        public TICKET TICKET { get; set; }
     }
 }

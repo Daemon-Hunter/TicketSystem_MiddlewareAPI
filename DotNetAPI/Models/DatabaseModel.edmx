@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DBModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DBModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ADMIN">
           <Key>
             <PropertyRef Name="ADMIN_ID" />
@@ -61,7 +61,7 @@
           <Property Name="VENUE_ID" Type="number" Precision="8" Scale="0" />
           <Property Name="PARENT_EVENT_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="CHILD_EVENT_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="CHILD_EVENT_DESCRIPTION" Type="varchar2" MaxLength="100" />
+          <Property Name="CHILD_EVENT_DESCRIPTION" Type="varchar2" MaxLength="500" />
           <Property Name="START_DATE_TIME" Type="date" />
           <Property Name="END_DATE_TIME" Type="date" />
           <Property Name="CHILD_EVENT_CANCELED" Type="number" Precision="1" Scale="0" Nullable="false" />
@@ -73,7 +73,6 @@
           </Key>
           <Property Name="ARTIST_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="CHILD_EVENT_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="COLUMN1" Type="varchar2" MaxLength="20" />
         </EntityType>
         <EntityType Name="CUSTOMER">
           <Key>
@@ -83,7 +82,7 @@
           <Property Name="CUSTOMER_FIRST_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="CUSTOMER_LAST_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="CUSTOMER_EMAIL" Type="varchar2" MaxLength="50" Nullable="false" />
-          <Property Name="CUSTOMER_ADDRESS" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="CUSTOMER_ADDRESS" Type="varchar2" MaxLength="200" Nullable="false" />
           <Property Name="CUSTOMER_POSTCODE" Type="varchar2" MaxLength="7" Nullable="false" />
           <Property Name="CUSTOMER_PASSWORD" Type="varchar2" MaxLength="20" Nullable="false" />
         </EntityType>
@@ -106,7 +105,7 @@
           <Property Name="GUEST_BOOKING_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="TICKET_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="GUEST_EMAIL" Type="varchar2" MaxLength="50" Nullable="false" />
-          <Property Name="GUEST_ADDRESS" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="GUEST_ADDRESS" Type="varchar2" MaxLength="200" Nullable="false" />
           <Property Name="GUEST_POSTCODE" Type="varchar2" MaxLength="7" Nullable="false" />
           <Property Name="GUEST_BOOKING_QUANTITY" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="GUEST_BOOKING_DATE_TIME" Type="date" Nullable="false" />
@@ -125,7 +124,7 @@
           <Property Name="PARENT_EVENT_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="SOCIAL_MEDIA_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="PARENT_EVENT_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="PARENT_EVENT_DESCRIPTION" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="PARENT_EVENT_DESCRIPTION" Type="varchar2" MaxLength="500" Nullable="false" />
         </EntityType>
         <EntityType Name="SOCIAL_MEDIA">
           <Key>
@@ -150,7 +149,7 @@
           </Key>
           <Property Name="TICKET_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="TICKET_PRICE" Type="number" Precision="6" Scale="2" Nullable="false" />
-          <Property Name="TICKET_DESCRIPTION" Type="varchar2" MaxLength="50" />
+          <Property Name="TICKET_DESCRIPTION" Type="varchar2" MaxLength="500" />
           <Property Name="TICKET_AMOUNT_REMAINING" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="TICKET_TYPE" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="CHILDEVENT_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
@@ -161,17 +160,18 @@
           </Key>
           <Property Name="VENUE_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="SOCIAL_MEDIA_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="VENUE_DESCRIPTION" Type="varchar2" MaxLength="100" />
-          <Property Name="VENUE_CAPACITY_SEATING" Type="number" Precision="4" Scale="0" Nullable="false" />
-          <Property Name="VENUE_CAPACITY_STANDING" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="VENUE_DESCRIPTION" Type="varchar2" MaxLength="150" />
+          <Property Name="VENUE_CAPACITY_SEATING" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="VENUE_CAPACITY_STANDING" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="VENUE_DISABLED_ACCESS" Type="number" Precision="1" Scale="0" Nullable="false" />
-          <Property Name="VENUE_FACILITES" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="VENUE_FACILITES" Type="varchar2" MaxLength="200" />
           <Property Name="VENUE_PARKING" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="VENUE_PHONE_NUMBER" Type="varchar2" MaxLength="11" />
-          <Property Name="VENUE_EMAIL" Type="varchar2" MaxLength="40" />
-          <Property Name="VENUE_ADDRESS" Type="varchar2" MaxLength="50" Nullable="false" />
-          <Property Name="VENUE_POSTCODE" Type="varchar2" MaxLength="7" Nullable="false" />
+          <Property Name="VENUE_EMAIL" Type="varchar2" MaxLength="50" />
+          <Property Name="VENUE_ADDRESS" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="VENUE_POSTCODE" Type="varchar2" MaxLength="8" Nullable="false" />
           <Property Name="VENUE_NAME" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="VENUE_CITY" Type="varchar2" MaxLength="30" />
         </EntityType>
         <EntityType Name="VENUE_REVIEW">
           <Key>
@@ -417,15 +417,102 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="COMPAREPASSWORD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
-          <Parameter Name="CUSTOMERID" Type="number" Mode="In" />
-          <Parameter Name="CUSTOMERPASSWORD" Type="varchar2" Mode="In" />
-          <Parameter Name="DOESMATCH" Type="number" Mode="Out" />
+        <Function Name="ADD_ADMIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
+          <Parameter Name="ADMIN_ID" Type="number" Mode="In" />
+          <Parameter Name="ADMIN_EMAIL" Type="varchar2" Mode="In" />
+          <Parameter Name="ADMIN_PASSWORD" Type="varchar2" Mode="In" />
+          <Parameter Name="NEW_ID" Type="number" Mode="Out" />
         </Function>
-        <Function Name="COMPAREPASSWORDS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
-          <Parameter Name="CUSTOMERID" Type="number" Mode="In" />
-          <Parameter Name="CUSTOMERPASSWORD" Type="varchar2" Mode="In" />
-          <Parameter Name="DOESMATCH" Type="number" Mode="Out" />
+        <Function Name="ADD_ARTIST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
+          <Parameter Name="ARTIST_ID" Type="number" Mode="InOut" />
+          <Parameter Name="ARTIST_NAME" Type="varchar2" Mode="In" />
+          <Parameter Name="ARTIST_TAGS" Type="varchar2" Mode="In" />
+          <Parameter Name="SOCIAL_MEDIA_ID" Type="number" Mode="In" />
+          <Parameter Name="ARTIST_DESCRIPTION" Type="varchar2" Mode="In" />
+          <Parameter Name="ARTIST_TYPE_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ADD_BOOKING" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
+          <Parameter Name="BOOKING_ID" Type="number" Mode="InOut" />
+          <Parameter Name="TICKET_ID" Type="number" Mode="In" />
+          <Parameter Name="ORDER_ID" Type="number" Mode="In" />
+          <Parameter Name="BOOKING_QUANTITY" Type="number" Mode="In" />
+          <Parameter Name="BOOKING_DATE_TIME" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ADD_CHILD_EVENT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
+          <Parameter Name="CHILD_EVENT_ID" Type="number" Mode="InOut" />
+          <Parameter Name="VENUE_ID" Type="number" Mode="In" />
+          <Parameter Name="PARENT_EVENT_ID" Type="number" Mode="In" />
+          <Parameter Name="CHILD_EVENT_NAME" Type="varchar2" Mode="In" />
+          <Parameter Name="CHILD_EVENT_DESCRIPTION" Type="varchar2" Mode="In" />
+          <Parameter Name="START_DATE_TIME" Type="date" Mode="In" />
+          <Parameter Name="END_DATE_TIME" Type="date" Mode="In" />
+          <Parameter Name="CHILD_EVENT_CANCELED" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ADD_CUSTOMER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
+          <Parameter Name="CUSTOMER_ID" Type="number" Mode="InOut" />
+          <Parameter Name="CUSTOMER_FIRST_NAME" Type="varchar2" Mode="In" />
+          <Parameter Name="CUSTOMER_LAST_NAME" Type="varchar2" Mode="In" />
+          <Parameter Name="CUSTOMER_EMAIL" Type="varchar2" Mode="In" />
+          <Parameter Name="CUSTOMER_ADDRESS" Type="varchar2" Mode="In" />
+          <Parameter Name="CUSTOMER_POSTCODE" Type="varchar2" Mode="In" />
+          <Parameter Name="CUSTOMER_PASSWORD" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="ADD_GUEST_BOOKING" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
+          <Parameter Name="GUEST_BOOKING_ID" Type="number" Mode="InOut" />
+          <Parameter Name="TICKET_ID" Type="number" Mode="In" />
+          <Parameter Name="GUEST_EMAIL" Type="varchar2" Mode="In" />
+          <Parameter Name="GUEST_ADDRESS" Type="varchar2" Mode="In" />
+          <Parameter Name="GUEST_POSTCODE" Type="varchar2" Mode="In" />
+          <Parameter Name="GUEST_BOOKING_QUANTITY" Type="number" Mode="In" />
+          <Parameter Name="GUEST_BOOKING_DATE_TIME" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ADD_ORDERS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
+          <Parameter Name="ORDER_ID" Type="number" Mode="InOut" />
+          <Parameter Name="CUSTOMER_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ADD_PARENT_EVENT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
+          <Parameter Name="PARENT_EVENT_ID" Type="number" Mode="InOut" />
+          <Parameter Name="SOCIAL_MEDIA_ID" Type="number" Mode="In" />
+          <Parameter Name="PARENT_EVENT_NAME" Type="varchar2" Mode="In" />
+          <Parameter Name="PARENT_EVENT_DESCRIPTION" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="ADD_SOCIAL_MEDIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
+          <Parameter Name="SOCIAL_MEDIA_ID" Type="number" Mode="InOut" />
+          <Parameter Name="IMAGE" Type="blob" Mode="In" />
+          <Parameter Name="IMAGE2" Type="blob" Mode="In" />
+          <Parameter Name="IMAGE3" Type="blob" Mode="In" />
+          <Parameter Name="IMAGE4" Type="blob" Mode="In" />
+          <Parameter Name="IMAGE5" Type="blob" Mode="In" />
+          <Parameter Name="FACEBOOK" Type="varchar2" Mode="In" />
+          <Parameter Name="TWITTER" Type="varchar2" Mode="In" />
+          <Parameter Name="INSTAGRAM" Type="varchar2" Mode="In" />
+          <Parameter Name="SOUNDCLOUD" Type="varchar2" Mode="In" />
+          <Parameter Name="WEBSITE" Type="varchar2" Mode="In" />
+          <Parameter Name="SPOTIFY" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="ADD_TICKET" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
+          <Parameter Name="TICKET_ID" Type="number" Mode="InOut" />
+          <Parameter Name="TICKET_PRICE" Type="number" Mode="In" />
+          <Parameter Name="TICKET_DESCRIPTION" Type="varchar2" Mode="In" />
+          <Parameter Name="TICKET_AMOUNT_REMAINING" Type="number" Mode="In" />
+          <Parameter Name="TICKET_TYPE" Type="varchar2" Mode="In" />
+          <Parameter Name="CHILD_EVENT_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ADD_VENUE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PRCS251G">
+          <Parameter Name="VENUE_ID" Type="number" Mode="InOut" />
+          <Parameter Name="SOCIAL_MEDIA_ID" Type="number" Mode="In" />
+          <Parameter Name="VENUE_DESCRIPTION" Type="varchar2" Mode="In" />
+          <Parameter Name="VENUE_CAPACITY_SEATING" Type="number" Mode="In" />
+          <Parameter Name="VENUE_CAPACITY_STANDING" Type="number" Mode="In" />
+          <Parameter Name="VENUE_DISABLED_ACCESS" Type="number" Mode="In" />
+          <Parameter Name="VENUE_FACILITES" Type="varchar2" Mode="In" />
+          <Parameter Name="VENUE_PARKING" Type="number" Mode="In" />
+          <Parameter Name="VENUE_PHONE_NUMBER" Type="varchar2" Mode="In" />
+          <Parameter Name="VENUE_EMAIL" Type="varchar2" Mode="In" />
+          <Parameter Name="VENUE_ADDRESS" Type="varchar2" Mode="In" />
+          <Parameter Name="VENUE_POSTCODE" Type="varchar2" Mode="In" />
+          <Parameter Name="VENUE_NAME" Type="varchar2" Mode="In" />
+          <Parameter Name="VENUE_CITY" Type="varchar2" Mode="In" />
         </Function>
         <EntityContainer Name="DBModelStoreContainer">
           <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="PRCS251G" store:Type="Tables" />
@@ -521,7 +608,8 @@
             <End Role="VENUE_REVIEW" EntitySet="VENUE_REVIEW" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -546,7 +634,7 @@
           <NavigationProperty Name="SOCIAL_MEDIA" Relationship="Self.ARTIST_FK1" FromRole="ARTIST" ToRole="SOCIAL_MEDIA" />
           <NavigationProperty Name="ARTIST_TYPE" Relationship="Self.ARTIST_FK2" FromRole="ARTIST" ToRole="ARTIST_TYPE" />
           <NavigationProperty Name="ARTIST_REVIEW" Relationship="Self.ARTIST_REVIEW_FK1" FromRole="ARTIST" ToRole="ARTIST_REVIEW" />
-          <NavigationProperty Name="CONTRACTS" Relationship="Self.CONTRACTS_FK1" FromRole="ARTIST" ToRole="CONTRACTS" />
+          <NavigationProperty Name="CHILD_EVENT" Relationship="Self.CONTRACTS" FromRole="ARTIST" ToRole="CHILD_EVENT" />
         </EntityType>
         <EntityType Name="ARTIST_REVIEW">
           <Key>
@@ -590,25 +678,14 @@
           <Property Name="VENUE_ID" Type="Int32" />
           <Property Name="PARENT_EVENT_ID" Type="Int32" Nullable="false" />
           <Property Name="CHILD_EVENT_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CHILD_EVENT_DESCRIPTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CHILD_EVENT_DESCRIPTION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="START_DATE_TIME" Type="DateTime" />
           <Property Name="END_DATE_TIME" Type="DateTime" />
           <Property Name="CHILD_EVENT_CANCELED" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="VENUE" Relationship="Self.CHILD_EVENT_FK2" FromRole="CHILD_EVENT" ToRole="VENUE" />
           <NavigationProperty Name="PARENT_EVENT" Relationship="Self.CHILD_EVENT_FK3" FromRole="CHILD_EVENT" ToRole="PARENT_EVENT" />
-          <NavigationProperty Name="CONTRACTS" Relationship="Self.CONTRACTS_FK2" FromRole="CHILD_EVENT" ToRole="CONTRACTS" />
           <NavigationProperty Name="TICKETs" Relationship="Self.TICKET_FK1" FromRole="CHILD_EVENT" ToRole="TICKET" />
-        </EntityType>
-        <EntityType Name="CONTRACT">
-          <Key>
-            <PropertyRef Name="ARTIST_ID" />
-            <PropertyRef Name="CHILD_EVENT_ID" />
-          </Key>
-          <Property Name="ARTIST_ID" Type="Int32" Nullable="false" />
-          <Property Name="CHILD_EVENT_ID" Type="Int32" Nullable="false" />
-          <Property Name="COLUMN1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ARTIST" Relationship="Self.CONTRACTS_FK1" FromRole="CONTRACTS" ToRole="ARTIST" />
-          <NavigationProperty Name="CHILD_EVENT" Relationship="Self.CONTRACTS_FK2" FromRole="CONTRACTS" ToRole="CHILD_EVENT" />
+          <NavigationProperty Name="ARTISTs" Relationship="Self.CONTRACTS" FromRole="CHILD_EVENT" ToRole="ARTIST" />
         </EntityType>
         <EntityType Name="CUSTOMER">
           <Key>
@@ -618,7 +695,7 @@
           <Property Name="CUSTOMER_FIRST_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CUSTOMER_LAST_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CUSTOMER_EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CUSTOMER_ADDRESS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CUSTOMER_ADDRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CUSTOMER_POSTCODE" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CUSTOMER_PASSWORD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="ARTIST_REVIEW" Relationship="Self.ARTIST_REVIEW_FK2" FromRole="CUSTOMER" ToRole="ARTIST_REVIEW" />
@@ -647,7 +724,7 @@
           <Property Name="GUEST_BOOKING_ID" Type="Int32" Nullable="false" />
           <Property Name="TICKET_ID" Type="Int32" Nullable="false" />
           <Property Name="GUEST_EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="GUEST_ADDRESS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GUEST_ADDRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="GUEST_POSTCODE" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="GUEST_BOOKING_QUANTITY" Type="Int32" Nullable="false" />
           <Property Name="GUEST_BOOKING_DATE_TIME" Type="DateTime" Nullable="false" />
@@ -669,7 +746,7 @@
           <Property Name="PARENT_EVENT_ID" Type="Int32" Nullable="false" />
           <Property Name="SOCIAL_MEDIA_ID" Type="Int32" Nullable="false" />
           <Property Name="PARENT_EVENT_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PARENT_EVENT_DESCRIPTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PARENT_EVENT_DESCRIPTION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CHILD_EVENT" Relationship="Self.CHILD_EVENT_FK3" FromRole="PARENT_EVENT" ToRole="CHILD_EVENT" />
           <NavigationProperty Name="EVENT_REVIEW" Relationship="Self.EVENT_REVIEW_FK1" FromRole="PARENT_EVENT" ToRole="EVENT_REVIEW" />
           <NavigationProperty Name="SOCIAL_MEDIA" Relationship="Self.PARENT_EVENT_FK1" FromRole="PARENT_EVENT" ToRole="SOCIAL_MEDIA" />
@@ -700,7 +777,7 @@
           </Key>
           <Property Name="TICKET_ID" Type="Int32" Nullable="false" />
           <Property Name="TICKET_PRICE" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
-          <Property Name="TICKET_DESCRIPTION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TICKET_DESCRIPTION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="TICKET_AMOUNT_REMAINING" Type="Int32" Nullable="false" />
           <Property Name="TICKET_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CHILDEVENT_ID" Type="Int32" Nullable="false" />
@@ -714,17 +791,18 @@
           </Key>
           <Property Name="VENUE_ID" Type="Int32" Nullable="false" />
           <Property Name="SOCIAL_MEDIA_ID" Type="Int32" Nullable="false" />
-          <Property Name="VENUE_DESCRIPTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="VENUE_CAPACITY_SEATING" Type="Int16" Nullable="false" />
-          <Property Name="VENUE_CAPACITY_STANDING" Type="Int16" Nullable="false" />
+          <Property Name="VENUE_DESCRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="VENUE_CAPACITY_SEATING" Type="Int32" Nullable="false" />
+          <Property Name="VENUE_CAPACITY_STANDING" Type="Int32" Nullable="false" />
           <Property Name="VENUE_DISABLED_ACCESS" Type="Boolean" Nullable="false" />
-          <Property Name="VENUE_FACILITES" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VENUE_FACILITES" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="VENUE_PARKING" Type="Int32" Nullable="false" />
           <Property Name="VENUE_PHONE_NUMBER" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="VENUE_EMAIL" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="VENUE_ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="VENUE_POSTCODE" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VENUE_EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VENUE_ADDRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VENUE_POSTCODE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="VENUE_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VENUE_CITY" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CHILD_EVENT" Relationship="Self.CHILD_EVENT_FK2" FromRole="VENUE" ToRole="CHILD_EVENT" />
           <NavigationProperty Name="SOCIAL_MEDIA" Relationship="Self.SOCIAL_MEDIA_ID_REVIEW_FOREIGN" FromRole="VENUE" ToRole="SOCIAL_MEDIA" />
           <NavigationProperty Name="VENUE_REVIEW" Relationship="Self.VENUE_REVIEW_FK1" FromRole="VENUE" ToRole="VENUE_REVIEW" />
@@ -777,18 +855,6 @@
               <PropertyRef Name="ARTIST_ID" />
             </Principal>
             <Dependent Role="ARTIST_REVIEW">
-              <PropertyRef Name="ARTIST_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CONTRACTS_FK1">
-          <End Role="ARTIST" Type="Self.ARTIST" Multiplicity="1" />
-          <End Role="CONTRACTS" Type="Self.CONTRACT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ARTIST">
-              <PropertyRef Name="ARTIST_ID" />
-            </Principal>
-            <Dependent Role="CONTRACTS">
               <PropertyRef Name="ARTIST_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -850,18 +916,6 @@
             </Principal>
             <Dependent Role="CHILD_EVENT">
               <PropertyRef Name="PARENT_EVENT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CONTRACTS_FK2">
-          <End Role="CHILD_EVENT" Type="Self.CHILD_EVENT" Multiplicity="1" />
-          <End Role="CONTRACTS" Type="Self.CONTRACT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CHILD_EVENT">
-              <PropertyRef Name="CHILD_EVENT_ID" />
-            </Principal>
-            <Dependent Role="CONTRACTS">
-              <PropertyRef Name="CHILD_EVENT_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -975,6 +1029,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="CONTRACTS">
+          <End Role="ARTIST" Type="Self.ARTIST" Multiplicity="*" />
+          <End Role="CHILD_EVENT" Type="Self.CHILD_EVENT" Multiplicity="*" />
+        </Association>
         <EntityContainer Name="DBConn" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ADMINs" EntityType="Self.ADMIN" />
           <EntitySet Name="ARTISTs" EntityType="Self.ARTIST" />
@@ -982,7 +1040,6 @@
           <EntitySet Name="ARTIST_TYPE" EntityType="Self.ARTIST_TYPE" />
           <EntitySet Name="BOOKINGs" EntityType="Self.BOOKING" />
           <EntitySet Name="CHILD_EVENT" EntityType="Self.CHILD_EVENT" />
-          <EntitySet Name="CONTRACTS" EntityType="Self.CONTRACT" />
           <EntitySet Name="CUSTOMERs" EntityType="Self.CUSTOMER" />
           <EntitySet Name="EVENT_REVIEW" EntityType="Self.EVENT_REVIEW" />
           <EntitySet Name="GUEST_BOOKING" EntityType="Self.GUEST_BOOKING" />
@@ -1004,10 +1061,6 @@
             <End Role="ARTIST" EntitySet="ARTISTs" />
             <End Role="ARTIST_REVIEW" EntitySet="ARTIST_REVIEW" />
           </AssociationSet>
-          <AssociationSet Name="CONTRACTS_FK1" Association="Self.CONTRACTS_FK1">
-            <End Role="ARTIST" EntitySet="ARTISTs" />
-            <End Role="CONTRACTS" EntitySet="CONTRACTS" />
-          </AssociationSet>
           <AssociationSet Name="ARTIST_REVIEW_FK2" Association="Self.ARTIST_REVIEW_FK2">
             <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
             <End Role="ARTIST_REVIEW" EntitySet="ARTIST_REVIEW" />
@@ -1027,10 +1080,6 @@
           <AssociationSet Name="CHILD_EVENT_FK3" Association="Self.CHILD_EVENT_FK3">
             <End Role="PARENT_EVENT" EntitySet="PARENT_EVENT" />
             <End Role="CHILD_EVENT" EntitySet="CHILD_EVENT" />
-          </AssociationSet>
-          <AssociationSet Name="CONTRACTS_FK2" Association="Self.CONTRACTS_FK2">
-            <End Role="CHILD_EVENT" EntitySet="CHILD_EVENT" />
-            <End Role="CONTRACTS" EntitySet="CONTRACTS" />
           </AssociationSet>
           <AssociationSet Name="TICKET_FK1" Association="Self.TICKET_FK1">
             <End Role="CHILD_EVENT" EntitySet="CHILD_EVENT" />
@@ -1068,10 +1117,106 @@
             <End Role="VENUE" EntitySet="VENUEs" />
             <End Role="VENUE_REVIEW" EntitySet="VENUE_REVIEW" />
           </AssociationSet>
-          <FunctionImport Name="COMPAREPASSWORDS">
-            <Parameter Name="CUSTOMERID" Mode="In" Type="Decimal" />
-            <Parameter Name="CUSTOMERPASSWORD" Mode="In" Type="String" />
-            <Parameter Name="DOESMATCH" Mode="Out" Type="Decimal" />
+          <AssociationSet Name="CONTRACTS" Association="Self.CONTRACTS">
+            <End Role="ARTIST" EntitySet="ARTISTs" />
+            <End Role="CHILD_EVENT" EntitySet="CHILD_EVENT" />
+          </AssociationSet>
+          <FunctionImport Name="ADD_ADMIN">
+            <Parameter Name="ADMIN_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="ADMIN_EMAIL" Mode="In" Type="String" />
+            <Parameter Name="ADMIN_PASSWORD" Mode="In" Type="String" />
+            <Parameter Name="NEW_ID" Mode="Out" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ADD_ARTIST">
+            <Parameter Name="ARTIST_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="ARTIST_NAME" Mode="In" Type="String" />
+            <Parameter Name="ARTIST_TAGS" Mode="In" Type="String" />
+            <Parameter Name="SOCIAL_MEDIA_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="ARTIST_DESCRIPTION" Mode="In" Type="String" />
+            <Parameter Name="ARTIST_TYPE_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ADD_BOOKING">
+            <Parameter Name="BOOKING_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="TICKET_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="ORDER_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="BOOKING_QUANTITY" Mode="In" Type="Decimal" />
+            <Parameter Name="BOOKING_DATE_TIME" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ADD_CHILD_EVENT">
+            <Parameter Name="CHILD_EVENT_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="VENUE_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="PARENT_EVENT_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="CHILD_EVENT_NAME" Mode="In" Type="String" />
+            <Parameter Name="CHILD_EVENT_DESCRIPTION" Mode="In" Type="String" />
+            <Parameter Name="START_DATE_TIME" Mode="In" Type="DateTime" />
+            <Parameter Name="END_DATE_TIME" Mode="In" Type="DateTime" />
+            <Parameter Name="CHILD_EVENT_CANCELED" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ADD_CUSTOMER">
+            <Parameter Name="CUSTOMER_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="CUSTOMER_FIRST_NAME" Mode="In" Type="String" />
+            <Parameter Name="CUSTOMER_LAST_NAME" Mode="In" Type="String" />
+            <Parameter Name="CUSTOMER_EMAIL" Mode="In" Type="String" />
+            <Parameter Name="CUSTOMER_ADDRESS" Mode="In" Type="String" />
+            <Parameter Name="CUSTOMER_POSTCODE" Mode="In" Type="String" />
+            <Parameter Name="CUSTOMER_PASSWORD" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ADD_GUEST_BOOKING">
+            <Parameter Name="GUEST_BOOKING_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="TICKET_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="GUEST_EMAIL" Mode="In" Type="String" />
+            <Parameter Name="GUEST_ADDRESS" Mode="In" Type="String" />
+            <Parameter Name="GUEST_POSTCODE" Mode="In" Type="String" />
+            <Parameter Name="GUEST_BOOKING_QUANTITY" Mode="In" Type="Decimal" />
+            <Parameter Name="GUEST_BOOKING_DATE_TIME" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ADD_ORDERS">
+            <Parameter Name="ORDER_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="CUSTOMER_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ADD_PARENT_EVENT">
+            <Parameter Name="PARENT_EVENT_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="SOCIAL_MEDIA_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="PARENT_EVENT_NAME" Mode="In" Type="String" />
+            <Parameter Name="PARENT_EVENT_DESCRIPTION" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ADD_SOCIAL_MEDIA">
+            <Parameter Name="SOCIAL_MEDIA_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="IMAGE" Mode="In" Type="Binary" />
+            <Parameter Name="IMAGE2" Mode="In" Type="Binary" />
+            <Parameter Name="IMAGE3" Mode="In" Type="Binary" />
+            <Parameter Name="IMAGE4" Mode="In" Type="Binary" />
+            <Parameter Name="IMAGE5" Mode="In" Type="Binary" />
+            <Parameter Name="FACEBOOK" Mode="In" Type="String" />
+            <Parameter Name="TWITTER" Mode="In" Type="String" />
+            <Parameter Name="INSTAGRAM" Mode="In" Type="String" />
+            <Parameter Name="SOUNDCLOUD" Mode="In" Type="String" />
+            <Parameter Name="WEBSITE" Mode="In" Type="String" />
+            <Parameter Name="SPOTIFY" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ADD_TICKET">
+            <Parameter Name="TICKET_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="TICKET_PRICE" Mode="In" Type="Decimal" />
+            <Parameter Name="TICKET_DESCRIPTION" Mode="In" Type="String" />
+            <Parameter Name="TICKET_AMOUNT_REMAINING" Mode="In" Type="Decimal" />
+            <Parameter Name="TICKET_TYPE" Mode="In" Type="String" />
+            <Parameter Name="CHILD_EVENT_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ADD_VENUE">
+            <Parameter Name="VENUE_ID" Mode="InOut" Type="Decimal" />
+            <Parameter Name="SOCIAL_MEDIA_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="VENUE_DESCRIPTION" Mode="In" Type="String" />
+            <Parameter Name="VENUE_CAPACITY_SEATING" Mode="In" Type="Decimal" />
+            <Parameter Name="VENUE_CAPACITY_STANDING" Mode="In" Type="Decimal" />
+            <Parameter Name="VENUE_DISABLED_ACCESS" Mode="In" Type="Decimal" />
+            <Parameter Name="VENUE_FACILITES" Mode="In" Type="String" />
+            <Parameter Name="VENUE_PARKING" Mode="In" Type="Decimal" />
+            <Parameter Name="VENUE_PHONE_NUMBER" Mode="In" Type="String" />
+            <Parameter Name="VENUE_EMAIL" Mode="In" Type="String" />
+            <Parameter Name="VENUE_ADDRESS" Mode="In" Type="String" />
+            <Parameter Name="VENUE_POSTCODE" Mode="In" Type="String" />
+            <Parameter Name="VENUE_NAME" Mode="In" Type="String" />
+            <Parameter Name="VENUE_CITY" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -1143,15 +1288,6 @@
                 <ScalarProperty Name="START_DATE_TIME" ColumnName="START_DATE_TIME" />
                 <ScalarProperty Name="END_DATE_TIME" ColumnName="END_DATE_TIME" />
                 <ScalarProperty Name="CHILD_EVENT_CANCELED" ColumnName="CHILD_EVENT_CANCELED" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CONTRACTS">
-            <EntityTypeMapping TypeName="DBModel.CONTRACT">
-              <MappingFragment StoreEntitySet="CONTRACTS">
-                <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
-                <ScalarProperty Name="CHILD_EVENT_ID" ColumnName="CHILD_EVENT_ID" />
-                <ScalarProperty Name="COLUMN1" ColumnName="COLUMN1" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1257,6 +1393,7 @@
                 <ScalarProperty Name="VENUE_ADDRESS" ColumnName="VENUE_ADDRESS" />
                 <ScalarProperty Name="VENUE_POSTCODE" ColumnName="VENUE_POSTCODE" />
                 <ScalarProperty Name="VENUE_NAME" ColumnName="VENUE_NAME" />
+                <ScalarProperty Name="VENUE_CITY" ColumnName="VENUE_CITY" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1272,7 +1409,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="COMPAREPASSWORDS" FunctionName="DBModel.Store.COMPAREPASSWORDS" />
+          <AssociationSetMapping Name="CONTRACTS" TypeName="DBModel.CONTRACTS" StoreEntitySet="CONTRACTS">
+            <EndProperty Name="ARTIST">
+              <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
+            </EndProperty>
+            <EndProperty Name="CHILD_EVENT">
+              <ScalarProperty Name="CHILD_EVENT_ID" ColumnName="CHILD_EVENT_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="ADD_ADMIN" FunctionName="DBModel.Store.ADD_ADMIN" />
+          <FunctionImportMapping FunctionImportName="ADD_ARTIST" FunctionName="DBModel.Store.ADD_ARTIST" />
+          <FunctionImportMapping FunctionImportName="ADD_BOOKING" FunctionName="DBModel.Store.ADD_BOOKING" />
+          <FunctionImportMapping FunctionImportName="ADD_CHILD_EVENT" FunctionName="DBModel.Store.ADD_CHILD_EVENT" />
+          <FunctionImportMapping FunctionImportName="ADD_CUSTOMER" FunctionName="DBModel.Store.ADD_CUSTOMER" />
+          <FunctionImportMapping FunctionImportName="ADD_GUEST_BOOKING" FunctionName="DBModel.Store.ADD_GUEST_BOOKING" />
+          <FunctionImportMapping FunctionImportName="ADD_ORDERS" FunctionName="DBModel.Store.ADD_ORDERS" />
+          <FunctionImportMapping FunctionImportName="ADD_PARENT_EVENT" FunctionName="DBModel.Store.ADD_PARENT_EVENT" />
+          <FunctionImportMapping FunctionImportName="ADD_SOCIAL_MEDIA" FunctionName="DBModel.Store.ADD_SOCIAL_MEDIA" />
+          <FunctionImportMapping FunctionImportName="ADD_TICKET" FunctionName="DBModel.Store.ADD_TICKET" />
+          <FunctionImportMapping FunctionImportName="ADD_VENUE" FunctionName="DBModel.Store.ADD_VENUE" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

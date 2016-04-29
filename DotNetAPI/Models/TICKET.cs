@@ -29,9 +29,9 @@ namespace DotNetAPI.Models
         public int CHILDEVENT_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public  ICollection<BOOKING> BOOKINGs { get; set; }
-        public  CHILD_EVENT CHILD_EVENT { get; set; }
+        public ICollection<BOOKING> BOOKINGs { get; set; }
+        public CHILD_EVENT CHILD_EVENT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public  ICollection<GUEST_BOOKING> GUEST_BOOKING { get; set; }
+        public ICollection<GUEST_BOOKING> GUEST_BOOKING { get; set; }
     }
 }

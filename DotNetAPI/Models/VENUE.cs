@@ -24,8 +24,8 @@ namespace DotNetAPI.Models
         public int VENUE_ID { get; set; }
         public int SOCIAL_MEDIA_ID { get; set; }
         public string VENUE_DESCRIPTION { get; set; }
-        public short VENUE_CAPACITY_SEATING { get; set; }
-        public short VENUE_CAPACITY_STANDING { get; set; }
+        public int VENUE_CAPACITY_SEATING { get; set; }
+        public int VENUE_CAPACITY_STANDING { get; set; }
         public bool VENUE_DISABLED_ACCESS { get; set; }
         public string VENUE_FACILITES { get; set; }
         public int VENUE_PARKING { get; set; }
@@ -34,11 +34,12 @@ namespace DotNetAPI.Models
         public string VENUE_ADDRESS { get; set; }
         public string VENUE_POSTCODE { get; set; }
         public string VENUE_NAME { get; set; }
+        public string VENUE_CITY { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public  ICollection<CHILD_EVENT> CHILD_EVENT { get; set; }
-        public  SOCIAL_MEDIA SOCIAL_MEDIA { get; set; }
+        public ICollection<CHILD_EVENT> CHILD_EVENT { get; set; }
+        public SOCIAL_MEDIA SOCIAL_MEDIA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public  ICollection<VENUE_REVIEW> VENUE_REVIEW { get; set; }
+        public ICollection<VENUE_REVIEW> VENUE_REVIEW { get; set; }
     }
 }

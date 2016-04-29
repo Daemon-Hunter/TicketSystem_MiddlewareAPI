@@ -266,7 +266,6 @@
     <Compile Include="Controllers\ARTIST_TYPEsController.cs" />
     <Compile Include="Controllers\BOOKINGsController.cs" />
     <Compile Include="Controllers\CHILD_EVENTSController.cs" />
-    <Compile Include="Controllers\CONTRACTsController.cs" />
     <Compile Include="Controllers\CUSTOMERsController.cs" />
     <Compile Include="Controllers\EVENT_REVIEWsController.cs" />
     <Compile Include="Controllers\FunctionsController.cs" />
@@ -300,9 +299,6 @@
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CHILD_EVENT.cs">
-      <DependentUpon>DatabaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CONTRACT.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CUSTOMER.cs">
