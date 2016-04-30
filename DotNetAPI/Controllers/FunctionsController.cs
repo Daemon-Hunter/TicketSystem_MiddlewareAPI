@@ -133,21 +133,21 @@ namespace DotNetAPI.Controllers
         [Route("api/functions/searchParent_Events/{searchString}/{amount}")]
         public List<PARENT_EVENT> searchParentEvents(String searchString, int amount)
         {
-            return db.PARENT_EVENTs.Where(p => p.PARENT_EVENT_NAME.ToLower().Contains(searchString.ToLower())).Take(amount).ToList();
+            return db.PARENT_EVENTs.Where(p => p.PARENT_EVENT_NAME.ToLower().Contains(searchString.ToLower())).OrderByDescending(a => a.PARENT_EVENT_ID).Take(amount).ToList();
         }
 
         [HttpGet]
         [Route("api/functions/searchArtists/{searchString}/{amount}")]
         public List<ARTIST> searchArtists(String searchString, int amount)
         {
-            return db.ARTISTs.Where(a => a.ARTIST_NAME.ToLower().Contains(searchString.ToLower())).Take(amount).ToList();
+            return db.ARTISTs.Where(a => a.ARTIST_NAME.ToLower().Contains(searchString.ToLower())).OrderByDescending(a => a.ARTIST_ID).Take(amount).ToList();
         }
 
         [HttpGet]
         [Route("api/functions/searchVenues/{searchString}/{amount}")]
         public List<VENUE> searchVenues(String searchString, int amount)
         {
-            return db.VENUEs.Where(a => a.VENUE_NAME.ToLower().Contains(searchString.ToLower())).Take(amount).ToList();
+            return db.VENUEs.Where(a => a.VENUE_NAME.ToLower().Contains(searchString.ToLower())).OrderByDescending(a => a.VENUE_ID).Take(amount).ToList();
         }
 
         [HttpGet]
