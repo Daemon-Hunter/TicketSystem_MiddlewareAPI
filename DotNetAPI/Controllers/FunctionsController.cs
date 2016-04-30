@@ -42,84 +42,42 @@ namespace DotNetAPI.Controllers
         [Route("api/functions/getartistsamount/{amount}/{lowestID}")]
         public List<ARTIST> getArtistsAmount(int amount, int lowestID)
         {
-            List<ARTIST> artistList = new List<ARTIST>();
-            ARTIST artist;
-            int count = 0;
-            int lastID = db.ARTISTs.Max(a => a.ARTIST_ID);
-            int diff = 0;
-
-            if (lowestID != 0)
+            if (lowestID.Equals(0))
             {
-                diff = lastID - lowestID + 1;
+                return db.ARTISTs.OrderByDescending(a => a.ARTIST_ID).Take(amount).ToList();
             }
-
-            for (int id = lastID - diff; count != amount && id >= 0; id--)
+            else
             {
-                artist = db.ARTISTs.Find(id);
-                if (artist != null)
-                {
-                    artistList.Add(artist);
-                    count++;
-                }
+                return db.ARTISTs.OrderByDescending(a => a.ARTIST_ID).Where(a => a.ARTIST_ID < lowestID).Take(amount).ToList();
             }
-
-            return artistList;
         }
 
         [HttpGet]
         [Route("api/functions/getvenuesamount/{amount}/{lowestID}")]
         public List<VENUE> getVenuesAmount(int amount, int lowestID)
         {
-            List<VENUE> venueList = new List<VENUE>();
-            VENUE venue;
-            int count = 0;
-            int lastID = db.VENUEs.Max(a => a.VENUE_ID);
-            int diff = 0;
-
-            if (lowestID != 0)
+            if (lowestID.Equals(0))
             {
-                diff = lastID - lowestID + 1;
+                return db.VENUEs.OrderByDescending(a => a.VENUE_ID).Take(amount).ToList();
             }
-
-            for (int id = lastID - diff; count != amount && id >= 0; id--)
+            else
             {
-                venue = db.VENUEs.Find(id);
-                if (venue != null)
-                {
-                    venueList.Add(venue);
-                    count++;
-                }
+                return db.VENUEs.OrderByDescending(a => a.VENUE_ID).Where(a => a.VENUE_ID < lowestID).Take(amount).ToList();
             }
-
-            return venueList;
         }
 
         [HttpGet]
         [Route("api/functions/getparent_eventsamount/{amount}/{lowestID}")]
         public List<PARENT_EVENT> getParentEventsAmount(int amount, int lowestID)
         {
-            List<PARENT_EVENT> parentEventList = new List<PARENT_EVENT>();
-            PARENT_EVENT parentEvent;
-            int count = 0;
-            int lastID = db.PARENT_EVENTs.Max(a => a.PARENT_EVENT_ID);
-            int diff = 0;
-
-            if (lowestID != 0)
+            if (lowestID.Equals(0))
             {
-                diff = lastID - lowestID + 1;
+                return db.PARENT_EVENTs.OrderByDescending(a => a.PARENT_EVENT_ID).Take(amount).ToList();
             }
-
-            for (int id = lastID - diff; count != amount && id >= 0; id--)
+            else
             {
-                parentEvent = db.PARENT_EVENTs.Find(id);
-                if (parentEvent != null)
-                {
-                    parentEventList.Add(parentEvent);
-                    count++;
-                }
+                return db.PARENT_EVENTs.OrderByDescending(a => a.PARENT_EVENT_ID).Where(a => a.PARENT_EVENT_ID < lowestID).Take(amount).ToList();
             }
-
-            return parentEventList;
         }
 
         [HttpGet]
@@ -147,14 +105,14 @@ namespace DotNetAPI.Controllers
         [Route("api/functions/getChild_EventsOfParent_Event/{id}")]
         public List<CHILD_EVENT> getChild_EventsOfParent_Event(int id)
         {
-            return db.CHILD_EVENTs.Where(c => c.PARENT_EVENT_ID == id).ToList();
+            return db.CHILD_EVENTs.Where(c => c.PARENT_EVENT_ID == id).OrderBy(d => d.START_DATE_TIME).ToList();
         }
 
         [HttpGet]
         [Route("api/functions/getChild_EventsOfArtist/{artistID}")]
         public List<CHILD_EVENT> getChild_EventsOfArtist(int artistID)
         {
-            return db.CHILD_EVENTs.Where(a => a.ARTISTs.Select(b => b.ARTIST_ID).Contains(artistID)).ToList();
+            return db.CHILD_EVENTs.Where(a => a.ARTISTs.Select(b => b.ARTIST_ID).Contains(artistID)).OrderBy(d => d.START_DATE_TIME).ToList();
         }
 
         [HttpGet]
@@ -168,28 +126,28 @@ namespace DotNetAPI.Controllers
         [Route("api/functions/getChild_EventsOfVenue/{venueID}")]
         public List<CHILD_EVENT> getChild_EventsOfVenue(int venueID)
         {
-            return db.CHILD_EVENTs.Where(c => c.VENUE_ID == venueID).ToList();
+            return db.CHILD_EVENTs.Where(c => c.VENUE_ID == venueID).OrderBy(d => d.START_DATE_TIME).ToList();
         }
 
         [HttpGet]
-        [Route("api/functions/searchParent_Events/{searchString}")]
-        public List<PARENT_EVENT> searchParentEvents(String searchString)
+        [Route("api/functions/searchParent_Events/{searchString}/{amount}")]
+        public List<PARENT_EVENT> searchParentEvents(String searchString, int amount)
         {
-            return db.PARENT_EVENTs.Where(p => p.PARENT_EVENT_NAME.ToLower().Contains(searchString.ToLower())).ToList();
+            return db.PARENT_EVENTs.Where(p => p.PARENT_EVENT_NAME.ToLower().Contains(searchString.ToLower())).Take(amount).ToList();
         }
 
         [HttpGet]
-        [Route("api/functions/searchArtists/{searchString}")]
-        public List<ARTIST> searchArtists(String searchString)
+        [Route("api/functions/searchArtists/{searchString}/{amount}")]
+        public List<ARTIST> searchArtists(String searchString, int amount)
         {
-            return db.ARTISTs.Where(a => a.ARTIST_NAME.ToLower().Contains(searchString.ToLower())).ToList();
+            return db.ARTISTs.Where(a => a.ARTIST_NAME.ToLower().Contains(searchString.ToLower())).Take(amount).ToList();
         }
 
         [HttpGet]
-        [Route("api/functions/searchVenues/{searchString}")]
-        public List<VENUE> searchVenues(String searchString)
+        [Route("api/functions/searchVenues/{searchString}/{amount}")]
+        public List<VENUE> searchVenues(String searchString, int amount)
         {
-            return db.VENUEs.Where(a => a.VENUE_NAME.ToLower().Contains(searchString.ToLower())).ToList();
+            return db.VENUEs.Where(a => a.VENUE_NAME.ToLower().Contains(searchString.ToLower())).Take(amount).ToList();
         }
 
         [HttpGet]
