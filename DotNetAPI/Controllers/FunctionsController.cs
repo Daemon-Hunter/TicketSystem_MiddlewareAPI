@@ -13,16 +13,29 @@ namespace DotNetAPI.Controllers
         private DBConn db = new DBConn();
 
         [HttpGet]
-        [Route("api/functions/comparepasswords/{email}/{password}")]
-        public CUSTOMER comparePassword(string email, string password)
+        [Route("api/functions/compareCustomerPasswords/{email}/{password}")]
+        public CUSTOMER compareCustomerPassword(string email, string password)
         {
-            CUSTOMER cust = db.CUSTOMERs.Where(c => c.CUSTOMER_EMAIL == email && c.CUSTOMER_PASSWORD == password).FirstOrDefault();
+            CUSTOMER cust = db.CUSTOMERs.Where(c => c.CUSTOMER_EMAIL == email.ToLower() && c.CUSTOMER_PASSWORD == password).FirstOrDefault();
             if (cust == null)
             {
-            cust = new CUSTOMER();
+                cust = new CUSTOMER();
                 cust.CUSTOMER_ID = -1;
             }
             return cust;
+        }
+
+        [HttpGet]
+        [Route("api/functions/compareAdminPasswords/{email}/{password}")]
+        public ADMIN compareAdminPassword(string email, string password)
+        {
+            ADMIN admin = db.ADMINs.Where(c => c.ADMIN_EMAIL == email.ToLower() && c.ADMIN_PASSWORD == password).FirstOrDefault();
+            if (admin == null)
+            {
+                admin = new ADMIN();
+                admin.ADMIN_ID = -1;
+            }
+            return admin;
         }
 
         [HttpGet]
