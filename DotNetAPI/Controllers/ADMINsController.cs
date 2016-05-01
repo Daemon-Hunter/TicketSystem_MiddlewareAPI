@@ -57,6 +57,11 @@ namespace DotNetAPI.Controllers
                 return BadRequest();
             }
 
+            if(aDMIN.ADMIN_PASSWORD == "" || aDMIN.ADMIN_PASSWORD == null)
+            {
+                aDMIN.ADMIN_PASSWORD = db.ADMINs.Find(aDMIN.ADMIN_ID).ADMIN_PASSWORD;
+            }
+
             db.Entry(aDMIN).State = EntityState.Modified;
 
             try
