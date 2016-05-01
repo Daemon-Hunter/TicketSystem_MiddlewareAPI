@@ -213,7 +213,13 @@ namespace DotNetAPI.Controllers
             return db.TICKETs.Where(t => t.CHILDEVENT_ID == childEventID).ToList();
         }
 
-        //Get Customer orders
-        //Search to have max return value
+        [HttpPost]
+        [Route("api/functions/createContract/{artistID}/{childEventID}")]
+        public IHttpActionResult createContract(int artistID, int childEventID)
+        {
+            string sql = "INSERT INTO CONTRACTS (artist_id, child_event_id) VALUES (" + artistID.ToString() + ", " + childEventID.ToString() + ")";
+            var result = db.Database.ExecuteSqlCommand(sql);
+            return Ok();
+        }
     }
 }
