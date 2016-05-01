@@ -81,6 +81,48 @@ namespace DotNetAPI.Controllers
         }
 
         [HttpGet]
+        [Route("api/functions/getadminsamount/{amount}/{lowestID}")]
+        public List<ADMIN> getAdminsAmount(int amount, int lowestID)
+        {
+            if (lowestID.Equals(0))
+            {
+                return db.ADMINs.OrderByDescending(a => a.ADMIN_PASSWORD).Take(amount).ToList();
+            }
+            else
+            {
+                return db.ADMINs.Where(a => a.ADMIN_ID < lowestID).OrderByDescending(a => a.ADMIN_ID).Take(amount).Distinct().ToList();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/functions/getcustomersamount/{amount}/{lowestID}")]
+        public List<CUSTOMER> getCustomersAmount(int amount, int lowestID)
+        {
+            if (lowestID.Equals(0))
+            {
+                return db.CUSTOMERs.OrderByDescending(a => a.CUSTOMER_ID).Take(amount).ToList();
+            }
+            else
+            {
+                return db.CUSTOMERs.Where(a => a.CUSTOMER_ID < lowestID).OrderByDescending(a => a.CUSTOMER_ID).Take(amount).Distinct().ToList();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/functions/getguestsamount/{amount}/{lowestID}")]
+        public List<GUEST_BOOKING> getGuestsAmount(int amount, int lowestID)
+        {
+            if (lowestID.Equals(0))
+            {
+                return db.GUEST_BOOKINGs.OrderByDescending(a => a.GUEST_BOOKING_ID).Take(amount).ToList();
+            }
+            else
+            {
+                return db.GUEST_BOOKINGs.Where(a => a.GUEST_BOOKING_ID < lowestID).OrderByDescending(a => a.GUEST_BOOKING_ID).Take(amount).Distinct().ToList();
+            }
+        }
+
+        [HttpGet]
         [Route("api/functions/getReviewsOfArtist/{id}")]
         public List<ARTIST_REVIEW> getReviewsOfArtist(int id)
         {
