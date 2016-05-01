@@ -48,7 +48,7 @@ namespace DotNetAPI.Controllers
             }
             else
             {
-                return db.ARTISTs.OrderByDescending(a => a.ARTIST_ID).Where(a => a.ARTIST_ID < lowestID).Take(amount).ToList();
+                return db.ARTISTs.Where(a => a.ARTIST_ID < lowestID).OrderByDescending(a => a.ARTIST_ID).Take(amount).ToList();
             }
         }
 
@@ -62,7 +62,7 @@ namespace DotNetAPI.Controllers
             }
             else
             {
-                return db.VENUEs.OrderByDescending(a => a.VENUE_ID).Where(a => a.VENUE_ID < lowestID).Take(amount).ToList();
+                return db.VENUEs.Where(a => a.VENUE_ID < lowestID).OrderByDescending(a => a.VENUE_ID).Take(amount).Distinct().ToList();
             }
         }
 
@@ -76,7 +76,7 @@ namespace DotNetAPI.Controllers
             }
             else
             {
-                return db.PARENT_EVENTs.OrderByDescending(a => a.PARENT_EVENT_ID).Where(a => a.PARENT_EVENT_ID < lowestID).Take(amount).ToList();
+                return db.PARENT_EVENTs.Where(a => a.PARENT_EVENT_ID < lowestID).OrderByDescending(a => a.PARENT_EVENT_ID).Take(amount).ToList();
             }
         }
 
@@ -105,14 +105,14 @@ namespace DotNetAPI.Controllers
         [Route("api/functions/getChild_EventsOfParent_Event/{id}")]
         public List<CHILD_EVENT> getChild_EventsOfParent_Event(int id)
         {
-            return db.CHILD_EVENTs.Where(c => c.PARENT_EVENT_ID == id).OrderBy(d => d.START_DATE_TIME).ToList();
+            return db.CHILD_EVENTs.Where(c => c.PARENT_EVENT_ID == id).OrderByDescending(d => d.START_DATE_TIME).ToList();
         }
 
         [HttpGet]
         [Route("api/functions/getChild_EventsOfArtist/{artistID}")]
         public List<CHILD_EVENT> getChild_EventsOfArtist(int artistID)
         {
-            return db.CHILD_EVENTs.Where(a => a.ARTISTs.Select(b => b.ARTIST_ID).Contains(artistID)).OrderBy(d => d.START_DATE_TIME).ToList();
+            return db.CHILD_EVENTs.Where(a => a.ARTISTs.Select(b => b.ARTIST_ID).Contains(artistID)).OrderByDescending(d => d.START_DATE_TIME).ToList();
         }
 
         [HttpGet]
@@ -126,7 +126,7 @@ namespace DotNetAPI.Controllers
         [Route("api/functions/getChild_EventsOfVenue/{venueID}")]
         public List<CHILD_EVENT> getChild_EventsOfVenue(int venueID)
         {
-            return db.CHILD_EVENTs.Where(c => c.VENUE_ID == venueID).OrderBy(d => d.START_DATE_TIME).ToList();
+            return db.CHILD_EVENTs.Where(c => c.VENUE_ID == venueID).OrderByDescending(d => d.START_DATE_TIME).ToList();
         }
 
         [HttpGet]
