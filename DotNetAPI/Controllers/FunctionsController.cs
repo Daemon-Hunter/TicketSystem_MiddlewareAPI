@@ -215,11 +215,21 @@ namespace DotNetAPI.Controllers
 
         [HttpPost]
         [Route("api/functions/createContract/{artistID}/{childEventID}")]
-        public IHttpActionResult createContract(int artistID, int childEventID)
+        public Boolean createContract(int artistID, int childEventID)
         {
             string sql = "INSERT INTO CONTRACTS (artist_id, child_event_id) VALUES (" + artistID.ToString() + ", " + childEventID.ToString() + ")";
-            var result = db.Database.ExecuteSqlCommand(sql);
-            return Ok();
+            string containsSql = "SELECT COUNT(*) FROM CONTRACTS WHERE ARTIST_ID = " + artistID.ToString() + " AND CHILD_EVENT_ID =" + childEventID.ToString();
+            
+            if (db.Database.SqlQuery<int>(containsSql).First() == 0)
+            {
+                var result = db.Database.ExecuteSqlCommand(sql);
+            }
+            else
+                return false;
+
+            if (Convert.ToInt32(db.Database.SqlQuery<int>(containsSql).First()) != 0)
+                return true;
+            return false;
         }
     }
 }
