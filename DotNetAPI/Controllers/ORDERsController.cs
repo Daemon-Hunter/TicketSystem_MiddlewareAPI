@@ -67,7 +67,7 @@ namespace DotNetAPI.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return CreatedAtRoute("DefaultApi", new { id = oRDER.ORDER_ID }, db.ORDERS.Find(oRDER.ORDER_ID)); ;
         }
 
         // POST: api/ORDERs

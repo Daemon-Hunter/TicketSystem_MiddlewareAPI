@@ -36,7 +36,7 @@ namespace DotNetAPI.Controllers
         }
 
         // PUT: api/ARTISTs/5
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(ARTIST))]
         public IHttpActionResult PutARTIST(int id, ARTIST aRTIST)
         {
             if (!ModelState.IsValid)
@@ -67,7 +67,7 @@ namespace DotNetAPI.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return CreatedAtRoute("DefaultApi", new {id = aRTIST.ARTIST_ID}, db.ARTISTs.Find(aRTIST.ARTIST_ID));
         }
 
         // POST: api/ARTISTs

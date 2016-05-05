@@ -78,7 +78,7 @@ namespace DotNetAPI.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return CreatedAtRoute("DefaultApi", new { id = cUSTOMER.CUSTOMER_ID }, db.CUSTOMERs.Find(cUSTOMER.CUSTOMER_ID)); ;
         }
 
         // POST: api/CUSTOMERs

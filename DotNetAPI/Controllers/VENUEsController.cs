@@ -67,7 +67,7 @@ namespace DotNetAPI.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return CreatedAtRoute("DefaultApi", new { id = vENUE.VENUE_ID }, db.VENUEs.Find(vENUE.VENUE_ID));
         }
 
         // POST: api/VENUEs
@@ -79,7 +79,7 @@ namespace DotNetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (VENUEExists(vENUE.SOCIAL_MEDIA_ID, vENUE.VENUE_NAME))
+            if (!VENUEExists(vENUE.SOCIAL_MEDIA_ID, vENUE.VENUE_NAME))
             {
 
                 vENUE.VENUE_ID = db.ADD_VENUE(vENUE.VENUE_ID, vENUE.SOCIAL_MEDIA_ID, vENUE.VENUE_DESCRIPTION,

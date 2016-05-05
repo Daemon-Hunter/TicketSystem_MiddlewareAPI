@@ -67,7 +67,7 @@ namespace DotNetAPI.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return CreatedAtRoute("DefaultApi", new { id = sOCIAL_MEDIA.SOCIAL_MEDIA_ID }, db.SOCIAL_MEDIAs.Find(sOCIAL_MEDIA.SOCIAL_MEDIA_ID));
         }
 
         // POST: api/SOCIAL_MEDIAs

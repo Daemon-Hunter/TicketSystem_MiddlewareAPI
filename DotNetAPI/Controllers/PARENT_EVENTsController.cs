@@ -67,7 +67,7 @@ namespace DotNetAPI.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return CreatedAtRoute("DefaultApi", new { id = pARENT_EVENT.PARENT_EVENT_ID }, db.PARENT_EVENTs.Find(pARENT_EVENT.PARENT_EVENT_ID));
         }
 
         // POST: api/PARENT_EVENTs

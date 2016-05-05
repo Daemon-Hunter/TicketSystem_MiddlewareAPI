@@ -67,7 +67,7 @@ namespace DotNetAPI.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return CreatedAtRoute("DefaultApi", new { id = gUEST_BOOKING.GUEST_BOOKING_ID }, db.GUEST_BOOKINGs.Find(gUEST_BOOKING.GUEST_BOOKING_ID)); ;
         }
 
         // POST: api/GUEST_BOOKINGs

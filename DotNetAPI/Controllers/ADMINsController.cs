@@ -80,7 +80,7 @@ namespace DotNetAPI.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return CreatedAtRoute("DefaultApi", new { id = aDMIN.ADMIN_ID }, db.ARTISTs.Find(aDMIN.ADMIN_ID));
         }
 
         // POST: api/ADMINs

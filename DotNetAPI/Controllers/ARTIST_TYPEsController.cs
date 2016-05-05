@@ -67,7 +67,7 @@ namespace DotNetAPI.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return CreatedAtRoute("DefaultApi", new { id = aRTIST_TYPE.ARTIST_TYPE_ID }, db.ARTIST_TYPEs.Find(aRTIST_TYPE.ARTIST_TYPE_ID));
         }
 
         // POST: api/ARTIST_TYPEs

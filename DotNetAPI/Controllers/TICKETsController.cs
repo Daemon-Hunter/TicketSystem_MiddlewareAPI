@@ -67,7 +67,7 @@ namespace DotNetAPI.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return CreatedAtRoute("DefaultApi", new { id = tICKET.TICKET_ID }, db.TICKETs.Find(tICKET.TICKET_ID));
         }
 
         // POST: api/TICKETs

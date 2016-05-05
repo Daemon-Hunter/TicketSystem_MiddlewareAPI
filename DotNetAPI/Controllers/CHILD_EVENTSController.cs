@@ -67,7 +67,7 @@ namespace DotNetAPI.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return CreatedAtRoute("DefaultApi", new { id = cHILD_EVENT.CHILD_EVENT_ID }, db.CHILD_EVENTs.Find(cHILD_EVENT.CHILD_EVENT_ID)); ;
         }
 
         // POST: api/CHILD_EVENTS
