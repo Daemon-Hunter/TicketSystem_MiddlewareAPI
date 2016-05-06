@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using DotNetAPI.Models;
+using System.Net.Mail;
+using System.Net.Mime;
 
 namespace DotNetAPI.Controllers
 {
@@ -230,6 +232,27 @@ namespace DotNetAPI.Controllers
             if (Convert.ToInt32(db.Database.SqlQuery<int>(containsSql).First()) != 0)
                 return true;
             return false;
+        }
+
+        [HttpGet]
+        [Route("api/functions/getSoldOutEvents")]
+        public List<CHILD_EVENT> getSoldOutEvents()
+        {
+            return db.CHILD_EVENTs.Where(c => !db.TICKETs.Where(t => t.TICKET_AMOUNT_REMAINING >= 0).Intersect(c.TICKETs).Any() && c.START_DATE_TIME > DateTime.Now ).ToList();
+        }
+
+        [HttpGet]
+        [Route("api/functions/getThisMonthsCustomerSales")]
+        public List<BOOKING> getThisMonthsCustomerSales()
+        {
+            return db.BOOKINGs.Where(b => b.BOOKING_DATE_TIME.Month == DateTime.Now.Month).ToList();
+        }
+
+        [HttpGet]
+        [Route("api/functions/getThisMonthsGuestSales")]
+        public List<GUEST_BOOKING> getThisMonthsGuestSales()
+        {
+            return db.GUEST_BOOKINGs.Where(b => b.GUEST_BOOKING_DATE_TIME.Month == DateTime.Now.Month).ToList();
         }
     }
 }
