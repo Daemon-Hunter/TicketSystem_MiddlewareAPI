@@ -64,7 +64,7 @@ namespace DotNetAPI.Controllers
             }
             else
             {
-                return db.VENUEs.Where(a => a.VENUE_ID < lowestID).OrderByDescending(a => a.VENUE_ID).Take(amount).Distinct().ToList();
+                return db.VENUEs.Where(a => a.VENUE_ID < lowestID).OrderByDescending(a => a.VENUE_ID).Take(amount).ToList();
             }
         }
 
@@ -92,7 +92,7 @@ namespace DotNetAPI.Controllers
             }
             else
             {
-                return db.ADMINs.Where(a => a.ADMIN_ID < lowestID).OrderByDescending(a => a.ADMIN_ID).Take(amount).Distinct().ToList();
+                return db.ADMINs.Where(a => a.ADMIN_ID < lowestID).OrderByDescending(a => a.ADMIN_ID).Take(amount).ToList();
             }
         }
 
@@ -106,7 +106,7 @@ namespace DotNetAPI.Controllers
             }
             else
             {
-                return db.CUSTOMERs.Where(a => a.CUSTOMER_ID < lowestID).OrderByDescending(a => a.CUSTOMER_ID).Take(amount).Distinct().ToList();
+                return db.CUSTOMERs.Where(a => a.CUSTOMER_ID < lowestID).OrderByDescending(a => a.CUSTOMER_ID).Take(amount).ToList();
             }
         }
 
@@ -120,7 +120,21 @@ namespace DotNetAPI.Controllers
             }
             else
             {
-                return db.GUEST_BOOKINGs.Where(a => a.GUEST_BOOKING_ID < lowestID).OrderByDescending(a => a.GUEST_BOOKING_ID).Take(amount).Distinct().ToList();
+                return db.GUEST_BOOKINGs.Where(a => a.GUEST_BOOKING_ID < lowestID).OrderByDescending(a => a.GUEST_BOOKING_ID).Take(amount).ToList();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/functions/getBookingsOfOrderAmount/{orderID}/{amount}/{lowestID}")]
+        public List<BOOKING> getBookingsOfOrderIDAmount(int orderID, int amount, int lowestID)
+        {
+            if (lowestID.Equals(0))
+            {
+                return db.BOOKINGs.Where(b => b.ORDER_ID == orderID).OrderByDescending(a => a.BOOKING_ID).Take(amount).ToList();
+            }
+            else
+            {
+                return db.BOOKINGs.Where(b => b.BOOKING_ID < lowestID && b.ORDER_ID == orderID).OrderByDescending(a => a.BOOKING_ID).Take(amount).ToList();
             }
         }
 

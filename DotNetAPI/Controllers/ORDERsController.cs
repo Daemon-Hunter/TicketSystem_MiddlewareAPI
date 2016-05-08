@@ -78,8 +78,13 @@ namespace DotNetAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            oRDER.ORDER_ID = db.ADD_ORDERS(oRDER.ORDER_ID, oRDER.CUSTOMER_ID);
+            try {
+                oRDER.ORDER_ID = db.ADD_ORDERS(oRDER.ORDER_ID, oRDER.CUSTOMER_ID);
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                return BadRequest();
+            }
 
             return CreatedAtRoute("DefaultApi", new { id = oRDER.ORDER_ID }, oRDER);
         }

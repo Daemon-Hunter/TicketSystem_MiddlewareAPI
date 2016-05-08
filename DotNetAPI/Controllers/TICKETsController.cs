@@ -79,10 +79,17 @@ namespace DotNetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (!TICKETExists(tICKET.CHILDEVENT_ID, tICKET.TICKET_TYPE)) {
-
-                tICKET.TICKET_ID = db.ADD_TICKET(tICKET.TICKET_ID, tICKET.TICKET_PRICE, tICKET.TICKET_DESCRIPTION,
-                    tICKET.TICKET_AMOUNT_REMAINING, tICKET.TICKET_TYPE, tICKET.CHILDEVENT_ID);
+            if (!TICKETExists(tICKET.CHILDEVENT_ID, tICKET.TICKET_TYPE))
+            {
+                try
+                {
+                    tICKET.TICKET_ID = db.ADD_TICKET(tICKET.TICKET_ID, tICKET.TICKET_PRICE, tICKET.TICKET_DESCRIPTION,
+                        tICKET.TICKET_AMOUNT_REMAINING, tICKET.TICKET_TYPE, tICKET.CHILDEVENT_ID);
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    return BadRequest();
+                }
 
                 return CreatedAtRoute("DefaultApi", new { id = tICKET.TICKET_ID }, tICKET);
             }

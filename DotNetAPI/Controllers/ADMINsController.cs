@@ -94,9 +94,14 @@ namespace DotNetAPI.Controllers
 
             if (!ADMINExists(aDMIN.ADMIN_EMAIL))
             {
-
-                aDMIN.ADMIN_ID = db.ADD_ADMIN(aDMIN.ADMIN_ID, aDMIN.ADMIN_EMAIL, aDMIN.ADMIN_PASSWORD);
-
+                try
+                {
+                    aDMIN.ADMIN_ID = db.ADD_ADMIN(aDMIN.ADMIN_ID, aDMIN.ADMIN_EMAIL, aDMIN.ADMIN_PASSWORD);
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    return BadRequest();
+                }
                 return CreatedAtRoute("DefaultApi", new { id = aDMIN.ADMIN_ID }, aDMIN);
             }
             return Conflict();

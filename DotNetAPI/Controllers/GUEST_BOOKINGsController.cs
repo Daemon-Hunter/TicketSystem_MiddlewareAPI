@@ -81,9 +81,14 @@ namespace DotNetAPI.Controllers
 
             if (!GUEST_BOOKINGExists(gUEST_BOOKING.TICKET_ID, gUEST_BOOKING.GUEST_EMAIL, gUEST_BOOKING.GUEST_ADDRESS, gUEST_BOOKING.GUEST_POSTCODE, gUEST_BOOKING.GUEST_BOOKING_QUANTITY, gUEST_BOOKING.GUEST_BOOKING_DATE_TIME))
             {
-
+                try {
                 gUEST_BOOKING.GUEST_BOOKING_ID = db.ADD_GUEST_BOOKING(gUEST_BOOKING.GUEST_BOOKING_ID, gUEST_BOOKING.TICKET_ID, gUEST_BOOKING.GUEST_EMAIL,
                     gUEST_BOOKING.GUEST_ADDRESS, gUEST_BOOKING.GUEST_POSTCODE, gUEST_BOOKING.GUEST_BOOKING_QUANTITY, gUEST_BOOKING.GUEST_BOOKING_DATE_TIME);
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    return BadRequest();
+                }
 
                 return CreatedAtRoute("DefaultApi", new { id = gUEST_BOOKING.GUEST_BOOKING_ID }, gUEST_BOOKING);
             }

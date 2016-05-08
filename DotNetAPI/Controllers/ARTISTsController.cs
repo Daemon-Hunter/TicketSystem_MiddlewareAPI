@@ -81,8 +81,15 @@ namespace DotNetAPI.Controllers
 
             if (!ARTISTExists(aRTIST.ARTIST_NAME, aRTIST.SOCIAL_MEDIA_ID, aRTIST.ARTIST_TYPE_ID)) {
 
-                db.ADD_ARTIST(aRTIST.ARTIST_ID, aRTIST.ARTIST_NAME, aRTIST.ARTIST_TAGS, aRTIST.SOCIAL_MEDIA_ID,
-                    aRTIST.ARTIST_DESCRIPTION, aRTIST.ARTIST_TYPE_ID);
+                try
+                {
+                    db.ADD_ARTIST(aRTIST.ARTIST_ID, aRTIST.ARTIST_NAME, aRTIST.ARTIST_TAGS, aRTIST.SOCIAL_MEDIA_ID,
+                        aRTIST.ARTIST_DESCRIPTION, aRTIST.ARTIST_TYPE_ID);
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    return BadRequest();
+                }
 
                 return CreatedAtRoute("DefaultApi", new { id = aRTIST.ARTIST_ID }, aRTIST);
             }

@@ -81,11 +81,17 @@ namespace DotNetAPI.Controllers
 
             if (!VENUEExists(vENUE.SOCIAL_MEDIA_ID, vENUE.VENUE_NAME))
             {
-
-                vENUE.VENUE_ID = db.ADD_VENUE(vENUE.VENUE_ID, vENUE.SOCIAL_MEDIA_ID, vENUE.VENUE_DESCRIPTION,
-                    vENUE.VENUE_CAPACITY_SEATING, vENUE.VENUE_CAPACITY_STANDING, vENUE.VENUE_DISABLED_ACCESS,
-                    vENUE.VENUE_FACILITES, vENUE.VENUE_PARKING, vENUE.VENUE_PHONE_NUMBER, vENUE.VENUE_EMAIL,
-                    vENUE.VENUE_ADDRESS, vENUE.VENUE_POSTCODE, vENUE.VENUE_NAME, vENUE.VENUE_CITY);
+                try
+                {
+                    vENUE.VENUE_ID = db.ADD_VENUE(vENUE.VENUE_ID, vENUE.SOCIAL_MEDIA_ID, vENUE.VENUE_DESCRIPTION,
+                        vENUE.VENUE_CAPACITY_SEATING, vENUE.VENUE_CAPACITY_STANDING, vENUE.VENUE_DISABLED_ACCESS,
+                        vENUE.VENUE_FACILITES, vENUE.VENUE_PARKING, vENUE.VENUE_PHONE_NUMBER, vENUE.VENUE_EMAIL,
+                        vENUE.VENUE_ADDRESS, vENUE.VENUE_POSTCODE, vENUE.VENUE_NAME, vENUE.VENUE_CITY);
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    return BadRequest();
+                }
 
                 return CreatedAtRoute("DefaultApi", new { id = vENUE.VENUE_ID }, vENUE);
             }

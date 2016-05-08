@@ -92,9 +92,14 @@ namespace DotNetAPI.Controllers
 
             if (!CUSTOMERExists(cUSTOMER.CUSTOMER_EMAIL))
             {
-
+                try {
                 db.ADD_CUSTOMER(cUSTOMER.CUSTOMER_ID, cUSTOMER.CUSTOMER_FIRST_NAME, cUSTOMER.CUSTOMER_LAST_NAME,
                     cUSTOMER.CUSTOMER_EMAIL, cUSTOMER.CUSTOMER_ADDRESS, cUSTOMER.CUSTOMER_POSTCODE, cUSTOMER.CUSTOMER_PASSWORD);
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    return BadRequest();
+                }
 
                 return CreatedAtRoute("DefaultApi", new { id = cUSTOMER.CUSTOMER_ID }, cUSTOMER);
             }

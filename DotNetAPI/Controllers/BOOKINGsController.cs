@@ -86,9 +86,9 @@ namespace DotNetAPI.Controllers
             {
                 bOOKING.BOOKING_ID = db.ADD_BOOKING(bOOKING.BOOKING_ID, bOOKING.TICKET_ID, bOOKING.ORDER_ID, bOOKING.BOOKING_QUANTITY, bOOKING.BOOKING_DATE_TIME);
             }
-            catch (ConstraintException e)
+            catch (DbUpdateConcurrencyException e)
             {
-
+                return BadRequest();
             }
 
             ORDER order = db.ORDERS.Where(o => o.ORDER_ID == bOOKING.ORDER_ID).FirstOrDefault();

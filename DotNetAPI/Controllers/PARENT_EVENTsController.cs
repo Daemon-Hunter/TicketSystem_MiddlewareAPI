@@ -79,10 +79,17 @@ namespace DotNetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (!PARENT_EVENTExists(pARENT_EVENT.SOCIAL_MEDIA_ID, pARENT_EVENT.PARENT_EVENT_NAME)) {
-
-                pARENT_EVENT.PARENT_EVENT_ID = db.ADD_PARENT_EVENT(pARENT_EVENT.PARENT_EVENT_ID, pARENT_EVENT.SOCIAL_MEDIA_ID,
-                    pARENT_EVENT.PARENT_EVENT_NAME, pARENT_EVENT.PARENT_EVENT_DESCRIPTION);
+            if (!PARENT_EVENTExists(pARENT_EVENT.SOCIAL_MEDIA_ID, pARENT_EVENT.PARENT_EVENT_NAME))
+            {
+                try
+                {
+                    pARENT_EVENT.PARENT_EVENT_ID = db.ADD_PARENT_EVENT(pARENT_EVENT.PARENT_EVENT_ID, pARENT_EVENT.SOCIAL_MEDIA_ID,
+                        pARENT_EVENT.PARENT_EVENT_NAME, pARENT_EVENT.PARENT_EVENT_DESCRIPTION);
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    return BadRequest();
+                }
 
                 return CreatedAtRoute("DefaultApi", new { id = pARENT_EVENT.PARENT_EVENT_ID }, pARENT_EVENT);
             }

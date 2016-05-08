@@ -78,11 +78,17 @@ namespace DotNetAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            sOCIAL_MEDIA.SOCIAL_MEDIA_ID = db.ADD_SOCIAL_MEDIA(sOCIAL_MEDIA.SOCIAL_MEDIA_ID, sOCIAL_MEDIA.IMAGE,
-                sOCIAL_MEDIA.IMAGE2, sOCIAL_MEDIA.IMAGE3, sOCIAL_MEDIA.IMAGE4, sOCIAL_MEDIA.IMAGE5,
-                sOCIAL_MEDIA.FACEBOOK, sOCIAL_MEDIA.TWITTER, sOCIAL_MEDIA.INSTAGRAM, sOCIAL_MEDIA.SOUNDCLOUD,
-                sOCIAL_MEDIA.WEBSITE, sOCIAL_MEDIA.SPOTIFY);
+            try
+            {
+                sOCIAL_MEDIA.SOCIAL_MEDIA_ID = db.ADD_SOCIAL_MEDIA(sOCIAL_MEDIA.SOCIAL_MEDIA_ID, sOCIAL_MEDIA.IMAGE,
+                    sOCIAL_MEDIA.IMAGE2, sOCIAL_MEDIA.IMAGE3, sOCIAL_MEDIA.IMAGE4, sOCIAL_MEDIA.IMAGE5,
+                    sOCIAL_MEDIA.FACEBOOK, sOCIAL_MEDIA.TWITTER, sOCIAL_MEDIA.INSTAGRAM, sOCIAL_MEDIA.SOUNDCLOUD,
+                    sOCIAL_MEDIA.WEBSITE, sOCIAL_MEDIA.SPOTIFY);
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                return BadRequest();
+            }
 
             return CreatedAtRoute("DefaultApi", new { id = sOCIAL_MEDIA.SOCIAL_MEDIA_ID }, sOCIAL_MEDIA);
         }

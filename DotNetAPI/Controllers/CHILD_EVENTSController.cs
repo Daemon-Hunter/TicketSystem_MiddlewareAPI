@@ -81,10 +81,15 @@ namespace DotNetAPI.Controllers
 
             if (!CHILD_EVENTExists(cHILD_EVENT.PARENT_EVENT_ID, cHILD_EVENT.VENUE_ID, cHILD_EVENT.CHILD_EVENT_NAME))
             {
-
+                try {
                 cHILD_EVENT.CHILD_EVENT_ID = db.ADD_CHILD_EVENT(cHILD_EVENT.CHILD_EVENT_ID, cHILD_EVENT.VENUE_ID, cHILD_EVENT.PARENT_EVENT_ID,
                     cHILD_EVENT.CHILD_EVENT_NAME, cHILD_EVENT.CHILD_EVENT_DESCRIPTION, cHILD_EVENT.START_DATE_TIME,
                     cHILD_EVENT.END_DATE_TIME, cHILD_EVENT.CHILD_EVENT_CANCELED);
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    return BadRequest();
+                }
 
                 return CreatedAtRoute("DefaultApi", new { id = cHILD_EVENT.CHILD_EVENT_ID }, cHILD_EVENT);
             }
