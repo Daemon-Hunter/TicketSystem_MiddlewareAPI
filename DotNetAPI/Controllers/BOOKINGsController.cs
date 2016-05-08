@@ -82,7 +82,14 @@ namespace DotNetAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            bOOKING.BOOKING_ID = db.ADD_BOOKING(bOOKING.BOOKING_ID, bOOKING.TICKET_ID, bOOKING.ORDER_ID, bOOKING.BOOKING_QUANTITY, bOOKING.BOOKING_DATE_TIME);
+            try
+            {
+                bOOKING.BOOKING_ID = db.ADD_BOOKING(bOOKING.BOOKING_ID, bOOKING.TICKET_ID, bOOKING.ORDER_ID, bOOKING.BOOKING_QUANTITY, bOOKING.BOOKING_DATE_TIME);
+            }
+            catch (ConstraintException e)
+            {
+
+            }
 
             ORDER order = db.ORDERS.Where(o => o.ORDER_ID == bOOKING.ORDER_ID).FirstOrDefault();
             CUSTOMER customer = db.ORDERS.Where(o => o.ORDER_ID == bOOKING.ORDER_ID).Select(o => o.CUSTOMER).FirstOrDefault();
@@ -108,10 +115,10 @@ namespace DotNetAPI.Controllers
                 body += "Thanks for booking tickets with the Function Junction. Please find your booking summary below.\n";
                 body += "Booking Summary - " + booking.BOOKING_DATE_TIME + "\n";
                 body += "\n";
-                body += "Order ID:     " + order.ORDER_ID + "\n";
-                body += "Booking ID:   " + booking.BOOKING_ID + "\n";
-                body += "Ticket:       " + ticket.TICKET_TYPE + "\n";
-                body += "Quantity:     " + booking.BOOKING_QUANTITY + "\n";
+                body += "Order ID: " + order.ORDER_ID + "\n";
+                body += "Booking ID: " + booking.BOOKING_ID + "\n";
+                body += "Ticket: " + ticket.TICKET_TYPE + "\n";
+                body += "Quantity: " + booking.BOOKING_QUANTITY + "\n";
                 body += "\n";
                 body += "We hope you enjoy the event. If you have any questions, don’t hesitate to contact us at info.functionjunction@gmail.com\n";
                 body += "\n";
@@ -119,7 +126,7 @@ namespace DotNetAPI.Controllers
                 body += "The Function Junction.\n";
                 body += "\n";
                 body += "\n";
-                body += "This email was intended for " + customer.CUSTOMER_ADDRESS + ". If this is not you, please contact us immediately at info.functionjunction@gmail.com";
+                body += "This email was intended for " + customer.CUSTOMER_EMAIL + ". If this is not you, please contact us immediately at info.functionjunction@gmail.com";
 
 
 

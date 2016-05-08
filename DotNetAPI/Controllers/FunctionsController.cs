@@ -195,6 +195,14 @@ namespace DotNetAPI.Controllers
         }
 
         [HttpGet]
+        [Route("api/functions/searchCustomers/{searchString}/{amount}")]
+        public List<CUSTOMER> searchCustomers(String searchString, int amount)
+        {
+            return db.CUSTOMERs.Where(a => a.CUSTOMER_FIRST_NAME.ToLower().Contains(searchString.ToLower()) || a.CUSTOMER_LAST_NAME.ToLower().Contains(searchString.ToLower())
+            || (a.CUSTOMER_FIRST_NAME + " " + a.CUSTOMER_LAST_NAME).ToLower().Contains(searchString.ToLower())).OrderByDescending(c => c.CUSTOMER_ID).Take(amount).ToList();
+        }
+
+        [HttpGet]
         [Route("api/functions/getBookingsOfOrder/{orderID}")]
         public List<BOOKING> getBookingsOfOrder(int orderID)
         {
