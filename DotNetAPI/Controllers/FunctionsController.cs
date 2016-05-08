@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using DotNetAPI.Models;
-using System.Net.Mail;
-using System.Net.Mime;
 
 namespace DotNetAPI.Controllers
 {
@@ -125,16 +121,16 @@ namespace DotNetAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/functions/getBookingsOfOrderAmount/{orderID}/{amount}/{lowestID}")]
-        public List<BOOKING> getBookingsOfOrderIDAmount(int orderID, int amount, int lowestID)
+        [Route("api/functions/getBookingsOfCustomerAmount/{customerID}/{amount}/{lowestID}")]
+        public List<BOOKING> getBookingsOfOrderIDAmount(int customerID, int amount, int lowestID)
         {
             if (lowestID.Equals(0))
             {
-                return db.BOOKINGs.Where(b => b.ORDER_ID == orderID).OrderByDescending(a => a.BOOKING_ID).Take(amount).ToList();
+                return db.BOOKINGs.Where(b => b.ORDER.CUSTOMER_ID == customerID).OrderByDescending(a => a.BOOKING_ID).Take(amount).ToList();
             }
             else
             {
-                return db.BOOKINGs.Where(b => b.BOOKING_ID < lowestID && b.ORDER_ID == orderID).OrderByDescending(a => a.BOOKING_ID).Take(amount).ToList();
+                return db.BOOKINGs.Where(b => b.BOOKING_ID < lowestID && b.ORDER.CUSTOMER_ID == customerID).OrderByDescending(a => a.BOOKING_ID).Take(amount).ToList();
             }
         }
 
@@ -242,7 +238,7 @@ namespace DotNetAPI.Controllers
         public Boolean createContract(int artistID, int childEventID)
         {
             string sql = "INSERT INTO CONTRACTS (artist_id, child_event_id) VALUES (" + artistID.ToString() + ", " + childEventID.ToString() + ")";
-            string containsSql = "SELECT COUNT(*) FROM CONTRACTS WHERE ARTIST_ID = " + artistID.ToString() + " AND CHILD_EVENT_ID =" + childEventID.ToString();
+            string containsSql = "SELECT COUNT(*) FROM CONTRACTS WHERE ARTIST_ID = " + artistID.ToString() + "AND CHILD_EVENT_ID =" + childEventID.ToString();
             
             if (db.Database.SqlQuery<int>(containsSql).First() == 0)
             {
