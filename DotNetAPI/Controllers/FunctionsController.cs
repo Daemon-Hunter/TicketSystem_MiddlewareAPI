@@ -107,8 +107,8 @@ namespace DotNetAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/functions/getguestsamount/{amount}/{lowestID}")]
-        public List<GUEST_BOOKING> getGuestsAmount(int amount, int lowestID)
+        [Route("api/functions/getguest_bookingsamount/{amount}/{lowestID}")]
+        public List<GUEST_BOOKING> getGuest_BookingsAmount(int amount, int lowestID)
         {
             if (lowestID.Equals(0))
             {
@@ -210,6 +210,14 @@ namespace DotNetAPI.Controllers
         {
             return db.CUSTOMERs.Where(a => a.CUSTOMER_FIRST_NAME.ToLower().Contains(searchString.ToLower()) || a.CUSTOMER_LAST_NAME.ToLower().Contains(searchString.ToLower())
             || (a.CUSTOMER_FIRST_NAME + " " + a.CUSTOMER_LAST_NAME).ToLower().Contains(searchString.ToLower())).OrderByDescending(c => c.CUSTOMER_ID).Take(amount).ToList();
+        }
+
+        [HttpGet]
+        [Route("api/functions/searchGuest_Bookings/{searchString}/{amount}")]
+        public List<GUEST_BOOKING> searchGuest_Bookings(String searchString, int amount)
+        {
+            return db.GUEST_BOOKINGs.Where(a => a.GUEST_EMAIL.ToLower().Contains(searchString.ToLower()))
+            .OrderByDescending(c => c.GUEST_BOOKING_ID).Take(amount).ToList();
         }
 
         [HttpGet]

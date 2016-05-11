@@ -57,7 +57,7 @@ namespace DotNetAPI.Controllers
 
             if (cUSTOMER.CUSTOMER_PASSWORD == "" || cUSTOMER.CUSTOMER_PASSWORD == null)
             {
-                cUSTOMER.CUSTOMER_PASSWORD = db.CUSTOMERs.Find(cUSTOMER.CUSTOMER_ID).CUSTOMER_PASSWORD;
+                return BadRequest();
             }
 
             db.Entry(cUSTOMER).State = EntityState.Modified;
