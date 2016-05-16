@@ -88,7 +88,7 @@ namespace DotNetAPI.Controllers
                 }
                 catch (DbUpdateConcurrencyException e)
                 {
-                    return BadRequest();
+                    return BadRequest(e.Message);
                 }
 
                 return CreatedAtRoute("DefaultApi", new { id = cHILD_EVENT.CHILD_EVENT_ID }, cHILD_EVENT);

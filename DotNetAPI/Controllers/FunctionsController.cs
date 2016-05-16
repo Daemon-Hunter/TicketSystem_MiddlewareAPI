@@ -68,13 +68,14 @@ namespace DotNetAPI.Controllers
         [Route("api/functions/getparent_eventsamount/{amount}/{lowestID}")]
         public List<PARENT_EVENT> getParentEventsAmount(int amount, int lowestID)
         {
+
             if (lowestID.Equals(0))
             {
-                return db.PARENT_EVENTs.OrderByDescending(a => a.PARENT_EVENT_ID).Take(amount).ToList();
+                return db.PARENT_EVENTs.Where(p => p.CHILD_EVENT.Where(c => c.START_DATE_TIME > DateTime.Now).Any()).OrderByDescending(a => a.PARENT_EVENT_ID).Take(amount).ToList();
             }
             else
             {
-                return db.PARENT_EVENTs.Where(a => a.PARENT_EVENT_ID < lowestID).OrderByDescending(a => a.PARENT_EVENT_ID).Take(amount).ToList();
+                return db.PARENT_EVENTs.Where(a => a.PARENT_EVENT_ID < lowestID && a.CHILD_EVENT.Where(c => c.START_DATE_TIME > DateTime.Now).Any()).OrderByDescending(a => a.PARENT_EVENT_ID).Take(amount).ToList();
             }
         }
 
@@ -84,7 +85,7 @@ namespace DotNetAPI.Controllers
         {
             if (lowestID.Equals(0))
             {
-                return db.ADMINs.OrderByDescending(a => a.ADMIN_PASSWORD).Take(amount).ToList();
+                return db.ADMINs.OrderByDescending(a => a.ADMIN_ID).Take(amount).ToList();
             }
             else
             {

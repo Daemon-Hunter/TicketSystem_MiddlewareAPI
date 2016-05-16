@@ -87,7 +87,7 @@ namespace DotNetAPI.Controllers
             }
             catch (DbUpdateConcurrencyException e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
 
             return CreatedAtRoute("DefaultApi", new { id = sOCIAL_MEDIA.SOCIAL_MEDIA_ID }, sOCIAL_MEDIA);

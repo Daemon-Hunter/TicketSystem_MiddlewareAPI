@@ -88,7 +88,7 @@ namespace DotNetAPI.Controllers
             }
             catch (DbUpdateConcurrencyException e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
 
             ORDER order = db.ORDERS.Where(o => o.ORDER_ID == bOOKING.ORDER_ID).FirstOrDefault();
@@ -147,7 +147,7 @@ namespace DotNetAPI.Controllers
                 sc.EnableSsl = true; // runtime encrypt the SMTP communications using SSL
                 sc.Send(m);
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
         }
